@@ -1,0 +1,11 @@
+
+privilegeTargets:
+  TYPO3\Flow\Security\Authorization\Privilege\Method\MethodPrivilege:
+    CRON_FormBuilder_Plugin:
+      matcher: 'method(CRON\FormBuilder\Controller\StandardController->.*Action())'
+roles:
+  'TYPO3.Flow:Everybody':
+    privileges:
+      -
+        privilegeTarget: CRON_FormBuilder_Plugin
+        permission: GRANT

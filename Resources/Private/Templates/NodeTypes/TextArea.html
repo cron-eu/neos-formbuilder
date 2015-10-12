@@ -1,0 +1,13 @@
+{namespace neos=TYPO3\Neos\ViewHelpers}
+<div class="formbuilder textarea{errorclass}">
+	<f:if condition="{node.context.workspace.name} == 'live'">
+		<f:then>
+			<label for="{node.identifier}">{node.properties.label}</label>
+			<textarea {f:if(condition: node.properties.rows, then: 'rows="{node.properties.rows}" ')}{f:if(condition: node.properties.cols, then: 'cols="{node.properties.cols}" ')}name="--data[{node.identifier}]" id="{node.identifier}"{f:if(condition: node.properties.required, then: ' required')}{f:if(condition: node.properties.readonly, then: ' readonly')} {f:if(condition: node.properties.placeholder, then: ' placeholder="{node.properties.placeholder}" ')}></textarea>
+		</f:then>
+		<f:else>
+			<label>{node.properties.label}</label>
+			<textarea rows="{node.properties.rows}" cols="{node.properties.cols}"{f:if(condition: node.properties.placeholder, then: ' placeholder="{node.properties.placeholder}" ')} readonly></textarea>
+		</f:else>
+	</f:if>
+</div>

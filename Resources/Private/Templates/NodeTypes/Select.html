@@ -1,0 +1,25 @@
+{namespace neos=TYPO3\Neos\ViewHelpers}
+<div class="formbuilder selectbox{errorclass}">
+    <label>{node.properties.label}</label>
+    <f:if condition="{node.context.workspace.name} == 'live'">
+        <f:then>
+            <select name="--data[{node.identifier}]"{f:if(condition: node.properties.required, then: ' required')}{f:if(condition: node.properties.multiple, then: ' multiple')}>
+                <f:if condition="{node.properties.firstoption}">
+                    <f:then>
+                        <option>{node.properties.firstoption}</option>
+                    </f:then>
+                </f:if>
+
+                {elements -> f:format.raw()}
+            </select>
+        </f:then>
+        <f:else>
+            <ul>
+                {elements -> f:format.raw()}
+            </ul>
+
+        </f:else>
+    </f:if>
+
+
+</div>

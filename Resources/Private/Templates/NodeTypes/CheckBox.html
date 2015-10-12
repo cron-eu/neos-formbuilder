@@ -1,0 +1,13 @@
+{namespace neos=TYPO3\Neos\ViewHelpers}
+<div class="formbuilder checkbox{errorclass}">
+	<f:if condition="{node.context.workspace.name} == 'live'">
+		<f:then>
+			<label for="{node.identifier}">{node.properties.label}</label>
+			<input name="--data[{node.identifier}]" type="checkbox" value="{f:if(condition: node.properties.readonly, then: '{node.properties.value}')}"{f:if(condition: node.properties.required, then: ' required')}{f:if(condition: node.properties.readonly, then: ' readonly')}{f:if(condition: node.properties.checked, then: ' checked')}/>
+		</f:then>
+		<f:else>
+			<label for="{node.identifier}">{node.properties.label}</label>
+			<input name="--data[{node.identifier}]" type="checkbox" readonly{f:if(condition: node.properties.checked, then: ' checked')}/>
+		</f:else>
+	</f:if>
+</div>
