@@ -81,29 +81,16 @@ class StandardController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 
 
 		$siteNode = $this->getSiteNode();
-
-
 		$values = $this->request->getArguments();
-
-
+		$hideFields = array('CRON.FormBuilder:SubmitButton');
 		$nodes = [];
 
-
 		foreach($values as $identifier => $value) {
-
 			$node = $this->nodeDataRepository->findOneByIdentifier($identifier, $siteNode->getWorkspace());
-
-			if($identifier == '23292677-785d-9b25-e386-58a87207f525'){
-				var_dump($node->getProperties());
+			if(!in_array($node->getNodeType(), $hideFields)){
+				$nodes[] = array($node->getProperty('label'), $value);
 			}
-
-			$nodes[] = array($node->getProperty('label'), $value);
 		}
-
-
-		//$this->view->assign('data',$nodes);
-
-
 
 		$this->sendMail($nodes);
 	}
@@ -123,20 +110,28 @@ class StandardController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 			$emailBody .= $nodes[$i][0] . ': '. $nodes[$i][1] . "\n";
 		}
 
+		$template = new \TYPO3\Fluid\View\StandaloneView();
+		$template->setTemplatePathAndFilename('resource://CRON.FormBuilder/Private/Templates/EMails/Form.html');
+		$template->assign('email', $emailBody);
+
+
+
+
+
+		/*
 		$templatepath =  'resource://CRON.FormBuilder/Private/Templates/EMails/Form.html';
-		$this->standaloneView->setFormat('text');
+		$this->standaloneView->setFormat('html');
 		$this->standaloneView->setTemplatePathAndFilename($templatepath);
-		//$emailBody = $this->standaloneView->render();
+		$this->standaloneView->assign('email', $emailBody);
+		$emailBody = $this->standaloneView->render();
+		*/
 		// create instance of \TYPO3\SwiftMailer\Message() and set mail details
 		$mail = new \TYPO3\SwiftMailer\Message();
 		$mail->setFrom('im1705@hotmail.com', 'Benedikt Kastl')
 		     ->setTo('im@cron.eu', 'Ingo Mueller')
 		     ->setSubject('Your Subject')
-
-			// you can set supported formats like .html .txt .xml etc
-			 ->setBody($emailBody, 'text')
-
-		     ->send();
+			 ->addPart($emailBody,'text/plain','utf-8');
+		$mail->send();
 	}
 
 	/**
