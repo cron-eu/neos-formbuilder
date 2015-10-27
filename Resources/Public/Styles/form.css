@@ -1,8 +1,8 @@
-ul{
+.formbuilder ul{
 	display: inline-block;
 }
 
-.radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"]{
+.formbuilder .radio input[type="radio"], .formbuilder .radio-inline input[type="radio"], .formbuilder .checkbox input[type="checkbox"], .formbuilder .checkbox-inline input[type="checkbox"]{
 	position: static;
 	margin: 0;
 }
