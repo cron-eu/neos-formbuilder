@@ -2,19 +2,40 @@
   superTypes:
     'TYPO3.Neos:Plugin': true
   ui:
-    label: 'Formbuilder'
+    label: i18n
     icon: 'icon-edit'
     inlineEditable: true
     inspector:
       groups:
         advanced:
-          label: 'Settings'
+          label: i18n
           position: 101
   properties:
     legend:
       type: string
       ui:
-        label: 'Legend'
+        label: i18n
+        reloadIfChanged: true
+        inspector:
+          group: advanced
+    receiver:
+      type: string
+      ui:
+        label: i18n
+        reloadIfChanged: true
+        inspector:
+          group: advanced
+    sender:
+      type: string
+      ui:
+        label: i18n
+        reloadIfChanged: true
+        inspector:
+          group: advanced
+    copytouser:
+      type: boolean
+      ui:
+        label: i18n
         reloadIfChanged: true
         inspector:
           group: advanced
@@ -35,43 +56,43 @@
   superTypes:
     'TYPO3.Neos:Content': true
   ui:
-    label: 'Textfeld'
+    label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield
     icon: 'icon-text-width'
     inlineEditable: true
     inspector:
       groups:
         options:
-          label: 'Options'
+          label: i18n
           position: 100
         advanced:
-          label: 'Settings'
+          label: CRON.FormBuilder:NodeTypes.Plugin:groups.advanced
           position: 101
   properties:
     label:
       type: string
       ui:
-        label: 'Label'
+        label: CRON.FormBuilder:NodeTypes.Plugin:field.label
         reloadIfChanged: true
         inspector:
           group: options
     placeholder:
       type: string
       ui:
-        label: 'Placeholder'
+        label: CRON.FormBuilder:NodeTypes.Plugin:field.placeholder
         reloadIfChanged: true
         inspector:
           group: options
     required:
       type: boolean
       ui:
-        label: 'Required'
+        label: CRON.FormBuilder:NodeTypes.Plugin:field.required
         reloadIfChanged: TRUE
         inspector:
           group: advanced
     readonly:
       type: boolean
       ui:
-        label: 'Read Only'
+        label: CRON.FormBuilder:NodeTypes.Plugin:field.readonly
         reloadIfChanged: TRUE
         inspector:
           group: advanced
@@ -86,27 +107,27 @@
           editorOptions:
             values:
               text:
-                label: 'Text'
+                label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield.text
               number:
-                label: 'Number'
+                label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield.number
               password:
-                label: 'Password'
+                label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield.password
               email:
-                label: 'Email'
+                label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield.email
               tel:
-                label: 'Telephone'
+                label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield.tel
               url:
-                label: 'Url'
+                label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield.url
               date:
-                label: 'Date'
+                label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield.date
               time:
-                label: 'Time'
+                label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield.time
 
 'CRON.FormBuilder:Select':
   superTypes:
     'TYPO3.Neos:Content': true
   ui:
-    label: 'Drop Down'
+    label: CRON.FormBuilder:NodeTypes.Plugin:fields.select
     icon: 'icon-text-width'
     inlineEditable: true
     inspector:
@@ -115,7 +136,7 @@
           label: 'Options'
           position: 100
         advanced:
-          label: 'Settings'
+          label: CRON.FormBuilder:NodeTypes.Plugin:groups.advanced
           position: 101
   childNodes:
     elements:
@@ -128,7 +149,7 @@
     label:
       type: string
       ui:
-        label: 'Label'
+        label: CRON.FormBuilder:NodeTypes.Plugin:fields.label
         reloadIfChanged: true
         inspector:
           group: options
@@ -148,7 +169,7 @@
     required:
       type: boolean
       ui:
-        label: 'Required'
+        label: CRON.FormBuilder:NodeTypes.Plugin:field.required
         reloadIfChanged: TRUE
         inspector:
           group: advanced
@@ -158,7 +179,7 @@
   superTypes:
     'TYPO3.Neos:Content': true
   ui:
-    label: 'Option'
+    label: CRON.FormBuilder:NodeTypes.Plugin:fields.options
     icon: 'icon-text-width'
     inlineEditable: true
     inspector:
@@ -188,7 +209,7 @@
   superTypes:
     'TYPO3.Neos:Content': true
   ui:
-    label: 'Radiobutton(s)'
+    label: CRON.FormBuilder:NodeTypes.Plugin:fields.radios
     icon: 'icon-text-width'
     inlineEditable: true
     inspector:
@@ -210,7 +231,7 @@
       label:
         type: string
         ui:
-          label: 'Label'
+          label: CRON.FormBuilder:NodeTypes.Plugin:fields.label
           reloadIfChanged: true
           inspector:
             group: options
@@ -220,7 +241,7 @@
   superTypes:
     'TYPO3.Neos:Content': true
   ui:
-    label: 'Checkbox'
+    label: CRON.FormBuilder:NodeTypes.Plugin:fields.checkbox
     icon: 'icon-text-width'
     inlineEditable: true
     inspector:
@@ -229,33 +250,33 @@
           label: 'Optionen'
           position: 100
         advanced:
-          label: 'Settings'
+          label: CRON.FormBuilder:NodeTypes.Plugin:groups.advanced
           position: 101
   properties:
     label:
       type: string
       ui:
-        label: 'Label'
+        label: CRON.FormBuilder:NodeTypes.Plugin:field.label
         reloadIfChanged: true
         inspector:
           group: options
     value:
       type: string
       ui:
-        label: 'Value'
+        label: CRON.FormBuilder:NodeTypes.Plugin:field.value
         reloadIfChanged: true
         inspector:
           group: options
     required:
       type: boolean
       ui:
-        label: 'Required'
+        label: CRON.FormBuilder:NodeTypes.Plugin:field.required
         inspector:
           group: advanced
     readonly:
       type: boolean
       ui:
-        label: 'Read Only'
+        label: CRON.FormBuilder:NodeTypes.Plugin:field.readonly
         inspector:
           group: advanced
     checked:
@@ -270,7 +291,7 @@
   superTypes:
     'TYPO3.Neos:Content': true
   ui:
-    label: 'Textarea'
+    label: CRON.FormBuilder:NodeTypes.Plugin:fields.textarea
     icon: 'icon-text-width'
     inlineEditable: true
     inspector:
@@ -279,20 +300,20 @@
           label: 'Options'
           position: 100
         advanced:
-          label: 'Settings'
+          label: CRON.FormBuilder:NodeTypes.Plugin:groups.advanced
           position: 101
   properties:
     label:
       type: string
       ui:
-        label: 'Label'
+        label: CRON.FormBuilder:NodeTypes.Plugin:fields.label
         reloadIfChanged: true
         inspector:
           group: options
     placeholder:
       type: string
       ui:
-        label: 'Placeholder'
+        label: CRON.FormBuilder:NodeTypes.Plugin:field.placeholder
         reloadIfChanged: true
         inspector:
           group: options
@@ -315,13 +336,13 @@
     required:
       type: boolean
       ui:
-        label: 'Required'
+        label: CRON.FormBuilder:NodeTypes.Plugin:field.required
         inspector:
           group: advanced
     readonly:
       type: boolean
       ui:
-        label: 'Read Only'
+        label: CRON.FormBuilder:NodeTypes.Plugin:field.readonly
         inspector:
           group: advanced
 
@@ -329,7 +350,7 @@
   superTypes:
     'TYPO3.Neos:Content': true
   ui:
-    label: 'Submit Button'
+    label: CRON.FormBuilder:NodeTypes.Plugin:fields.submit
     icon: 'icon-text-width'
     inspector:
       groups:

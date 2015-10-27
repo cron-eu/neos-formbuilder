@@ -3,3 +3,8 @@ TYPO3:
     typoScript:
       autoInclude:
         'CRON.FormBuilder': TRUE
+
+    userInterface:
+      translation:
+        autoInclude:
+          'CRON.FormBuilder': ['NodeTypes/*']
