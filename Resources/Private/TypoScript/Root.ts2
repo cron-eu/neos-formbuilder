@@ -3,7 +3,6 @@ prototype(CRON.FormBuilder:Plugin) < prototype(TYPO3.Neos:Plugin) {
 	controller = 'Standard'
 	argumentNamespace = 'data'
 	action = 'index'
-	legend = ${q(node).property('legend')}
 
 	elements = TYPO3.Neos:ContentCollection {
 		nodePath = 'elements'
