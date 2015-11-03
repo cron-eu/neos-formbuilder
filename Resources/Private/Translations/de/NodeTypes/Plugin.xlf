@@ -6,6 +6,10 @@
 		<source>Settings</source>
 		<target xml:lang="de" state="translated">Einstellungen</target>
 	</trans-unit>
+	 <trans-unit id="groups.options" xml:space="preserve">
+    		<source>Options</source>
+    		<target xml:lang="de" state="translated">Optionen</target>
+    </trans-unit>
 	<trans-unit id="properties.legend" xml:space="preserve">
     		<source>Legend</source>
     		<target xml:lang="de" state="translated">Legende</target>
@@ -55,6 +59,10 @@
 	        <source>Textfield</source>
 	        <target xml:lang="de" state="translated">Textfeld</target>
     </trans-unit>
+    <trans-unit id="fields.textfield.inputtype" xml:space="preserve">
+        		<source>Input Type</source>
+        		<target xml:lang="de" state="translated">Feld-Typ</target>
+    </trans-unit>
     <trans-unit id="fields.textfield.text" xml:space="preserve">
 	        <source>Text</source>
 	        <target xml:lang="de" state="translated">Text</target>
@@ -91,18 +99,38 @@
 	        <source>Textarea</source>
 	        <target xml:lang="de" state="translated">mehrzeiliges Textfeld</target>
     </trans-unit>
+    <trans-unit id="fields.textarea.cols" xml:space="preserve">
+            <source>Cols</source>
+            <target xml:lang="de" state="translated">Spalten</target>
+    </trans-unit>
+    <trans-unit id="fields.textarea.rows" xml:space="preserve">
+            <source>Rows</source>
+            <target xml:lang="de" state="translated">Reihen</target>
+    </trans-unit>
     <trans-unit id="fields.submit" xml:space="preserve">
             <source>Submit-Button</source>
             <target xml:lang="de" state="translated">Senden</target>
+    </trans-unit>
+    <trans-unit id="fields.submit.caption" xml:space="preserve">
+            <source>Caption</source>
+            <target xml:lang="de" state="translated">Beschriftung</target>
     </trans-unit>
     <trans-unit id="fields.select" xml:space="preserve">
              <source>Selectbox</source>
              <target xml:lang="de" state="translated">Auswahlbox</target>
      </trans-unit>
-	<trans-unit id="fields.options" xml:space="preserve">
-             <source>Options</source>
-             <target xml:lang="de" state="translated">Optionen</target>
+	<trans-unit id="fields.select.firstoption" xml:space="preserve">
+             <source>1. Option</source>
+             <target xml:lang="de" state="translated">1. Option</target>
      </trans-unit>
+     <trans-unit id="fields.select.options" xml:space="preserve">
+             <source>Option</source>
+      <target xml:lang="de" state="translated">Option</target>
+      </trans-unit>
+      <trans-unit id="fields.select.options.text" xml:space="preserve">
+           <source>Text displayed</source>
+    <target xml:lang="de" state="translated">angezeigter Text</target>
+    </trans-unit>
      <trans-unit id="fields.radios" xml:space="preserve">
             <source>Radiobutton(s)</source>
             <target xml:lang="de" state="translated">Optionsschaltfläche(n)</target>

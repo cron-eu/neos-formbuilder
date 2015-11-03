@@ -62,7 +62,7 @@
     inspector:
       groups:
         options:
-          label: i18n
+          label: CRON.FormBuilder:NodeTypes.Plugin:groups.options
           position: 100
         advanced:
           label: CRON.FormBuilder:NodeTypes.Plugin:groups.advanced
@@ -99,10 +99,10 @@
     type:
       type: string
       ui:
-        label: 'Input Type'
+        label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield.inputtype
         reloadIfChanged: TRUE
         inspector:
-          group: 'advanced'
+          group: advanced
           editor: Content/Inspector/Editors/SelectBoxEditor
           editorOptions:
             values:
@@ -133,7 +133,7 @@
     inspector:
       groups:
         options:
-          label: 'Options'
+          label: CRON.FormBuilder:NodeTypes.Plugin:groups.options
           position: 100
         advanced:
           label: CRON.FormBuilder:NodeTypes.Plugin:groups.advanced
@@ -149,14 +149,14 @@
     label:
       type: string
       ui:
-        label: CRON.FormBuilder:NodeTypes.Plugin:fields.label
+        label: CRON.FormBuilder:NodeTypes.Plugin:field.label
         reloadIfChanged: true
         inspector:
           group: options
     firstoption:
       type: string
       ui:
-        label: 'First Option'
+        label: CRON.FormBuilder:NodeTypes.Plugin:fields.select.firstoption
         inspector:
           group: options
     multiple:
@@ -179,26 +179,26 @@
   superTypes:
     'TYPO3.Neos:Content': true
   ui:
-    label: CRON.FormBuilder:NodeTypes.Plugin:fields.options
+    label: CRON.FormBuilder:NodeTypes.Plugin:fields.select.options
     icon: 'icon-text-width'
     inlineEditable: true
     inspector:
       groups:
         options:
-          label: 'Optionen'
+          label: CRON.FormBuilder:NodeTypes.Plugin:groups.options
           position: 100
   properties:
     value:
       type: string
       ui:
-        label: 'Value'
+        label: CRON.FormBuilder:NodeTypes.Plugin:field.value
         reloadIfChanged: true
         inspector:
           group: options
     option:
       type: string
       ui:
-        label: 'Anzeigetext'
+        label: CRON.FormBuilder:NodeTypes.Plugin:fields.select.options.text
         reloadIfChanged: true
         inspector:
           group: options
@@ -215,19 +215,9 @@
     inspector:
       groups:
         options:
-          label: 'Optionen'
+          label: CRON.FormBuilder:NodeTypes.Plugin:groups.options
           position: 100
   properties:
-      value:
-        type: string
-        ui:
-          label: 'Value'
-          reloadIfChanged: true
-          inspector:
-            group: options
-            editor: 'TYPO3.Neos/Inspector/Editors/TextAreaEditor'
-            editorOptions:
-              rows: 7
       label:
         type: string
         ui:
@@ -235,6 +225,17 @@
           reloadIfChanged: true
           inspector:
             group: options
+      value:
+        type: string
+        ui:
+          label: CRON.FormBuilder:NodeTypes.Plugin:field.value
+          reloadIfChanged: true
+          inspector:
+            group: options
+            editor: 'TYPO3.Neos/Inspector/Editors/TextAreaEditor'
+            editorOptions:
+              rows: 7
+
 
 
 'CRON.FormBuilder:CheckBox':
@@ -247,7 +248,7 @@
     inspector:
       groups:
         options:
-          label: 'Optionen'
+          label: CRON.FormBuilder:NodeTypes.Plugin:groups.options
           position: 100
         advanced:
           label: CRON.FormBuilder:NodeTypes.Plugin:groups.advanced
@@ -282,7 +283,7 @@
     checked:
       type: boolean
       ui:
-        label: 'Checked'
+        label: CRON.FormBuilder:NodeTypes.Plugin:field.checked
         inspector:
           group: advanced
 
@@ -297,7 +298,7 @@
     inspector:
       groups:
         options:
-          label: 'Options'
+          label: CRON.FormBuilder:NodeTypes.Plugin:groups.options
           position: 100
         advanced:
           label: CRON.FormBuilder:NodeTypes.Plugin:groups.advanced
@@ -306,7 +307,7 @@
     label:
       type: string
       ui:
-        label: CRON.FormBuilder:NodeTypes.Plugin:fields.label
+        label: CRON.FormBuilder:NodeTypes.Plugin:field.label
         reloadIfChanged: true
         inspector:
           group: options
@@ -321,7 +322,7 @@
       type: integer
       defaultValue: 5
       ui:
-        label: 'Rows'
+        label: CRON.FormBuilder:NodeTypes.Plugin:fields.textarea.rows
         reloadIfChanged: TRUE
         inspector:
           group: advanced
@@ -329,7 +330,7 @@
       type: integer
       defaultValue: 2
       ui:
-        label: 'Cols'
+        label: CRON.FormBuilder:NodeTypes.Plugin:fields.textarea.cols
         reloadIfChanged: TRUE
         inspector:
           group: advanced
@@ -355,13 +356,13 @@
     inspector:
       groups:
         options:
-          label: 'Optionen'
+          label: CRON.FormBuilder:NodeTypes.Plugin:groups.options
           position: 100
   properties:
     caption:
       type: string
       ui:
-        label: 'caption'
+        label: CRON.FormBuilder:NodeTypes.Plugin:fields.submit.caption
         reloadIfChanged: true
         inspector:
           group: options

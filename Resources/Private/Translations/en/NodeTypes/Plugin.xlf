@@ -5,6 +5,9 @@
 			<trans-unit id="groups.advanced" xml:space="preserve">
 				<source>Settings</source>
 			</trans-unit>
+			<trans-unit id="groups.options" xml:space="preserve">
+                <source>Options</source>
+            </trans-unit>
 			<trans-unit id="properties.legend" xml:space="preserve">
             	<source>Legend</source>
             </trans-unit>
@@ -41,6 +44,9 @@
             <trans-unit id="fields.textfield" xml:space="preserve">
                 <source>Textfield</source>
             </trans-unit>
+             <trans-unit id="fields.textfield.inputtype" xml:space="preserve">
+                <source>Input Type</source>
+            </trans-unit>
             <trans-unit id="fields.textfield.text" xml:space="preserve">
                 <source>Text</source>
             </trans-unit>
@@ -68,12 +74,30 @@
             <trans-unit id="fields.textarea" xml:space="preserve">
                 <source>Textarea</source>
             </trans-unit>
+            <trans-unit id="fields.textarea.cols" xml:space="preserve">
+                <source>Cols</source>
+            </trans-unit>
+            <trans-unit id="fields.textarea.rows" xml:space="preserve">
+               <source>Rows</source>
+           </trans-unit>
             <trans-unit id="fields.submit" xml:space="preserve">
                 <source>Submit-Button</source>
+            </trans-unit>
+            <trans-unit id="fields.submit.caption" xml:space="preserve">
+                <source>Caption</source>
             </trans-unit>
            <trans-unit id="fields.select" xml:space="preserve">
                <source>Selectbox</source>
            </trans-unit>
+           <trans-unit id="fields.select.options" xml:space="preserve">
+               <source>Option</source>
+           </trans-unit>
+           <trans-unit id="fields.select.firstoption" xml:space="preserve">
+              <source>1. Option</source>
+          </trans-unit>
+           <trans-unit id="fields.select.options.text" xml:space="preserve">
+            <source>Text displayed</source>
+         </trans-unit>
          <trans-unit id="fields.radios" xml:space="preserve">
              <source>Options</source>
          </trans-unit>
