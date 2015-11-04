@@ -1,86 +1,17 @@
-
 -
-  name: 'AJAX Login'
-  uriPattern: 'ajax/login(/{@action})'
+  name: 'FormBuilder'
+  uriPattern: '{node}/form-builder/{--data.@action}'
   defaults:
-    '@package':    'CRON.DavShop'
-    '@controller': 'Login'
-    '@format':     'html'
-    '@action':     'authenticate'
-  appendExceedingArguments: TRUE
-
--
-  name: 'Search paginate'
-  uriPattern:    '{node}/seite:{--typo3-typo3cr-search-viewhelpers-widget-paginateviewhelper.currentPage}'
-  defaults:
-    '@package':    'TYPO3.Neos'
+    '@package': 'TYPO3.Neos'
     '@controller': 'Frontend\Node'
-    '@format':     'html'
-    '@action':     'show'
-    '--typo3-typo3cr-search-viewhelpers-widget-paginateviewhelper':
-      '@package': ''
-      '@subpackage': ''
-      '@controller': ''
-      '@action': 'index'
-      'currentPage': '1'
-  routeParts:
-    node:
-      handler: 'TYPO3\Neos\Routing\FrontendNodeRoutePartHandlerInterface'
-  appendExceedingArguments: TRUE
-
--
-  name: 'Newsletter actions'
-  uriPattern:    'newsletter/{--newsletter.@action}/{--newsletter.token}'
-  defaults:
-    '@package':    'TYPO3.Neos'
-    '@controller': 'Frontend\Node'
-    '@format':     'html'
-    '@action':     'show'
-    # ACHTUNG: keep in Sync with Settings.yaml:Flownative.DoubleOptIn.presets.newsletter.activation.uri.arguments.node
-    'node': '/sites/davshop/shop/node-558d204e1571c/node-558d20586a0c2'
-    '--newsletter':
-      '@package': 'CRON.DavShop'
-      '@subpackage': ''
-      '@controller': 'Newsletter'
-      '@action': 'activate'
+    '@action': 'show'
+    '@format': 'html'
+    '--data':
+      '@package': 'CRON.FormBuilder'
+      '@controller': 'Standard'
+      '@action': 'transfer'
       '@format': 'html'
-      'token': ''
   routeParts:
-    node:
-      handler: 'TYPO3\Neos\Routing\FrontendNodeRoutePartHandlerInterface'
-  appendExceedingArguments: TRUE
-
--
-  name: 'Customer actions'
-  uriPattern:    'customer/{--customer.@action}/{--customer.token}'
-  defaults:
-    '@package':    'TYPO3.Neos'
-    '@controller': 'Frontend\Node'
-    '@format':     'html'
-    '@action':     'show'
-    # ACHTUNG: keep in Sync with Settings.yaml:Flownative.DoubleOptIn.presets.customerRegistration.activation.uri.arguments.node
-    'node': '/sites/davshop/shop/node-558d204e1571c/node-558d2130872a6'
-    '--customer':
-      '@package': 'CRON.DavShop'
-      '@subpackage': ''
-      '@controller': 'Customer'
-      '@action': 'activate'
-      '@format': 'html'
-      'token': ''
-  routeParts:
-    node:
-      handler: 'TYPO3\Neos\Routing\FrontendNodeRoutePartHandlerInterface'
-  appendExceedingArguments: TRUE
-
--
-  name: 'Product View Page'
-  uriPattern: 'shop/produkt/{productId}(/{title})'
-  defaults:
-    '@package':    'TYPO3.Neos'
-    '@controller': 'Frontend\Node'
-    '@format':     'html'
-    '@action':     'show'
-    'node':        '/sites/davshop/shop/product'
-    'title':       ''
-  toLowerCase: FALSE
-  appendExceedingArguments: TRUE
+   node:
+      handler: TYPO3\Neos\Routing\FrontendNodeRoutePartHandler
+  appendExceedingArguments: FALSE
