@@ -1,0 +1,11 @@
+{namespace neos=TYPO3\Neos\ViewHelpers}
+<div class="formbuilder textfield{errorclass}">
+	<f:if condition="{node.context.workspace.name} == 'live'">
+		<f:then>
+			<input type="hidden" name="--data[{node.identifier}]" value="{node.properties.value}"/>
+		</f:then>
+		<f:else>
+			<input type="text" value="{node.properties.value}" readonly />
+		</f:else>
+	</f:if>
+</div>
