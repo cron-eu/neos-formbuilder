@@ -29,6 +29,9 @@
             <trans-unit id="field.value" xml:space="preserve">
                 <source>Value</source>
             </trans-unit>
+            <trans-unit id="field.name" xml:space="preserve">
+                <source>Name</source>
+            </trans-unit>
             <trans-unit id="field.required" xml:space="preserve">
                 <source>Required</source>
             </trans-unit>
@@ -70,6 +73,9 @@
             </trans-unit>
             <trans-unit id="fields.textfield.time" xml:space="preserve">
                 <source>Time</source>
+            </trans-unit>
+            <trans-unit id="fields.hidden" xml:space="preserve">
+                <source>Hiddenfield</source>
             </trans-unit>
             <trans-unit id="fields.textarea" xml:space="preserve">
                 <source>Textarea</source>

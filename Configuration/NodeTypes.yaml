@@ -60,6 +60,7 @@
           'CRON.FormBuilder:RadioButton': true
           'CRON.FormBuilder:CheckBox': true
           'CRON.FormBuilder:TextArea': true
+          'CRON.FormBuilder:HiddenField': true
           'CRON.FormBuilder:SubmitButton': true
           '*': false
 
@@ -133,6 +134,33 @@
                 label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield.date
               time:
                 label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield.time
+
+'CRON.FormBuilder:HiddenField':
+  superTypes:
+    'TYPO3.Neos:Content': true
+  ui:
+    label: CRON.FormBuilder:NodeTypes.Plugin:fields.hidden
+    icon: 'icon-text-width'
+    inspector:
+      groups:
+        options:
+          label: CRON.FormBuilder:NodeTypes.Plugin:groups.options
+          position: 100
+  properties:
+    label:
+      type: string
+      ui:
+        label: CRON.FormBuilder:NodeTypes.Plugin:field.name
+        reloadIfChanged: true
+        inspector:
+          group: options
+    value:
+      type: string
+      ui:
+        label: CRON.FormBuilder:NodeTypes.Plugin:field.value
+        reloadIfChanged: true
+        inspector:
+          group: options
 
 'CRON.FormBuilder:Select':
   superTypes:

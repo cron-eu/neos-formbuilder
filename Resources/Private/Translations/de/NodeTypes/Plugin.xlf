@@ -39,6 +39,10 @@
             <source>Value</source>
             <target xml:lang="de" state="translated">Wert</target>
     </trans-unit>
+    <trans-unit id="field.name" xml:space="preserve">
+            <source>Name</source>
+            <target xml:lang="de" state="translated">Name</target>
+    </trans-unit>
     <trans-unit id="field.required" xml:space="preserve">
             <source>Required</source>
             <target xml:lang="de" state="translated">Pflichtfeld</target>
@@ -94,6 +98,10 @@
     <trans-unit id="fields.textfield.time" xml:space="preserve">
             <source>Time</source>
             <target xml:lang="de" state="translated">Zeit</target>
+    </trans-unit>
+    <trans-unit id="fields.hidden" xml:space="preserve">
+            <source>Hiddenfield</source>
+            <target xml:lang="de" state="translated">verstecktes Textfeld</target>
     </trans-unit>
     <trans-unit id="fields.textarea" xml:space="preserve">
 	        <source>Textarea</source>
