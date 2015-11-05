@@ -39,6 +39,17 @@
         reloadIfChanged: true
         inspector:
           group: advanced
+    tags:
+      type: array
+      ui:
+        label: Empfängerfeld
+        reloadIfChanged: true
+        inspector:
+          group: advanced
+          editor: 'Content/Inspector/Editors/SelectBoxEditor'
+          editorOptions:
+            placeholder: E-Mailfeld wählen
+            dataSourceIdentifier: 'cron-formbuilder-formnodes'
   childNodes:
     elements:
       type: 'TYPO3.Neos:ContentCollection'

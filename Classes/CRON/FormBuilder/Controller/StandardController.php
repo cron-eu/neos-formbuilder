@@ -52,7 +52,6 @@ class StandardController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 	 */
 	public function indexAction() {
 		$this->view->assign('elements',$this->request->getInternalArgument('__elements'));
-
 		$legend = $this->request->getInternalArgument('__legend');
 		$this->view->assign('legend', $legend);
 	}
@@ -79,10 +78,10 @@ class StandardController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 	 */
 	public function transferAction() {
 
-
 		$siteNode = $this->getSiteNode();
 		$values = $this->request->getArguments();
 		$hideFields = array('CRON.FormBuilder:SubmitButton');
+
 		$nodes = [];
 
 		foreach($values as $identifier => $value) {
@@ -101,36 +100,32 @@ class StandardController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 	 * @return void
 	 */
 	public function sendMail($nodes) {
-		// set your template path
+
+		$sender = $this->request->getInternalArgument('__sender');
+		$receiver = $this->request->getInternalArgument('__receiver');
+		$copytouser = $this->request->getInternalArgument('__copytouser');
 
 		$emailBody = "neue Nachricht\n\n";
 
 		for($i = 0; $i < count ($nodes); $i++){
-
 			$emailBody .= $nodes[$i][0] . ': '. $nodes[$i][1] . "\n";
 		}
-
 		$template = new \TYPO3\Fluid\View\StandaloneView();
 		$template->setTemplatePathAndFilename('resource://CRON.FormBuilder/Private/Templates/EMails/Form.html');
 		$template->assign('email', $emailBody);
 
-
-
-
-
-		/*
-		$templatepath =  'resource://CRON.FormBuilder/Private/Templates/EMails/Form.html';
-		$this->standaloneView->setFormat('html');
-		$this->standaloneView->setTemplatePathAndFilename($templatepath);
-		$this->standaloneView->assign('email', $emailBody);
-		$emailBody = $this->standaloneView->render();
-		*/
 		// create instance of \TYPO3\SwiftMailer\Message() and set mail details
 		$mail = new \TYPO3\SwiftMailer\Message();
-		$mail->setFrom('im1705@hotmail.com', 'Benedikt Kastl')
-		     ->setTo('im@cron.eu', 'Ingo Mueller')
+		$mail->setFrom($sender, 'Absender')
+		     ->setTo($receiver, 'Empfänger')
 		     ->setSubject('Your Subject')
 			 ->addPart($emailBody,'text/plain','utf-8');
+
+		if($copytouser == 1){
+			//todo
+			//$mail->addBcc()
+		}
+
 		$mail->send();
 	}
 
