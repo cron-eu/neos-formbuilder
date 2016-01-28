@@ -1,9 +1,9 @@
 {
-    "name": "cron/formbuilder",
+    "name": "cron/form-builder",
     "type": "typo3-flow-package",
-    "description": "Add description here",
+    "description": "Component to build and populate forms in the backend",
     "require": {
-        "typo3/flow": "*"
+        "typo3/neos": "*"
     },
     "autoload": {
         "psr-0": {
