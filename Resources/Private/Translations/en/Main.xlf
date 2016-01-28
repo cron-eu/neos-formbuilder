@@ -8,6 +8,9 @@
 			<trans-unit id="formBuilder.submitPending.thankYou.message" xml:space="preserve">
 				<source>The form was submitted successfully.</source>
 			</trans-unit>
+			<trans-unit id="formBuilder.index.backend.addFormElements" xml:space="preserve">
+				<source>Please add form elements.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
