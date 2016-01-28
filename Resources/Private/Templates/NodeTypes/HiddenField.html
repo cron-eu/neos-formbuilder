@@ -2,10 +2,10 @@
 <div class="formbuilder textfield{errorclass}">
 	<f:if condition="{node.context.workspace.name} == 'live'">
 		<f:then>
-			<input type="hidden" name="--data[{node.identifier}]" value="{node.properties.value}"/>
+			<input type="hidden" name="--data[{node.identifier}]" value="{value}"/>
 		</f:then>
 		<f:else>
-			<input type="text" value="{node.properties.value}" readonly />
+			<input type="text" value="{value}" readonly />
 		</f:else>
 	</f:if>
 </div>
