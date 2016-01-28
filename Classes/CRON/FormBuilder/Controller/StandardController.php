@@ -9,6 +9,7 @@ namespace CRON\FormBuilder\Controller;
 
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\TYPO3CR\Domain\Repository\NodeDataRepository;
+use CRON\FormBuilder\Utils\EmailMessage;
 
 
 class StandardController extends \TYPO3\Flow\Mvc\Controller\ActionController {
@@ -19,14 +20,6 @@ class StandardController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 	 */
 	protected $contextFactory;
 
-
-	/**
-	 * A standalone template view
-	 *
-	 * @Flow\Inject
-	 * @var \TYPO3\Fluid\View\StandaloneView
-	 */
-	protected $standaloneView;
 
 	/**
 	 * @Flow\Inject
@@ -87,7 +80,7 @@ class StandardController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 		foreach($values as $identifier => $value) {
 			$node = $this->nodeDataRepository->findOneByIdentifier($identifier, $siteNode->getWorkspace());
 			if(!in_array($node->getNodeType(), $hideFields)){
-				$nodes[] = array($node->getProperty('label'), $value);
+				$nodes[] = array('label' => $node->getProperty('label'), 'value' => $value);
 			}
 		}
 
@@ -96,37 +89,26 @@ class StandardController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 
 	/**
 	 * Sends your details to recipient
-	 * @param array $nodes
+	 * @param array $fields
 	 * @return void
 	 */
-	public function sendMail($nodes) {
+	public function sendMail($fields) {
+
+
+		$receiver = $this->request->getInternalArgument('__receiver');
+		//$copytouser = $this->request->getInternalArgument('__copytouser');
+
+
+		$emailMessage = new EmailMessage('Form');
 
 		$sender = $this->request->getInternalArgument('__sender');
-		$receiver = $this->request->getInternalArgument('__receiver');
-		$copytouser = $this->request->getInternalArgument('__copytouser');
-
-		$emailBody = "neue Nachricht\n\n";
-
-		for($i = 0; $i < count ($nodes); $i++){
-			$emailBody .= $nodes[$i][0] . ': '. $nodes[$i][1] . "\n";
-		}
-		$template = new \TYPO3\Fluid\View\StandaloneView();
-		$template->setTemplatePathAndFilename('resource://CRON.FormBuilder/Private/Templates/EMails/Form.html');
-		$template->assign('email', $emailBody);
-
-		// create instance of \TYPO3\SwiftMailer\Message() and set mail details
-		$mail = new \TYPO3\SwiftMailer\Message();
-		$mail->setFrom($sender, 'Absender')
-		     ->setTo($receiver, 'Empfänger')
-		     ->setSubject('Your Subject')
-			 ->addPart($emailBody,'text/plain','utf-8');
-
-		if($copytouser == 1){
-			//todo
-			//$mail->addBcc()
+		if ($sender) {
+			$emailMessage->mail->setFrom($sender);
 		}
 
-		$mail->send();
+		$emailMessage->fluidView->assign('fields', $fields);
+		$emailMessage->fluidView->setControllerContext($this->controllerContext);
+		$emailMessage->send(explode(',', $receiver));
 	}
 
 	/**

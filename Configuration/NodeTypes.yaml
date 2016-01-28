@@ -25,6 +25,8 @@
         reloadIfChanged: true
         inspector:
           group: advanced
+      validation:
+        'TYPO3.Neos/Validation/NotEmptyValidator': []
     sender:
       type: string
       ui:
