@@ -36,7 +36,6 @@
         nodeTypes:
           'CRON.FormBuilder:Input': true
           'CRON.FormBuilder:Select': true
-          'CRON.FormBuilder:RadioButton': true
           'CRON.FormBuilder:CheckBox': true
           'CRON.FormBuilder:TextArea': true
           'CRON.FormBuilder:HiddenField': true
@@ -220,41 +219,6 @@
         reloadIfChanged: true
         inspector:
           group: options
-
-
-
-'CRON.FormBuilder:RadioButton':
-  superTypes:
-    'TYPO3.Neos:Content': true
-  ui:
-    label: CRON.FormBuilder:NodeTypes.Plugin:fields.radios
-    icon: 'icon-text-width'
-    inlineEditable: true
-    inspector:
-      groups:
-        options:
-          label: CRON.FormBuilder:NodeTypes.Plugin:groups.options
-          position: 100
-  properties:
-      label:
-        type: string
-        ui:
-          label: CRON.FormBuilder:NodeTypes.Plugin:fields.label
-          reloadIfChanged: true
-          inspector:
-            group: options
-      value:
-        type: string
-        ui:
-          label: CRON.FormBuilder:NodeTypes.Plugin:field.value
-          reloadIfChanged: true
-          inspector:
-            group: options
-            editor: 'TYPO3.Neos/Inspector/Editors/TextAreaEditor'
-            editorOptions:
-              rows: 7
-
-
 
 'CRON.FormBuilder:CheckBox':
   superTypes:

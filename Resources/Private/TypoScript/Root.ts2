@@ -1,3 +1,36 @@
+prototype(CRON.FormBuilder:FormElement) < prototype(TYPO3.Neos:Content) {
+	layoutName = 'Wrapper'
+}
+
+prototype(CRON.FormBuilder:CheckBox) < prototype(CRON.FormBuilder:FormElement) {
+	attributes.class = 'checkbox'
+}
+
+prototype(CRON.FormBuilder:HiddenField) < prototype(CRON.FormBuilder:FormElement) {
+
+}
+
+prototype(CRON.FormBuilder:Input) < prototype(CRON.FormBuilder:FormElement) {
+
+}
+
+prototype(CRON.FormBuilder:Option) < prototype(CRON.FormBuilder:FormElement) {
+
+}
+
+prototype(CRON.FormBuilder:Select) < prototype(CRON.FormBuilder:FormElement) {
+
+}
+
+prototype(CRON.FormBuilder:SubmitButton) < prototype(CRON.FormBuilder:FormElement) {
+
+}
+
+prototype(CRON.FormBuilder:TextArea) < prototype(CRON.FormBuilder:FormElement) {
+
+}
+
+
 prototype(CRON.FormBuilder:Plugin) < prototype(TYPO3.Neos:Plugin) {
 	package = 'CRON.FormBuilder'
 	controller = 'FormBuilder'

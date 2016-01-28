@@ -11,6 +11,9 @@
 			<trans-unit id="formBuilder.index.backend.addFormElements" xml:space="preserve">
 				<source>Please add form elements.</source>
 			</trans-unit>
+			<trans-unit id="formBuilder.index.backend.addSelectElements" xml:space="preserve">
+				<source>Please add options.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

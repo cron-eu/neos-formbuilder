@@ -14,6 +14,10 @@
 				<source>Please add form elements.</source>
 				<target xml:lang="de" state="translated">Bitte Formelemente hinzufügen</target>
 			</trans-unit>
+			<trans-unit id="formBuilder.index.backend.addSelectElements" xml:space="preserve">
+				<source>Please add options.</source>
+				<target xml:lang="de" state="translated">Bitte Select-Optionen hinzufügen</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
