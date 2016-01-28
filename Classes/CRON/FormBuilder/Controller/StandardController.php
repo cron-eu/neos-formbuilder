@@ -95,20 +95,14 @@ class StandardController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 	public function sendMail($fields) {
 
 
-		$receiver = $this->request->getInternalArgument('__receiver');
-		//$copytouser = $this->request->getInternalArgument('__copytouser');
-
+		$receiver = explode(',', $this->request->getInternalArgument('__receiver'));
 
 		$emailMessage = new EmailMessage('Form');
 
-		$sender = $this->request->getInternalArgument('__sender');
-		if ($sender) {
-			$emailMessage->mail->setFrom($sender);
-		}
-
+		$emailMessage->fluidView->assign('subject', $this->request->getInternalArgument('__subject'));
 		$emailMessage->fluidView->assign('fields', $fields);
 		$emailMessage->fluidView->setControllerContext($this->controllerContext);
-		$emailMessage->send(explode(',', $receiver));
+		$emailMessage->send($receiver);
 	}
 
 	/**

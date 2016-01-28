@@ -12,7 +12,10 @@
             	<source>Legend</source>
             </trans-unit>
 			<trans-unit id="properties.receiver" xml:space="preserve">
-            	<source>Receiver-Email</source>
+            	<source>Receiver-Email(s)</source>
+            </trans-unit>
+            <trans-unit id="properties.subject" xml:space="preserve">
+    		    <source>Subject</source>
             </trans-unit>
 			<trans-unit id="properties.sender" xml:space="preserve">
             	<source>Sender-Email</source>

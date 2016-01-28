@@ -15,8 +15,12 @@
     		<target xml:lang="de" state="translated">Legende</target>
     </trans-unit>
 	<trans-unit id="properties.receiver" xml:space="preserve">
-    		<source>Receiver-Email</source>
-    		<target xml:lang="de" state="translated">Empfänger-Email</target>
+    		<source>Receiver-Email(s)</source>
+    		<target xml:lang="de" state="translated">Empfänger-Email(s)</target>
+    </trans-unit>
+    <trans-unit id="properties.subject" xml:space="preserve">
+    		<source>Subject</source>
+    		<target xml:lang="de" state="translated">Betreff</target>
     </trans-unit>
 	<trans-unit id="properties.sender" xml:space="preserve">
     		<source>Sender-Email</source>
