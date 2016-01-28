@@ -6,7 +6,7 @@
 				<input name="--data[{node.identifier}]" type="checkbox" readonly{f:if(condition: checked, then: ' checked')}/> {label}
 			</f:then>
 			<f:else>
-				<input name="--data[{node.identifier}]" type="checkbox" value="{f:if(condition: readonly, then: '{value}')}"{f:if(condition: required, then: ' required')}{f:if(condition: readonly, then: ' readonly')}{f:if(condition: checked, then: ' checked')}/> {label}
+				<input name="--data[{node.identifier}]" type="checkbox" value="{value}"{f:if(condition: required, then: ' required')}{f:if(condition: readonly, then: ' readonly')}{f:if(condition: checked, then: ' checked')}/> {label}
 			</f:else>
 		</f:if>
 	</label>
