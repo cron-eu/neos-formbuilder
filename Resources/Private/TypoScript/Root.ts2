@@ -1,5 +1,6 @@
 prototype(CRON.FormBuilder:FormElement) < prototype(TYPO3.Neos:Content) {
 	layoutName = 'Wrapper'
+	attributes.id = ${node.identifier}
 }
 
 prototype(CRON.FormBuilder:CheckBox) < prototype(CRON.FormBuilder:FormElement) {
