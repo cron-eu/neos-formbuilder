@@ -1,6 +1,6 @@
 prototype(CRON.FormBuilder:Plugin) < prototype(TYPO3.Neos:Plugin) {
 	package = 'CRON.FormBuilder'
-	controller = 'Standard'
+	controller = 'FormBuilder'
 	argumentNamespace = 'data'
 	action = 'index'
 

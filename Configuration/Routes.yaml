@@ -8,7 +8,7 @@
     '@format': 'html'
     '--data':
       '@package': 'CRON.FormBuilder'
-      '@controller': 'Standard'
+      '@controller': 'FormBuilder'
       '@action': 'transfer'
       '@format': 'html'
   routeParts:

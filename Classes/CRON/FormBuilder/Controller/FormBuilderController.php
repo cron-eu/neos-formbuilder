@@ -12,7 +12,7 @@ use TYPO3\TYPO3CR\Domain\Repository\NodeDataRepository;
 use CRON\FormBuilder\Utils\EmailMessage;
 
 
-class StandardController extends \TYPO3\Flow\Mvc\Controller\ActionController {
+class FormBuilderController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 
 	/**
 	 * @Flow\Inject
