@@ -9,7 +9,7 @@
     '--data':
       '@package': 'CRON.FormBuilder'
       '@controller': 'FormBuilder'
-      '@action': 'transfer'
+      '@action': 'submit'
       '@format': 'html'
   routeParts:
    node:

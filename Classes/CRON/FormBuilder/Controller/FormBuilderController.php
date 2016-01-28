@@ -37,7 +37,7 @@ class FormBuilderController extends \TYPO3\Flow\Mvc\Controller\ActionController 
 	/**
 	 * @var Node $siteNode
 	 */
-	public $siteNode = NULL;
+	protected $siteNode = NULL;
 
 
 	/**
@@ -45,31 +45,12 @@ class FormBuilderController extends \TYPO3\Flow\Mvc\Controller\ActionController 
 	 */
 	public function indexAction() {
 		$this->view->assign('elements',$this->request->getInternalArgument('__elements'));
-		$legend = $this->request->getInternalArgument('__legend');
-		$this->view->assign('legend', $legend);
-	}
-
-	/**
-	 * Get the root site node
-	 *
-	 * @return \TYPO3\TYPO3CR\Domain\Model\NodeInterface
-	 */
-	public function getSiteNode() {
-
-		if (!$this->siteNode) {
-
-			/** @var ContentContext $contentContext */
-			$contentContext = $this->createContext();
-			$this->siteNode = $contentContext->getCurrentSiteNode();
-		}
-
-		return $this->siteNode;
 	}
 
 	/**
 	 * @return void
 	 */
-	public function transferAction() {
+	public function submitAction() {
 
 		$siteNode = $this->getSiteNode();
 		$values = $this->request->getArguments();
@@ -85,15 +66,22 @@ class FormBuilderController extends \TYPO3\Flow\Mvc\Controller\ActionController 
 		}
 
 		$this->sendMail($nodes);
+
+		$this->redirect('submitPending');
 	}
+
+	/**
+	 * @return void
+	 */
+	public function submitPendingAction() {}
+
 
 	/**
 	 * Sends your details to recipient
 	 * @param array $fields
 	 * @return void
 	 */
-	public function sendMail($fields) {
-
+	private function sendMail($fields) {
 
 		$receiver = explode(',', $this->request->getInternalArgument('__receiver'));
 
@@ -106,13 +94,30 @@ class FormBuilderController extends \TYPO3\Flow\Mvc\Controller\ActionController 
 	}
 
 	/**
+	 * Get the root site node
+	 *
+	 * @return \TYPO3\TYPO3CR\Domain\Model\NodeInterface
+	 */
+	private function getSiteNode() {
+
+		if (!$this->siteNode) {
+
+			/** @var ContentContext $contentContext */
+			$contentContext = $this->createContext();
+			$this->siteNode = $contentContext->getCurrentSiteNode();
+		}
+
+		return $this->siteNode;
+	}
+
+	/**
 	 * @param string $workspace
 	 * @param bool   $showInvisibleAndInaccessibleContent
 	 *
 	 * @throws \Exception
 	 * @return \TYPO3\Neos\Domain\Service\ContentContext
 	 */
-	public function createContext($workspace = 'live', $showInvisibleAndInaccessibleContent = TRUE) {
+	private function createContext($workspace = 'live', $showInvisibleAndInaccessibleContent = TRUE) {
 
 		/** @var Site $currentSite */
 		$currentSite = $this->siteRepository->findFirstOnline();
