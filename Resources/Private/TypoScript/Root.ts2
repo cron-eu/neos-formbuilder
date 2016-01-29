@@ -20,7 +20,9 @@ prototype(CRON.FormBuilder:Option) < prototype(CRON.FormBuilder:FormElement) {
 }
 
 prototype(CRON.FormBuilder:Select) < prototype(CRON.FormBuilder:FormElement) {
-
+	elements = TYPO3.Neos:ContentCollection {
+		nodePath = 'elements'
+	}
 }
 
 prototype(CRON.FormBuilder:SubmitButton) < prototype(CRON.FormBuilder:FormElement) {
@@ -42,11 +44,5 @@ prototype(CRON.FormBuilder:Plugin) < prototype(TYPO3.Neos:Plugin) {
 
 	elements = TYPO3.Neos:ContentCollection {
 		nodePath = 'elements'
-	}
-
-	prototype(CRON.FormBuilder:Select) {
-		elements = TYPO3.Neos:ContentCollection {
-			nodePath = 'elements'
-		}
 	}
 }
