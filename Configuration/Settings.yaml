@@ -8,3 +8,13 @@ TYPO3:
       translation:
         autoInclude:
           'CRON.FormBuilder': ['NodeTypes/*']
+CRON:
+  FormBuilder:
+    Email:
+      layoutRootPath: 'resource://CRON.FormBuilder/Private/Templates/Email/Layouts'
+      templatePathAndFilenameFormat: 'resource://CRON.FormBuilder/Private/Templates/Email/%s.txt'
+      defaults:
+        from: dev@cron.eu
+        subject: New Message from FormBuilder
+    Controller:
+      useForward: true

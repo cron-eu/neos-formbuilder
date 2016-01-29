@@ -1,0 +1,9 @@
+Dear Administrator,
+
+a form has been submitted:
+
+<f:render section="Content" />
+
+--
+FormBuilder
+https://github.com/cron-eu/neos-formbuilder

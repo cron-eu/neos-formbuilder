@@ -1,3 +1,2 @@
-<div class="formbuilder submitbutton">
-	<input type="submit" name="--data[{node.identifier}]" value="{node.properties.caption}"/>
-</div>
+<input {attributes -> f:format.raw()} type="submit" value="{caption}">
+

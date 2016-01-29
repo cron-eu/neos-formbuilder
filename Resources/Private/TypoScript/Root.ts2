@@ -1,16 +1,45 @@
+prototype(CRON.FormBuilder:FormElement) < prototype(TYPO3.Neos:Content) {
+	layoutName = 'Wrapper'
+	attributes.id = ${node.identifier}
+	attributes.name = ${'--cron_formbuilder-plugin[data][' + node.identifier + ']'}
+}
+
+prototype(CRON.FormBuilder:CheckBox) < prototype(CRON.FormBuilder:FormElement) {
+}
+
+prototype(CRON.FormBuilder:HiddenField) < prototype(CRON.FormBuilder:FormElement) {
+}
+
+prototype(CRON.FormBuilder:Input) < prototype(CRON.FormBuilder:FormElement) {
+}
+
+prototype(CRON.FormBuilder:Option) < prototype(CRON.FormBuilder:FormElement) {
+}
+
+prototype(CRON.FormBuilder:Select) < prototype(CRON.FormBuilder:FormElement) {
+	elements = TYPO3.Neos:ContentCollection {
+		nodePath = 'elements'
+	}
+}
+
+prototype(CRON.FormBuilder:SubmitButton) < prototype(CRON.FormBuilder:FormElement) {
+	attributes.name >
+}
+
+prototype(CRON.FormBuilder:TextArea) < prototype(CRON.FormBuilder:FormElement) {
+}
+
+
 prototype(CRON.FormBuilder:Plugin) < prototype(TYPO3.Neos:Plugin) {
 	package = 'CRON.FormBuilder'
-	controller = 'Standard'
-	argumentNamespace = 'data'
+	controller = 'FormBuilder'
 	action = 'index'
+
+	attributes = TYPO3.TypoScript:RawArray
 
 	elements = TYPO3.Neos:ContentCollection {
 		nodePath = 'elements'
 	}
 
-	prototype(CRON.FormBuilder:Select) {
-		elements = TYPO3.Neos:ContentCollection {
-			nodePath = 'elements'
-		}
-	}
+	elementsArray = ${q(node).children('elements').children().get()}
 }
