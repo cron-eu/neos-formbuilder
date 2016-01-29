@@ -1,7 +1,7 @@
 prototype(CRON.FormBuilder:FormElement) < prototype(TYPO3.Neos:Content) {
 	layoutName = 'Wrapper'
 	attributes.id = ${node.identifier}
-	attributes.name = ${'--data[' + node.identifier + ']'}
+	attributes.name = ${'--cron_formbuilder-plugin[data][' + node.identifier + ']'}
 }
 
 prototype(CRON.FormBuilder:CheckBox) < prototype(CRON.FormBuilder:FormElement) {
@@ -33,7 +33,6 @@ prototype(CRON.FormBuilder:TextArea) < prototype(CRON.FormBuilder:FormElement) {
 prototype(CRON.FormBuilder:Plugin) < prototype(TYPO3.Neos:Plugin) {
 	package = 'CRON.FormBuilder'
 	controller = 'FormBuilder'
-	argumentNamespace = 'data'
 	action = 'index'
 
 	attributes = TYPO3.TypoScript:RawArray

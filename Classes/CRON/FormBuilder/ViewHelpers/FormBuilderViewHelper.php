@@ -26,7 +26,7 @@ class FormBuilderViewHelper extends AbstractFormViewHelper {
 		/** @var NodeInterface $element */
 		foreach ($elements as $element) {
 			if(!$element->getNodeType()->isOfType('CRON.FormBuilder:SubmitButton'))
-				$this->registerFieldNameForFormTokenGeneration(sprintf('--data[%s]', $element->getIdentifier()));
+				$this->registerFieldNameForFormTokenGeneration(sprintf('--cron_formbuilder-plugin[data][%s]', $element->getIdentifier()));
 		}
 	}
 }

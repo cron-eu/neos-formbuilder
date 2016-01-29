@@ -51,16 +51,16 @@ class FormBuilderController extends \TYPO3\Flow\Mvc\Controller\ActionController 
 	}
 
 	/**
+	 * @param array $data
 	 * @return void
 	 */
-	public function submitAction() {
+	public function submitAction($data) {
 
 		$siteNode = $this->getSiteNode();
-		$values = $this->request->getArguments();
 
 		$fields = [];
 
-		foreach($values as $identifier => $value) {
+		foreach($data as $identifier => $value) {
 			$node = $this->nodeDataRepository->findOneByIdentifier($identifier, $siteNode->getWorkspace());
 
 			//we can only handle registered nodes, must be a form manipulation
