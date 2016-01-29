@@ -1,5 +1,5 @@
 {
-    "name": "cron/form-builder",
+    "name": "cron/neos-formbuilder",
     "type": "typo3-flow-package",
     "description": "Component to build and populate forms in the backend",
     "require": {
