@@ -1,6 +1,6 @@
 {namespace neos=TYPO3\Neos\ViewHelpers}
 
-<f:form action="submit" method="post">
+<f:form action="submit" method="post" additionalAttributes="{attributes}">
 	<f:if condition="{neos:rendering.inBackend(node: documentNode)}">
 		<strong><f:translate id="formBuilder.index.backend.addFormElements" package="CRON.FormBuilder" /></strong>
 	</f:if>

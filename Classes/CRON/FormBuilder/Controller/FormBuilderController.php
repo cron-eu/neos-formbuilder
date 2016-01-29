@@ -44,6 +44,7 @@ class FormBuilderController extends \TYPO3\Flow\Mvc\Controller\ActionController 
 	 * @return void
 	 */
 	public function indexAction() {
+		$this->view->assign('attributes',$this->request->getInternalArgument('__attributes'));
 		$this->view->assign('elements',$this->request->getInternalArgument('__elements'));
 		$this->view->assign('documentNode',$this->request->getInternalArgument('__documentNode'));
 	}

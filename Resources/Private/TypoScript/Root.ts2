@@ -38,6 +38,8 @@ prototype(CRON.FormBuilder:Plugin) < prototype(TYPO3.Neos:Plugin) {
 	argumentNamespace = 'data'
 	action = 'index'
 
+	attributes = TYPO3.TypoScript:RawArray
+
 	elements = TYPO3.Neos:ContentCollection {
 		nodePath = 'elements'
 	}
