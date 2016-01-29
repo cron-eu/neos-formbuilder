@@ -2,7 +2,7 @@
 privilegeTargets:
   TYPO3\Flow\Security\Authorization\Privilege\Method\MethodPrivilege:
     CRON_FormBuilder_Plugin:
-      matcher: 'method(CRON\FormBuilder\Controller\StandardController->.*Action())'
+      matcher: 'method(CRON\FormBuilder\Controller\FormBuilderController->.*Action())'
 roles:
   'TYPO3.Flow:Everybody':
     privileges:

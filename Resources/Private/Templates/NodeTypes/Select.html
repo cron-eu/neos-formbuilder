@@ -1,25 +1,17 @@
 {namespace neos=TYPO3\Neos\ViewHelpers}
-<div class="formbuilder selectbox{errorclass}">
-    <label>{node.properties.label}</label>
-    <f:if condition="{node.context.workspace.name} == 'live'">
+<f:layout name="{layoutName}" />
+<f:section name="Content">
+    <f:if condition="{neos:rendering.inBackend()}">
         <f:then>
-            <select name="--data[{node.identifier}]"{f:if(condition: node.properties.required, then: ' required')}{f:if(condition: node.properties.multiple, then: ' multiple')}>
-                <f:if condition="{node.properties.firstoption}">
-                    <f:then>
-                        <option>{node.properties.firstoption}</option>
-                    </f:then>
-                </f:if>
-
-                {elements -> f:format.raw()}
-            </select>
-        </f:then>
-        <f:else>
+            <strong><f:translate id="formBuilder.index.backend.addSelectElements" package="CRON.FormBuilder" /></strong>
             <ul>
                 {elements -> f:format.raw()}
             </ul>
-
+        </f:then>
+        <f:else>
+            <select {attributes -> f:format.raw()}{f:if(condition: required, then: ' required')}{f:if(condition: multiple, then: ' multiple')}>
+                 {elements -> f:format.raw()}
+            </select>
         </f:else>
     </f:if>
-
-
-</div>
+</f:section>

@@ -1,0 +1,4 @@
+<f:layout name="Default.txt" />
+<f:section name="Subject">New Message from FormBuilder: {subject}</f:section>
+<f:section name="Content"><f:for each="{fields}" as="field">
+{field.label}: {field.value}</f:for></f:section>

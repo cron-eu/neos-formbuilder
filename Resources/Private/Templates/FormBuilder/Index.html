@@ -1,0 +1,11 @@
+{namespace neos=TYPO3\Neos\ViewHelpers}
+{namespace fb=CRON\FormBuilder\ViewHelpers}
+
+<f:form action="submit" method="post" additionalAttributes="{attributes}">
+	<f:if condition="{neos:rendering.inBackend(node: documentNode)}">
+		<strong><f:translate id="formBuilder.index.backend.addFormElements" package="CRON.FormBuilder" /></strong>
+	</f:if>
+	<fb:formBuilder elements="{elementsArray}"/>
+	{elements -> f:format.raw()}
+	<f:form.hidden name="__formId" value="{node.identifier}"></f:form.hidden>
+</f:form>
