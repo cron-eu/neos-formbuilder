@@ -10,9 +10,11 @@ namespace CRON\FormBuilder\Controller;
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\TYPO3CR\Domain\Repository\NodeDataRepository;
 use CRON\FormBuilder\Utils\EmailMessage;
+use TYPO3\Flow\Mvc\Controller\ActionController;
+use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
 
 
-class FormBuilderController extends \TYPO3\Flow\Mvc\Controller\ActionController {
+class FormBuilderController extends ActionController {
 
 	/**
 	 * @Flow\Inject
@@ -35,7 +37,7 @@ class FormBuilderController extends \TYPO3\Flow\Mvc\Controller\ActionController 
 	protected $siteRepository;
 
 	/**
-	 * @var Node $siteNode
+	 * @var NodeInterface $siteNode
 	 */
 	protected $siteNode = NULL;
 
@@ -105,10 +107,7 @@ class FormBuilderController extends \TYPO3\Flow\Mvc\Controller\ActionController 
 	private function getSiteNode() {
 
 		if (!$this->siteNode) {
-
-			/** @var ContentContext $contentContext */
-			$contentContext = $this->createContext();
-			$this->siteNode = $contentContext->getCurrentSiteNode();
+			$this->siteNode = $this->createContext()->getCurrentSiteNode();
 		}
 
 		return $this->siteNode;
@@ -123,7 +122,6 @@ class FormBuilderController extends \TYPO3\Flow\Mvc\Controller\ActionController 
 	 */
 	private function createContext($workspace = 'live', $showInvisibleAndInaccessibleContent = TRUE) {
 
-		/** @var Site $currentSite */
 		$currentSite = $this->siteRepository->findFirstOnline();
 		if ($currentSite === NULL) {
 			throw new \Exception('no online site available');
