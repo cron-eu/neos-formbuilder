@@ -54,6 +54,7 @@ class FormBuilderController extends \TYPO3\Flow\Mvc\Controller\ActionController 
 	 * @return void
 	 */
 	public function submitAction() {
+		print_r($this->arguments);
 
 		$siteNode = $this->getSiteNode();
 		$values = $this->request->getArguments();
