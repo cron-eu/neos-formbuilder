@@ -10,13 +10,7 @@
         </f:then>
         <f:else>
             <select {attributes -> f:format.raw()}{f:if(condition: required, then: ' required')}{f:if(condition: multiple, then: ' multiple')}>
-            <f:if condition="{firstoption}">
-                <f:then>
-                    <option>{firstoption}</option>
-                </f:then>
-            </f:if>
-
-            {elements -> f:format.raw()}
+                 {elements -> f:format.raw()}
             </select>
         </f:else>
     </f:if>

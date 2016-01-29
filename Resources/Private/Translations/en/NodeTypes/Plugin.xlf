@@ -98,6 +98,9 @@
            <trans-unit id="fields.select" xml:space="preserve">
                <source>Selectbox</source>
            </trans-unit>
+            <trans-unit id="fields.select.multiple" xml:space="preserve">
+             <source>Multiple Selection</source>
+     </trans-unit>
            <trans-unit id="fields.select.options" xml:space="preserve">
                <source>Option</source>
            </trans-unit>
@@ -107,6 +110,9 @@
            <trans-unit id="fields.select.options.text" xml:space="preserve">
             <source>Text displayed</source>
          </trans-unit>
+            <trans-unit id="fields.select.options.selected" xml:space="preserve">
+            <source>Selected</source>
+            </trans-unit>
          <trans-unit id="fields.radios" xml:space="preserve">
              <source>Options</source>
          </trans-unit>

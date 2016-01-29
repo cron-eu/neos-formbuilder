@@ -8,15 +8,12 @@ prototype(CRON.FormBuilder:CheckBox) < prototype(CRON.FormBuilder:FormElement) {
 }
 
 prototype(CRON.FormBuilder:HiddenField) < prototype(CRON.FormBuilder:FormElement) {
-
 }
 
 prototype(CRON.FormBuilder:Input) < prototype(CRON.FormBuilder:FormElement) {
-
 }
 
 prototype(CRON.FormBuilder:Option) < prototype(CRON.FormBuilder:FormElement) {
-	attributes.name >
 }
 
 prototype(CRON.FormBuilder:Select) < prototype(CRON.FormBuilder:FormElement) {
@@ -30,7 +27,6 @@ prototype(CRON.FormBuilder:SubmitButton) < prototype(CRON.FormBuilder:FormElemen
 }
 
 prototype(CRON.FormBuilder:TextArea) < prototype(CRON.FormBuilder:FormElement) {
-
 }
 
 

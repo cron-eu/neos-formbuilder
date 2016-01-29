@@ -142,6 +142,7 @@
 'CRON.FormBuilder:Select':
   superTypes:
     'CRON.FormBuilder:FormElementMixin': true
+    'CRON.FormBuilder:FormElementValueMixin': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.select
   childNodes:
@@ -152,16 +153,10 @@
           'CRON.FormBuilder:Option': true
           '*': false
   properties:
-    firstoption:
-      type: string
-      ui:
-        label: CRON.FormBuilder:NodeTypes.Plugin:fields.select.firstoption
-        inspector:
-          group: options
     multiple:
       type: boolean
       ui:
-        label: 'multiple Selection'
+        label: CRON.FormBuilder:NodeTypes.Plugin:fields.select.multiple
         reloadIfChanged: TRUE
         inspector:
           group: options
@@ -185,6 +180,13 @@
       ui:
         label: CRON.FormBuilder:NodeTypes.Plugin:fields.select.options.text
         reloadIfChanged: true
+        inspector:
+          group: options
+    selected:
+      type: boolean
+      ui:
+        label: CRON.FormBuilder:NodeTypes.Plugin:fields.select.options.selected
+        reloadIfChanged: false
         inspector:
           group: options
 

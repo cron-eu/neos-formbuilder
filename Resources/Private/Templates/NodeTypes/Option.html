@@ -4,6 +4,6 @@
 		<li>{option}</li>
 	</f:then>
 	<f:else>
-		<option value="{value}">{option}</option>
+		<option value="{value}"{f:if(condition: selected, then: ' selected')}>{option}</option>
 	</f:else>
 </f:if>
