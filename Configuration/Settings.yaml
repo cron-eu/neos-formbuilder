@@ -16,3 +16,5 @@ CRON:
       defaults:
         from: dev@cron.eu
         subject: New Message from FormBuilder
+    Controller:
+      useForward: true

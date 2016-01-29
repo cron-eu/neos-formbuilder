@@ -7,4 +7,5 @@
 	</f:if>
 	<fb:formBuilder elements="{elementsArray}"/>
 	{elements -> f:format.raw()}
+	<f:form.hidden name="__formId" value="{node.identifier}"></f:form.hidden>
 </f:form>

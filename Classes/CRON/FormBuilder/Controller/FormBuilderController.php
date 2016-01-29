@@ -12,6 +12,7 @@ use TYPO3\TYPO3CR\Domain\Repository\NodeDataRepository;
 use CRON\FormBuilder\Utils\EmailMessage;
 use TYPO3\Flow\Mvc\Controller\ActionController;
 use CRON\FormBuilder\Service\SiteService;
+use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
 
 
 class FormBuilderController extends ActionController {
@@ -29,6 +30,12 @@ class FormBuilderController extends ActionController {
 	protected $nodeDataRepository;
 
 	/**
+	 * @Flow\InjectConfiguration(path="Controller")
+	 * @var array
+	 */
+	protected $conf;
+
+	/**
 	 * @return void
 	 */
 	public function indexAction() {
@@ -36,6 +43,17 @@ class FormBuilderController extends ActionController {
 		$this->view->assign('elements',$this->request->getInternalArgument('__elements'));
 		$this->view->assign('elementsArray',$this->request->getInternalArgument('__elementsArray'));
 		$this->view->assign('documentNode',$this->request->getInternalArgument('__documentNode'));
+		$this->view->assign('node',$this->request->getInternalArgument('__node'));
+	}
+
+
+
+	/**
+	 * Checks the form id
+	 * @return void
+	 */
+	public function initializeSubmitAction() {
+		$this->checkFormId();
 	}
 
 	/**
@@ -60,14 +78,34 @@ class FormBuilderController extends ActionController {
 
 		$this->sendMail($fields);
 
-		$this->redirect('submitPending');
+		if ($this->conf['useForward']) {
+			$this->forward('submitPending');
+		} else {
+			$this->redirect('submitPending');
+		}
+
 	}
+
 
 	/**
 	 * @return void
 	 */
 	public function submitPendingAction() {}
 
+
+
+	/**
+	 * For multiple forms on one page we check which form is submitted and forward to index if necessary
+	 * @return void
+	 */
+	private function checkFormId() {
+		/** @var NodeInterface $node */
+		$node = $this->request->getInternalArgument('__node');
+
+		if($this->request->getInternalArgument('__formId') != $node->getIdentifier()) {
+			$this->forward('index');
+		}
+	}
 
 	/**
 	 * Sends your details to recipient
