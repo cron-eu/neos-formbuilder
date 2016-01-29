@@ -11,36 +11,22 @@ use TYPO3\Flow\Annotations as Flow;
 use TYPO3\TYPO3CR\Domain\Repository\NodeDataRepository;
 use CRON\FormBuilder\Utils\EmailMessage;
 use TYPO3\Flow\Mvc\Controller\ActionController;
-use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
+use CRON\FormBuilder\Service\SiteService;
 
 
 class FormBuilderController extends ActionController {
 
 	/**
 	 * @Flow\Inject
-	 * @var \TYPO3\TYPO3CR\Domain\Service\ContextFactoryInterface
+	 * @var SiteService
 	 */
-	protected $contextFactory;
-
+	protected $siteService;
 
 	/**
 	 * @Flow\Inject
 	 * @var NodeDataRepository
 	 */
 	protected $nodeDataRepository;
-
-
-	/**
-	 * @Flow\Inject
-	 * @var \TYPO3\Neos\Domain\Repository\SiteRepository
-	 */
-	protected $siteRepository;
-
-	/**
-	 * @var NodeInterface $siteNode
-	 */
-	protected $siteNode = NULL;
-
 
 	/**
 	 * @return void
@@ -54,11 +40,12 @@ class FormBuilderController extends ActionController {
 
 	/**
 	 * @param array $data
+	 * @Flow\Validate(argumentName="data", type="\CRON\FormBuilder\Validation\Validator\FormBuilderValidator")
 	 * @return void
 	 */
 	public function submitAction($data) {
 
-		$siteNode = $this->getSiteNode();
+		$siteNode = $this->siteService->getSiteNode();
 
 		$fields = [];
 
@@ -99,40 +86,5 @@ class FormBuilderController extends ActionController {
 		$emailMessage->send($receiver);
 	}
 
-	/**
-	 * Get the root site node
-	 *
-	 * @return \TYPO3\TYPO3CR\Domain\Model\NodeInterface
-	 */
-	private function getSiteNode() {
-
-		if (!$this->siteNode) {
-			$this->siteNode = $this->createContext()->getCurrentSiteNode();
-		}
-
-		return $this->siteNode;
-	}
-
-	/**
-	 * @param string $workspace
-	 * @param bool   $showInvisibleAndInaccessibleContent
-	 *
-	 * @throws \Exception
-	 * @return \TYPO3\Neos\Domain\Service\ContentContext
-	 */
-	private function createContext($workspace = 'live', $showInvisibleAndInaccessibleContent = TRUE) {
-
-		$currentSite = $this->siteRepository->findFirstOnline();
-		if ($currentSite === NULL) {
-			throw new \Exception('no online site available');
-		}
-
-		return $this->contextFactory->create([
-			'workspaceName'            => $workspace,
-			'currentSite'              => $currentSite,
-			'invisibleContentShown'    => $showInvisibleAndInaccessibleContent,
-			'inaccessibleContentShown' => $showInvisibleAndInaccessibleContent
-		]);
-	}
 
 }
