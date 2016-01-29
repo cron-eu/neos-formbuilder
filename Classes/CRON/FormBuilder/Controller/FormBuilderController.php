@@ -57,18 +57,19 @@ class FormBuilderController extends \TYPO3\Flow\Mvc\Controller\ActionController 
 
 		$siteNode = $this->getSiteNode();
 		$values = $this->request->getArguments();
-		$hideFields = array('CRON.FormBuilder:SubmitButton');
 
-		$nodes = [];
+		$fields = [];
 
 		foreach($values as $identifier => $value) {
 			$node = $this->nodeDataRepository->findOneByIdentifier($identifier, $siteNode->getWorkspace());
-			if(!in_array($node->getNodeType(), $hideFields)){
-				$nodes[] = array('label' => $node->getProperty('label'), 'value' => $value);
-			}
+
+			//we can only handle registered nodes, must be a form manipulation
+			if($node === NULL) $this->throwStatus(403);
+
+			$fields[] = array('label' => $node->getProperty('label'), 'value' => $value);
 		}
 
-		$this->sendMail($nodes);
+		$this->sendMail($fields);
 
 		$this->redirect('submitPending');
 	}
