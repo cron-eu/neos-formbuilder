@@ -6,7 +6,7 @@
 			<input {attributes -> f:format.raw()} type="text" placeholder="{placeholder}" readonly>
 		</f:then>
 		<f:else>
-			<input {attributes -> f:format.raw()} type="{type}" {f:if(condition: placeholder, then: 'placeholder="{placeholder}" ')}id="{node.identifier}" name="--data[{node.identifier}]" {f:if(condition: required, then: 'required')}{f:if(condition: readonly, then: ' readonly')}>
+			<input {attributes -> f:format.raw()} type="{type}" {f:if(condition: placeholder, then: 'placeholder="{placeholder}" ')}id="{node.identifier}" name="--data[{node.identifier}]" {f:if(condition: required, then: 'required')}>
 		</f:else>
 	</f:if>
 </f:section>

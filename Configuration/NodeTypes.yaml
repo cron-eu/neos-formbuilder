@@ -42,33 +42,22 @@
           'CRON.FormBuilder:SubmitButton': true
           '*': false
 
-'CRON.FormBuilder:Input':
+'CRON.FormBuilder:FormElementMixin':
   superTypes:
     'TYPO3.Neos:Content': true
+  abstract: true
   ui:
-    label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield
     icon: 'icon-text-width'
-    inlineEditable: true
+    inlineEditable: false
     inspector:
       groups:
         options:
           label: CRON.FormBuilder:NodeTypes.Plugin:groups.options
-          position: 100
-        advanced:
-          label: CRON.FormBuilder:NodeTypes.Plugin:groups.advanced
-          position: 101
   properties:
     label:
       type: string
       ui:
         label: CRON.FormBuilder:NodeTypes.Plugin:field.label
-        reloadIfChanged: true
-        inspector:
-          group: options
-    placeholder:
-      type: string
-      ui:
-        label: CRON.FormBuilder:NodeTypes.Plugin:field.placeholder
         reloadIfChanged: true
         inspector:
           group: options
@@ -78,21 +67,45 @@
         label: CRON.FormBuilder:NodeTypes.Plugin:field.required
         reloadIfChanged: TRUE
         inspector:
-          group: advanced
-    readonly:
-      type: boolean
+          group: options
+
+'CRON.FormBuilder:FormElementValueMixin':
+  abstract: true
+  properties:
+    value:
+      type: string
       ui:
-        label: CRON.FormBuilder:NodeTypes.Plugin:field.readonly
-        reloadIfChanged: TRUE
+        label: CRON.FormBuilder:NodeTypes.Plugin:field.value
+        reloadIfChanged: true
         inspector:
-          group: advanced
+          group: options
+
+'CRON.FormBuilder:FormElementPlaceholderMixin':
+  abstract: true
+  properties:
+    value:
+      type: string
+      ui:
+        label: CRON.FormBuilder:NodeTypes.Plugin:field.placeholder
+        reloadIfChanged: true
+        inspector:
+          group: options
+
+'CRON.FormBuilder:Input':
+  superTypes:
+    'CRON.FormBuilder:FormElementMixin': true
+    'CRON.FormBuilder:FormElementValueMixin': true
+    'CRON.FormBuilder:FormElementPlaceholderMixin': true
+  ui:
+    label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield
+  properties:
     type:
       type: string
       ui:
         label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield.inputtype
         reloadIfChanged: TRUE
         inspector:
-          group: advanced
+          group: options
           editor: Content/Inspector/Editors/SelectBoxEditor
           editorOptions:
             values:
@@ -115,7 +128,8 @@
 
 'CRON.FormBuilder:HiddenField':
   superTypes:
-    'TYPO3.Neos:Content': true
+    'CRON.FormBuilder:FormElementMixin': true
+    'CRON.FormBuilder:FormElementValueMixin': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.hidden
     icon: 'icon-text-width'
@@ -124,37 +138,12 @@
         options:
           label: CRON.FormBuilder:NodeTypes.Plugin:groups.options
           position: 100
-  properties:
-    label:
-      type: string
-      ui:
-        label: CRON.FormBuilder:NodeTypes.Plugin:field.name
-        reloadIfChanged: true
-        inspector:
-          group: options
-    value:
-      type: string
-      ui:
-        label: CRON.FormBuilder:NodeTypes.Plugin:field.value
-        reloadIfChanged: true
-        inspector:
-          group: options
 
 'CRON.FormBuilder:Select':
   superTypes:
-    'TYPO3.Neos:Content': true
+    'CRON.FormBuilder:FormElementMixin': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.select
-    icon: 'icon-text-width'
-    inlineEditable: true
-    inspector:
-      groups:
-        options:
-          label: CRON.FormBuilder:NodeTypes.Plugin:groups.options
-          position: 100
-        advanced:
-          label: CRON.FormBuilder:NodeTypes.Plugin:groups.advanced
-          position: 101
   childNodes:
     elements:
       type: 'TYPO3.Neos:ContentCollection'
@@ -163,13 +152,6 @@
           'CRON.FormBuilder:Option': true
           '*': false
   properties:
-    label:
-      type: string
-      ui:
-        label: CRON.FormBuilder:NodeTypes.Plugin:field.label
-        reloadIfChanged: true
-        inspector:
-          group: options
     firstoption:
       type: string
       ui:
@@ -182,36 +164,22 @@
         label: 'multiple Selection'
         reloadIfChanged: TRUE
         inspector:
-          group: advanced
-    required:
-      type: boolean
-      ui:
-        label: CRON.FormBuilder:NodeTypes.Plugin:field.required
-        reloadIfChanged: TRUE
-        inspector:
-          group: advanced
+          group: options
 
 
 'CRON.FormBuilder:Option':
   superTypes:
     'TYPO3.Neos:Content': true
+    'CRON.FormBuilder:FormElementValueMixin': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.select.options
-    icon: 'icon-text-width'
-    inlineEditable: true
+    icon: icon-circle-blank
+    inlineEditable: false
     inspector:
       groups:
         options:
           label: CRON.FormBuilder:NodeTypes.Plugin:groups.options
-          position: 100
   properties:
-    value:
-      type: string
-      ui:
-        label: CRON.FormBuilder:NodeTypes.Plugin:field.value
-        reloadIfChanged: true
-        inspector:
-          group: options
     option:
       type: string
       ui:
@@ -222,57 +190,17 @@
 
 'CRON.FormBuilder:CheckBox':
   superTypes:
-    'TYPO3.Neos:Content': true
+    'CRON.FormBuilder:FormElementMixin': true
+    'CRON.FormBuilder:FormElementValueMixin': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.checkbox
-    icon: 'icon-text-width'
-    inlineEditable: true
-    inspector:
-      groups:
-        options:
-          label: CRON.FormBuilder:NodeTypes.Plugin:groups.options
-          position: 100
-        advanced:
-          label: CRON.FormBuilder:NodeTypes.Plugin:groups.advanced
-          position: 101
-  properties:
-    label:
-      type: string
-      ui:
-        label: CRON.FormBuilder:NodeTypes.Plugin:field.label
-        reloadIfChanged: true
-        inspector:
-          group: options
-    value:
-      type: string
-      ui:
-        label: CRON.FormBuilder:NodeTypes.Plugin:field.value
-        reloadIfChanged: true
-        inspector:
-          group: options
-    required:
-      type: boolean
-      ui:
-        label: CRON.FormBuilder:NodeTypes.Plugin:field.required
-        inspector:
-          group: advanced
-    readonly:
-      type: boolean
-      ui:
-        label: CRON.FormBuilder:NodeTypes.Plugin:field.readonly
-        inspector:
-          group: advanced
-    checked:
-      type: boolean
-      ui:
-        label: CRON.FormBuilder:NodeTypes.Plugin:field.checked
-        inspector:
-          group: advanced
 
 
 'CRON.FormBuilder:TextArea':
   superTypes:
-    'TYPO3.Neos:Content': true
+    'CRON.FormBuilder:FormElementMixin': true
+    'CRON.FormBuilder:FormElementValueMixin': true
+    'CRON.FormBuilder:FormElementPlaceholderMixin': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.textarea
     icon: 'icon-text-width'
@@ -282,24 +210,7 @@
         options:
           label: CRON.FormBuilder:NodeTypes.Plugin:groups.options
           position: 100
-        advanced:
-          label: CRON.FormBuilder:NodeTypes.Plugin:groups.advanced
-          position: 101
   properties:
-    label:
-      type: string
-      ui:
-        label: CRON.FormBuilder:NodeTypes.Plugin:field.label
-        reloadIfChanged: true
-        inspector:
-          group: options
-    placeholder:
-      type: string
-      ui:
-        label: CRON.FormBuilder:NodeTypes.Plugin:field.placeholder
-        reloadIfChanged: true
-        inspector:
-          group: options
     rows:
       type: integer
       defaultValue: 5
@@ -307,7 +218,7 @@
         label: CRON.FormBuilder:NodeTypes.Plugin:fields.textarea.rows
         reloadIfChanged: TRUE
         inspector:
-          group: advanced
+          group: options
     cols:
       type: integer
       defaultValue: 2
@@ -315,19 +226,7 @@
         label: CRON.FormBuilder:NodeTypes.Plugin:fields.textarea.cols
         reloadIfChanged: TRUE
         inspector:
-          group: advanced
-    required:
-      type: boolean
-      ui:
-        label: CRON.FormBuilder:NodeTypes.Plugin:field.required
-        inspector:
-          group: advanced
-    readonly:
-      type: boolean
-      ui:
-        label: CRON.FormBuilder:NodeTypes.Plugin:field.readonly
-        inspector:
-          group: advanced
+          group: options
 
 'CRON.FormBuilder:SubmitButton':
   superTypes:
