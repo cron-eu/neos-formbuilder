@@ -45,4 +45,6 @@ prototype(CRON.FormBuilder:Plugin) < prototype(TYPO3.Neos:Plugin) {
 	elements = TYPO3.Neos:ContentCollection {
 		nodePath = 'elements'
 	}
+
+	elementsArray = ${q(node).children('elements').children().get()}
 }
