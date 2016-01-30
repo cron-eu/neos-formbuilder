@@ -2,6 +2,23 @@
 {namespace fb=CRON\FormBuilder\ViewHelpers}
 
 <f:form action="submit" method="post" additionalAttributes="{attributes}">
+
+	<f:validation.results for="data">
+		<f:if condition="{validationResults.flattenedErrors}">
+			<ul class="errors">
+				<f:for each="{validationResults.flattenedErrors}" as="errors" key="propertyPath">
+					<li>{propertyPath}
+						<ul>
+							<f:for each="{errors}" as="error">
+								<li>{error.code}: {error}</li>
+							</f:for>
+						</ul>
+					</li>
+				</f:for>
+			</ul>
+		</f:if>
+	</f:validation.results>
+
 	<f:if condition="{neos:rendering.inBackend(node: documentNode)}">
 		<strong><f:translate id="formBuilder.index.backend.addFormElements" package="CRON.FormBuilder" /></strong>
 	</f:if>
