@@ -6,7 +6,7 @@
 				<input {attributes -> f:format.raw()} type="checkbox" readonly{f:if(condition: checked, then: ' checked')}/> {label}
 			</f:then>
 			<f:else>
-				<input {attributes -> f:format.raw()} type="checkbox" value="{value}"{f:if(condition: required, then: ' required')}/> {label}
+				<input {attributes -> f:format.raw()} type="checkbox" value="{value}"/> {label}
 			</f:else>
 		</f:if>
 	</label>

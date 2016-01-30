@@ -1,7 +1,10 @@
 prototype(CRON.FormBuilder:FormElement) < prototype(TYPO3.Neos:Content) {
 	layoutName = 'Wrapper'
+
 	attributes.id = ${node.identifier}
 	attributes.name = ${'--cron_formbuilder-plugin[data][' + node.identifier + ']'}
+	attributes.required = ${q(node).property('required')}
+	attributes.required.@if.isRequired = ${Configuration.setting('CRON.FormBuilder.View.useRequiredAttribute') && this.attributes.required}
 }
 
 prototype(CRON.FormBuilder:CheckBox) < prototype(CRON.FormBuilder:FormElement) {

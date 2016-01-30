@@ -9,7 +9,7 @@
             </ul>
         </f:then>
         <f:else>
-            <select {attributes -> f:format.raw()}{f:if(condition: required, then: ' required')}{f:if(condition: multiple, then: ' multiple')}>
+            <select {attributes -> f:format.raw()}{f:if(condition: multiple, then: ' multiple')}>
                  {elements -> f:format.raw()}
             </select>
         </f:else>

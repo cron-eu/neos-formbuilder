@@ -6,7 +6,7 @@
 			<textarea  {attributes -> f:format.raw()} rows="{rows}" cols="{cols}"{f:if(condition: placeholder, then: ' placeholder="{placeholder}" ')} readonly></textarea>
 		</f:then>
 		<f:else>
-			<textarea  {attributes -> f:format.raw()} {f:if(condition: rows, then: 'rows="{rows}" ')}{f:if(condition: cols, then: 'cols="{cols}" ')}{f:if(condition: required, then: ' required')}{f:if(condition: placeholder, then: ' placeholder="{placeholder}" ')}></textarea>
+			<textarea  {attributes -> f:format.raw()} {f:if(condition: rows, then: 'rows="{rows}" ')}{f:if(condition: cols, then: 'cols="{cols}" ')}{f:if(condition: placeholder, then: ' placeholder="{placeholder}" ')}></textarea>
 		</f:else>
 	</f:if>
 </f:section>

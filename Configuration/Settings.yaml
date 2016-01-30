@@ -18,3 +18,5 @@ CRON:
         subject: New Message from FormBuilder
     Controller:
       useForward: true
+    View:
+      useRequiredAttribute: true
