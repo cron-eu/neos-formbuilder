@@ -3,21 +3,28 @@
 
 <f:form action="submit" method="post" additionalAttributes="{attributes}">
 
-	<f:validation.results for="data">
-		<f:if condition="{validationResults.flattenedErrors}">
-			<ul class="errors">
-				<f:for each="{validationResults.flattenedErrors}" as="errors" key="propertyPath">
-					<li>{propertyPath}
-						<ul>
-							<f:for each="{errors}" as="error">
-								<li>{error.code}: {error}</li>
+	<f:validation.ifHasErrors>
+		<div class="has-error">
+			<strong><f:translate id="formBuilder.index.errors.title" package="CRON.FormBuilder" /></strong>
+			<ul>
+				<f:for each="{elementsArray}" as="element">
+					<f:validation.results for="data.{element.identifier}">
+						<f:if condition="{validationResults.flattenedErrors}">
+							<f:for each="{validationResults.flattenedErrors}" as="errors">
+								<li>{element.properties.label}:
+									<ul>
+										<f:for each="{errors}" as="error">
+											<li>{error -> f:translate(id: error.code, arguments: error.arguments, package: 'TYPO3.Flow', source: 'ValidationErrors')}</li>
+										</f:for>
+									</ul>
+								</li>
 							</f:for>
-						</ul>
-					</li>
+						</f:if>
+					</f:validation.results>
 				</f:for>
 			</ul>
-		</f:if>
-	</f:validation.results>
+		</div>
+	</f:validation.ifHasErrors>
 
 	<f:if condition="{neos:rendering.inBackend(node: documentNode)}">
 		<strong><f:translate id="formBuilder.index.backend.addFormElements" package="CRON.FormBuilder" /></strong>

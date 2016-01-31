@@ -11,12 +11,16 @@
 				<target xml:lang="de" state="translated">Das Formular wurde erfolgreich übermittelt.</target>
 			</trans-unit>
 			<trans-unit id="formBuilder.index.backend.addFormElements" xml:space="preserve">
-				<source>Please add form elements.</source>
+				<source>Please add form elements</source>
 				<target xml:lang="de" state="translated">Bitte Formelemente hinzufügen</target>
 			</trans-unit>
 			<trans-unit id="formBuilder.index.backend.addSelectElements" xml:space="preserve">
-				<source>Please add options.</source>
+				<source>Please add options</source>
 				<target xml:lang="de" state="translated">Bitte Select-Optionen hinzufügen</target>
+			</trans-unit>
+			<trans-unit id="formBuilder.index.errors.title" xml:space="preserve">
+				<source>Following errors occurred:</source>
+				<target xml:lang="de" state="translated">Folgende Fehler sind aufgetreten:</target>
 			</trans-unit>
 		</body>
 	</file>
