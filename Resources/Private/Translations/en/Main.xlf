@@ -14,6 +14,9 @@
 			<trans-unit id="formBuilder.index.backend.addSelectElements" xml:space="preserve">
 				<source>Please add options.</source>
 			</trans-unit>
+			<trans-unit id="formBuilder.index.errors.title" xml:space="preserve">
+				<source>Following errors occurred:</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

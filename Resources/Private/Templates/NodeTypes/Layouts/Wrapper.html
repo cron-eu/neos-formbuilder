@@ -1,6 +1,7 @@
 <div>
-	<label for="{node.identifier}">{label}</label>
+	<label for="{node.identifier}">{node.properties.label}</label>
 	<div>
 		<f:render section="Content"/>
 	</div>
+	<f:render partial="FlattenedErrors" arguments="{_all}" />
 </div>

@@ -3,10 +3,10 @@
 	<label>
 		<f:if condition="{neos:rendering.inBackend()}">
 			<f:then>
-				<input {attributes -> f:format.raw()} type="text" value="{value}" readonly />
+				<input {attributes -> f:format.raw()} type="text" value="{node.properties.value}" readonly />
 			</f:then>
 			<f:else>
-				<input {attributes -> f:format.raw()} type="hidden" value="{value}"/>
+				<input {attributes -> f:format.raw()} type="hidden" value="{node.properties.value}"/>
 			</f:else>
 		</f:if>
 	</label>

@@ -3,10 +3,10 @@
 <f:section name="Content">
 	<f:if condition="{neos:rendering.inBackend()}">
 		<f:then>
-			<input {attributes -> f:format.raw()} type="text" placeholder="{placeholder}" readonly>
+			<input {attributes -> f:format.raw()} type="text" placeholder="{node.properties.placeholder}" readonly>
 		</f:then>
 		<f:else>
-			<input {attributes -> f:format.raw()} type="{type}" {f:if(condition: placeholder, then: 'placeholder="{placeholder}" ')}{f:if(condition: required, then: 'required')}>
+			<input {attributes -> f:format.raw()} type="{node.properties.type}" {f:if(condition: placeholder, then: 'placeholder="{node.properties.placeholder}" ')}>
 		</f:else>
 	</f:if>
 </f:section>
