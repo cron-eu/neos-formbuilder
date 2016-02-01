@@ -50,6 +50,9 @@ prototype(CRON.FormBuilder:Plugin) < prototype(TYPO3.Neos:Plugin) {
 	attributes = TYPO3.TypoScript:RawArray
 
 	elementsArray = ${q(node).children('elements').children().get()}
+
+	tsPath = 'formElementRenderer'
+	tsPackageKey = 'CRON.FormBuilder'
 }
 
 formElementRenderer =  TYPO3.TypoScript:Case {
