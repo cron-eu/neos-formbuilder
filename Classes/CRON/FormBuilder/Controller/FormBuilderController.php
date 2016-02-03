@@ -47,7 +47,8 @@ class FormBuilderController extends ActionController {
 		$this->view->assign('submitButtonLabel',$this->request->getInternalArgument('__submitButtonLabel'));
 		$this->view->assign('tsPath',$this->request->getInternalArgument('__tsPath'));
 		$this->view->assign('tsPackageKey',$this->request->getInternalArgument('__tsPackageKey'));
-
+		$this->view->assign('tsPath',$this->request->getInternalArgument('__tsPath'));
+		$this->view->assign('tsPackageKey',$this->request->getInternalArgument('__tsPackageKey'));
 	}
 
 
