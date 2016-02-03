@@ -7,23 +7,17 @@ prototype(CRON.FormBuilder:FormElement) < prototype(TYPO3.Neos:Content) {
 
 	attributes.id = ${node.identifier}
 	attributes.name = ${'--cron_formbuilder-plugin[data][' + node.identifier + ']'}
-	attributes.name.@if.isNotSubmitButton = ${node.nodeData.nodeType != 'CRON.FormBuilder:SubmitButton'}
 	attributes.required = ${q(node).property('required')}
 	attributes.required.@if.isRequired = ${Configuration.setting('CRON.FormBuilder.View.useRequiredAttribute') && this.attributes.required}
+	attributes.class = 'form-control'
 
 	node = ${node}
 	flattenedErrors = ${flattenedErrors}
-
-	elements = TYPO3.Neos:ContentCollection {
-		nodePath = 'elements'
-	}
-	elements.@if.isSelect = ${node.nodeData.nodeType == 'CRON.FormBuilder:Select'}
 }
 
 prototype(CRON.FormBuilder:CheckBox) < prototype(CRON.FormBuilder:FormElement) {
-}
-
-prototype(CRON.FormBuilder:HiddenField) < prototype(CRON.FormBuilder:FormElement) {
+	layoutName = 'CheckboxWrapper'
+	attributes.class = ''
 }
 
 prototype(CRON.FormBuilder:Input) < prototype(CRON.FormBuilder:FormElement) {
@@ -33,9 +27,9 @@ prototype(CRON.FormBuilder:Option) < prototype(CRON.FormBuilder:FormElement) {
 }
 
 prototype(CRON.FormBuilder:Select) < prototype(CRON.FormBuilder:FormElement) {
-}
-
-prototype(CRON.FormBuilder:SubmitButton) < prototype(CRON.FormBuilder:FormElement) {
+	elements = TYPO3.Neos:ContentCollection {
+		nodePath = 'elements'
+	}
 }
 
 prototype(CRON.FormBuilder:TextArea) < prototype(CRON.FormBuilder:FormElement) {
@@ -48,8 +42,17 @@ prototype(CRON.FormBuilder:Plugin) < prototype(TYPO3.Neos:Plugin) {
 	action = 'index'
 
 	attributes = TYPO3.TypoScript:RawArray
+	attributes.class = 'form-auto'
+	attributes.role = 'form'
 
 	elementsArray = ${q(node).children('elements').children().get()}
+	
+	elements = TYPO3.Neos:ContentCollection {
+		nodePath = 'elements'
+	}
+
+	tsPath = 'formElementRenderer'
+	tsPackageKey = 'CRON.FormBuilder'
 }
 
 formElementRenderer =  TYPO3.TypoScript:Case {

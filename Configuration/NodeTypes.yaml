@@ -9,7 +9,6 @@
       groups:
         advanced:
           label: i18n
-          position: 101
   properties:
     receiver:
       type: string
@@ -29,6 +28,15 @@
           group: advanced
       validation:
         'TYPO3.Neos/Validation/NotEmptyValidator': []
+    submitButtonLabel:
+      type: string
+      ui:
+        label: i18n
+        reloadIfChanged: true
+        inspector:
+          group: advanced
+      validation:
+        'TYPO3.Neos/Validation/NotEmptyValidator': []
   childNodes:
     elements:
       type: 'TYPO3.Neos:ContentCollection'
@@ -38,8 +46,6 @@
           'CRON.FormBuilder:Select': true
           'CRON.FormBuilder:CheckBox': true
           'CRON.FormBuilder:TextArea': true
-          'CRON.FormBuilder:HiddenField': true
-          'CRON.FormBuilder:SubmitButton': true
           '*': false
 
 'CRON.FormBuilder:FormElementMixin':
@@ -47,7 +53,7 @@
     'TYPO3.Neos:Content': true
   abstract: true
   ui:
-    icon: 'icon-text-width'
+    icon: 'icon-edit-sign'
     inlineEditable: false
     inspector:
       groups:
@@ -61,11 +67,13 @@
         reloadIfChanged: true
         inspector:
           group: options
+      validation:
+        'TYPO3.Neos/Validation/NotEmptyValidator': []
     required:
       type: boolean
       ui:
         label: CRON.FormBuilder:NodeTypes.Plugin:field.required
-        reloadIfChanged: TRUE
+        reloadIfChanged: true
         inspector:
           group: options
 
@@ -125,19 +133,6 @@
                 label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield.date
               time:
                 label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield.time
-
-'CRON.FormBuilder:HiddenField':
-  superTypes:
-    'CRON.FormBuilder:FormElementMixin': true
-    'CRON.FormBuilder:FormElementValueMixin': true
-  ui:
-    label: CRON.FormBuilder:NodeTypes.Plugin:fields.hidden
-    icon: 'icon-text-width'
-    inspector:
-      groups:
-        options:
-          label: CRON.FormBuilder:NodeTypes.Plugin:groups.options
-          position: 100
 
 'CRON.FormBuilder:Select':
   superTypes:
@@ -205,13 +200,6 @@
     'CRON.FormBuilder:FormElementPlaceholderMixin': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.textarea
-    icon: 'icon-text-width'
-    inlineEditable: true
-    inspector:
-      groups:
-        options:
-          label: CRON.FormBuilder:NodeTypes.Plugin:groups.options
-          position: 100
   properties:
     rows:
       type: integer
@@ -227,25 +215,5 @@
       ui:
         label: CRON.FormBuilder:NodeTypes.Plugin:fields.textarea.cols
         reloadIfChanged: TRUE
-        inspector:
-          group: options
-
-'CRON.FormBuilder:SubmitButton':
-  superTypes:
-    'TYPO3.Neos:Content': true
-  ui:
-    label: CRON.FormBuilder:NodeTypes.Plugin:fields.submit
-    icon: 'icon-text-width'
-    inspector:
-      groups:
-        options:
-          label: CRON.FormBuilder:NodeTypes.Plugin:groups.options
-          position: 100
-  properties:
-    caption:
-      type: string
-      ui:
-        label: CRON.FormBuilder:NodeTypes.Plugin:fields.submit.caption
-        reloadIfChanged: true
         inspector:
           group: options

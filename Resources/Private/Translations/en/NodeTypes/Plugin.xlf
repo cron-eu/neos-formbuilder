@@ -20,8 +20,8 @@
 			<trans-unit id="properties.sender" xml:space="preserve">
 				<source>Sender-Email</source>
 			</trans-unit>
-			<trans-unit id="properties.copytouser" xml:space="preserve">
-				<source>Send copy to Submitter</source>
+			<trans-unit id="properties.submitButtonLabel" xml:space="preserve">
+				<source>Submit-Button-Label</source>
 			</trans-unit>
 			<trans-unit id="ui.label" xml:space="preserve">
 				<source>Formbuilder</source>
@@ -117,7 +117,7 @@
 				<source>Options</source>
 			</trans-unit>
 			<trans-unit id="fields.checkbox" xml:space="preserve">
-				<source>Checkbox(es)</source>
+				<source>Checkbox</source>
 			</trans-unit>
 		</body>
 	</file>
