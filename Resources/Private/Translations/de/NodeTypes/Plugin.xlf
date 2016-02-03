@@ -10,10 +10,6 @@
 				<source>Options</source>
 				<target xml:lang="de" state="translated">Optionen</target>
 			</trans-unit>
-			<trans-unit id="properties.legend" xml:space="preserve">
-				<source>Legend</source>
-				<target xml:lang="de" state="translated">Legende</target>
-			</trans-unit>
 			<trans-unit id="properties.receiver" xml:space="preserve">
 				<source>Receiver-Email(s)</source>
 				<target xml:lang="de" state="translated">Empfänger-Email(s)</target>
@@ -22,17 +18,13 @@
 				<source>Subject</source>
 				<target xml:lang="de" state="translated">Betreff</target>
 			</trans-unit>
-			<trans-unit id="properties.sender" xml:space="preserve">
-				<source>Sender-Email</source>
-				<target xml:lang="de" state="translated">Absender-Email</target>
-			</trans-unit>
-			<trans-unit id="properties.copytouser" xml:space="preserve">
-				<source>Send copy to Submitter</source>
-				<target xml:lang="de" state="translated">E-Mail-Kopie an den Absender</target>
+			<trans-unit id="properties.submitButtonLabel" xml:space="preserve">
+				<source>Submit-Button-Label</source>
+				<target xml:lang="de" state="translated">Absende-Knopf-Bezeichner</target>
 			</trans-unit>
 			<trans-unit id="ui.label" xml:space="preserve">
-				<source>Formbuilder</source>
-				<target xml:lang="de" state="translated">Formularplugin</target>
+				<source>FormBuilder</source>
+				<target xml:lang="de" state="translated">FormBuilder</target>
 			</trans-unit>
 			<trans-unit id="field.label" xml:space="preserve">
 				<source>Label</source>
@@ -49,10 +41,6 @@
 			<trans-unit id="field.required" xml:space="preserve">
 				<source>Required</source>
 				<target xml:lang="de" state="translated">Pflichtfeld</target>
-			</trans-unit>
-			<trans-unit id="field.readonly" xml:space="preserve">
-				<source>Read Only</source>
-				<target xml:lang="de" state="translated">nur lesen</target>
 			</trans-unit>
 			<trans-unit id="field.checked" xml:space="preserve">
 				<source>Checked</source>
@@ -102,13 +90,9 @@
 				<source>Time</source>
 				<target xml:lang="de" state="translated">Zeit</target>
 			</trans-unit>
-			<trans-unit id="fields.hidden" xml:space="preserve">
-				<source>Hiddenfield</source>
-				<target xml:lang="de" state="translated">verstecktes Textfeld</target>
-			</trans-unit>
 			<trans-unit id="fields.textarea" xml:space="preserve">
 				<source>Textarea</source>
-				<target xml:lang="de" state="translated">mehrzeiliges Textfeld</target>
+				<target xml:lang="de" state="translated">Mehrzeiliges Textfeld</target>
 			</trans-unit>
 			<trans-unit id="fields.textarea.cols" xml:space="preserve">
 				<source>Cols</source>
@@ -116,11 +100,7 @@
 			</trans-unit>
 			<trans-unit id="fields.textarea.rows" xml:space="preserve">
 				<source>Rows</source>
-				<target xml:lang="de" state="translated">Reihen</target>
-			</trans-unit>
-			<trans-unit id="fields.submit" xml:space="preserve">
-				<source>Submit-Button</source>
-				<target xml:lang="de" state="translated">Senden</target>
+				<target xml:lang="de" state="translated">Zeilen</target>
 			</trans-unit>
 			<trans-unit id="fields.submit.caption" xml:space="preserve">
 				<source>Caption</source>
@@ -141,17 +121,12 @@
 			<trans-unit id="fields.select.options.text" xml:space="preserve">
 				<source>Text displayed</source>
 			</trans-unit>
-			<target xml:lang="de" state="translated">angezeigter Text</target>
 			<trans-unit id="fields.select.options.selected" xml:space="preserve">
 				<source>Selected</source>
 				<target xml:lang="de" state="translated">Vorausgewählt</target>
 			</trans-unit>
-			<trans-unit id="fields.radios" xml:space="preserve">
-				<source>Radiobutton(s)</source>
-				<target xml:lang="de" state="translated">Optionsschaltfläche(n)</target>
-			</trans-unit>
 			<trans-unit id="fields.checkbox" xml:space="preserve">
-				<source>Checkbox(es)</source>
+				<source>Checkbox</source>
 				<target xml:lang="de" state="translated">Auswahlkasten</target>
 			</trans-unit>
 		</body>

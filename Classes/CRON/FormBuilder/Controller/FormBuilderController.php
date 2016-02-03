@@ -44,6 +44,9 @@ class FormBuilderController extends ActionController {
 		$this->view->assign('elementsArray',$this->request->getInternalArgument('__elementsArray'));
 		$this->view->assign('documentNode',$this->request->getInternalArgument('__documentNode'));
 		$this->view->assign('node',$this->request->getInternalArgument('__node'));
+		$this->view->assign('submitButtonLabel',$this->request->getInternalArgument('__submitButtonLabel'));
+		$this->view->assign('tsPath',$this->request->getInternalArgument('__tsPath'));
+		$this->view->assign('tsPackageKey',$this->request->getInternalArgument('__tsPackageKey'));
 		$this->view->assign('tsPath',$this->request->getInternalArgument('__tsPath'));
 		$this->view->assign('tsPackageKey',$this->request->getInternalArgument('__tsPackageKey'));
 	}

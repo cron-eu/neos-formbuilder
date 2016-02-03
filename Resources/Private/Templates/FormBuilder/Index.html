@@ -3,17 +3,24 @@
 {namespace ts=TYPO3\TypoScript\ViewHelpers}
 
 <f:form action="submit" method="post" additionalAttributes="{attributes}">
-
-	<f:for each="{elementsArray}" as="element">
-		<f:validation.results for="data.{element.identifier}">
-			<ts:render path="{tsPath}"  typoScriptPackageKey="{tsPackageKey}" context="{node: element, flattenedErrors: validationResults.flattenedErrors}"/>
-		</f:validation.results>
-	</f:for>
-
 	<f:if condition="{neos:rendering.inBackend(node: documentNode)}">
-		<strong><f:translate id="formBuilder.index.backend.addFormElements" package="CRON.FormBuilder" /></strong>
+		<f:then>
+			<f:if condition="{f:count(subject: elementsArray)}">
+				<f:else>
+					<strong><f:translate id="formBuilder.index.backend.addFormElements" package="CRON.FormBuilder" /></strong>
+				</f:else>
+			</f:if>
+			{elements -> f:format.raw()}
+		</f:then>
+		<f:else>
+			<f:for each="{elementsArray}" as="element">
+				<f:validation.results for="data.{element.identifier}">
+					<ts:render path="{tsPath}"  typoScriptPackageKey="{tsPackageKey}" context="{node: element, flattenedErrors: validationResults.flattenedErrors}"/>
+				</f:validation.results>
+			</f:for>
+			<fb:formBuilder elements="{elementsArray}"/>
+			<f:form.hidden name="__formId" value="{node.identifier}"></f:form.hidden>
+		</f:else>
 	</f:if>
-	<fb:formBuilder elements="{elementsArray}"/>
-	{elements -> f:format.raw()}
-	<f:form.hidden name="__formId" value="{node.identifier}"></f:form.hidden>
+	<button type="submit" class="btn btn-default">{submitButtonLabel}</button>
 </f:form>

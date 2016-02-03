@@ -8,23 +8,17 @@
 			<trans-unit id="groups.options" xml:space="preserve">
 				<source>Options</source>
 			</trans-unit>
-			<trans-unit id="properties.legend" xml:space="preserve">
-				<source>Legend</source>
-			</trans-unit>
 			<trans-unit id="properties.receiver" xml:space="preserve">
 				<source>Receiver-Email(s)</source>
 			</trans-unit>
 			<trans-unit id="properties.subject" xml:space="preserve">
 				<source>Subject</source>
 			</trans-unit>
-			<trans-unit id="properties.sender" xml:space="preserve">
-				<source>Sender-Email</source>
-			</trans-unit>
-			<trans-unit id="properties.copytouser" xml:space="preserve">
-				<source>Send copy to Submitter</source>
+			<trans-unit id="properties.submitButtonLabel" xml:space="preserve">
+				<source>Submit-Button-Label</source>
 			</trans-unit>
 			<trans-unit id="ui.label" xml:space="preserve">
-				<source>Formbuilder</source>
+				<source>FormBuilder</source>
 			</trans-unit>
 			<trans-unit id="field.label" xml:space="preserve">
 				<source>Label</source>
@@ -43,9 +37,6 @@
 			</trans-unit>
 			<trans-unit id="field.placeholder" xml:space="preserve">
 				<source>Placeholder</source>
-			</trans-unit>
-			<trans-unit id="field.readonly" xml:space="preserve">
-				<source>Read Only</source>
 			</trans-unit>
 			<trans-unit id="fields.textfield" xml:space="preserve">
 				<source>Textfield</source>
@@ -77,9 +68,6 @@
 			<trans-unit id="fields.textfield.time" xml:space="preserve">
 				<source>Time</source>
 			</trans-unit>
-			<trans-unit id="fields.hidden" xml:space="preserve">
-				<source>Hiddenfield</source>
-			</trans-unit>
 			<trans-unit id="fields.textarea" xml:space="preserve">
 				<source>Textarea</source>
 			</trans-unit>
@@ -88,9 +76,6 @@
 			</trans-unit>
 			<trans-unit id="fields.textarea.rows" xml:space="preserve">
 				<source>Rows</source>
-			</trans-unit>
-			<trans-unit id="fields.submit" xml:space="preserve">
-				<source>Submit-Button</source>
 			</trans-unit>
 			<trans-unit id="fields.submit.caption" xml:space="preserve">
 				<source>Caption</source>
@@ -104,20 +89,14 @@
 			<trans-unit id="fields.select.options" xml:space="preserve">
 				<source>Option</source>
 			</trans-unit>
-			<trans-unit id="fields.select.firstoption" xml:space="preserve">
-				<source>1. Option</source>
-			</trans-unit>
 			<trans-unit id="fields.select.options.text" xml:space="preserve">
 				<source>Text displayed</source>
 			</trans-unit>
 			<trans-unit id="fields.select.options.selected" xml:space="preserve">
 				<source>Selected</source>
 			</trans-unit>
-			<trans-unit id="fields.radios" xml:space="preserve">
-				<source>Options</source>
-			</trans-unit>
 			<trans-unit id="fields.checkbox" xml:space="preserve">
-				<source>Checkbox(es)</source>
+				<source>Checkbox</source>
 			</trans-unit>
 		</body>
 	</file>
