@@ -30,6 +30,7 @@
         'TYPO3.Neos/Validation/NotEmptyValidator': []
     submitButtonLabel:
       type: string
+      defaultValue: Absenden
       ui:
         label: i18n
         reloadIfChanged: true
