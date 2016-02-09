@@ -3,7 +3,11 @@
 <f:section name="Content">
     <f:if condition="{neos:rendering.inBackend()}">
         <f:then>
-            <strong><f:translate id="formBuilder.index.backend.addSelectElements" package="CRON.FormBuilder" /></strong>
+            <f:if condition="{f:count(subject: elementsArray)}">
+                <f:else>
+                    <strong><f:translate id="formBuilder.index.backend.addSelectElements" package="CRON.FormBuilder" /></strong>
+                </f:else>
+            </f:if>
             <ul>
                 {elements -> f:format.raw()}
             </ul>

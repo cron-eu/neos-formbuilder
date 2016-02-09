@@ -30,6 +30,7 @@
         'TYPO3.Neos/Validation/NotEmptyValidator': []
     submitButtonLabel:
       type: string
+      defaultValue: Absenden
       ui:
         label: i18n
         reloadIfChanged: true
@@ -148,6 +149,8 @@
           'CRON.FormBuilder:Option': true
           '*': false
   properties:
+    value:
+      ui: ~
     multiple:
       type: boolean
       ui:
