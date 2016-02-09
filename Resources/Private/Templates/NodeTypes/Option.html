@@ -4,6 +4,6 @@
 		<li>{node.properties.option}</li>
 	</f:then>
 	<f:else>
-		<option value="{node.properties.value}"{f:if(condition: node.properties.selected, then: ' selected')}>{node.properties.option}</option>
+		<option value="{value}"{f:if(condition: node.properties.selected, then: ' selected')}>{node.properties.option}</option>
 	</f:else>
 </f:if>

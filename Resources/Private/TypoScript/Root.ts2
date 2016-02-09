@@ -27,9 +27,6 @@ prototype(CRON.FormBuilder:Option) < prototype(CRON.FormBuilder:FormElement) {
 }
 
 prototype(CRON.FormBuilder:Select) < prototype(CRON.FormBuilder:FormElement) {
-
-	elementsArray = ${q(node).children('elements').children().get()}
-
 	elements = TYPO3.Neos:ContentCollection {
 		nodePath = 'elements'
 	}
