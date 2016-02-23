@@ -8,7 +8,7 @@
 					<input {attributes -> f:format.raw()} type="checkbox" readonly/> {node.properties.label}
 				</f:then>
 				<f:else>
-					<input {attributes -> f:format.raw()} type="checkbox" value="{node.properties.value}"/> {node.properties.label}
+					<input {attributes -> f:format.raw()} type="checkbox" value="{node.properties.value}" {f:if(condition: value, then: 'checked')}/> {node.properties.label}
 				</f:else>
 			</f:if>
 		</label>

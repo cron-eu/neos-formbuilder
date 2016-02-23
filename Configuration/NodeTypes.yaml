@@ -47,7 +47,12 @@
           'CRON.FormBuilder:Select': true
           'CRON.FormBuilder:CheckBox': true
           'CRON.FormBuilder:TextArea': true
+          'CRON.FormBuilder:Text': true
           '*': false
+
+'CRON.FormBuilder:Text':
+  superTypes:
+    'TYPO3.Neos.NodeTypes:Text': true
 
 'CRON.FormBuilder:FormElementMixin':
   superTypes:
@@ -92,7 +97,7 @@
 'CRON.FormBuilder:FormElementPlaceholderMixin':
   abstract: true
   properties:
-    value:
+    placeholder:
       type: string
       ui:
         label: CRON.FormBuilder:NodeTypes.Plugin:field.placeholder
@@ -103,7 +108,6 @@
 'CRON.FormBuilder:Input':
   superTypes:
     'CRON.FormBuilder:FormElementMixin': true
-    'CRON.FormBuilder:FormElementValueMixin': true
     'CRON.FormBuilder:FormElementPlaceholderMixin': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield
@@ -138,7 +142,6 @@
 'CRON.FormBuilder:Select':
   superTypes:
     'CRON.FormBuilder:FormElementMixin': true
-    'CRON.FormBuilder:FormElementValueMixin': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.select
   childNodes:
@@ -199,7 +202,6 @@
 'CRON.FormBuilder:TextArea':
   superTypes:
     'CRON.FormBuilder:FormElementMixin': true
-    'CRON.FormBuilder:FormElementValueMixin': true
     'CRON.FormBuilder:FormElementPlaceholderMixin': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.textarea

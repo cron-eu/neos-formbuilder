@@ -5,8 +5,13 @@ prototype(CRON.FormBuilder:FormElement) < prototype(TYPO3.Neos:Content) {
 	templatePath = ${'resource://CRON.FormBuilder/Private/Templates/NodeTypes/' + String.replace(node.nodeData.nodeType, 'CRON.FormBuilder:', '') + '.html'}
 	layoutName = 'Wrapper'
 
+
+	value = ${request.internalArguments.__submittedArguments.data[node.identifier]}
+	value.@if.valueWasSubmitted = ${request.internalArguments.__submittedArguments.data[node.identifier]}
+	multiple = ${q(node).property('multiple')}
+
 	attributes.id = ${node.identifier}
-	attributes.name = ${'--cron_formbuilder-plugin[data][' + node.identifier + ']'}
+	attributes.name = ${'--cron_formbuilder-plugin[data][' + node.identifier + ']' + (q(node).property('multiple') ? '[]' : '')}
 	attributes.required = ${q(node).property('required')}
 	attributes.required.@if.isRequired = ${Configuration.setting('CRON.FormBuilder.View.useRequiredAttribute') && this.attributes.required}
 	attributes.class = 'form-control'
@@ -29,13 +34,25 @@ prototype(CRON.FormBuilder:Option) < prototype(CRON.FormBuilder:FormElement) {
 prototype(CRON.FormBuilder:Select) < prototype(CRON.FormBuilder:FormElement) {
 
 	elementsArray = ${q(node).children('elements').children().get()}
+	@context.selectValue = ${this.value}
+	@context.selectMultiple = ${this.multiple}
 
 	elements = TYPO3.Neos:ContentCollection {
 		nodePath = 'elements'
+
+		prototype(CRON.FormBuilder:Option) {
+			selected = ${selectValue ? (selectMultiple ? Array.indexOf(selectValue, q(node).property('value')) > -1 : selectValue == q(node).property('value')) : q(node).property('selected')}
+		}
 	}
 }
 
 prototype(CRON.FormBuilder:TextArea) < prototype(CRON.FormBuilder:FormElement) {
+}
+
+prototype(CRON.FormBuilder:Text) < prototype(CRON.FormBuilder:FormElement) {
+	attributes.name >
+	attributes.class >
+	text = ${q(node).property('text')}
 }
 
 

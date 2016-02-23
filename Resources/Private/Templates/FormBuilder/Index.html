@@ -2,7 +2,7 @@
 {namespace fb=CRON\FormBuilder\ViewHelpers}
 {namespace ts=TYPO3\TypoScript\ViewHelpers}
 
-<f:form action="submit" method="post" additionalAttributes="{attributes}">
+<f:form action="submit" method="post" additionalAttributes="{attributes}" section="{node.identifier}" id="{node.identifier}">
 	<f:if condition="{neos:rendering.inBackend(node: documentNode)}">
 		<f:then>
 			<f:if condition="{f:count(subject: elementsArray)}">
