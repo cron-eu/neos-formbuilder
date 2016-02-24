@@ -78,6 +78,8 @@ class FormBuilderController extends ActionController {
 			//we can only handle registered nodes, must be a form manipulation
 			if($node === NULL) $this->throwStatus(403);
 
+			if (is_array($value)) $value = implode(', ', $value);
+
 			$fields[] = array('label' => $node->getProperty('label'), 'value' => $value);
 		}
 
@@ -95,7 +97,9 @@ class FormBuilderController extends ActionController {
 	/**
 	 * @return void
 	 */
-	public function submitPendingAction() {}
+	public function submitPendingAction() {
+		$this->view->assign('node',$this->request->getInternalArgument('__node'));
+	}
 
 
 

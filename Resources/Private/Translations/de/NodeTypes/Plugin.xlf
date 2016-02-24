@@ -129,6 +129,14 @@
 				<source>Checkbox</source>
 				<target xml:lang="de" state="translated">Auswahlkasten</target>
 			</trans-unit>
+			<trans-unit id="fields.checkbox.group" xml:space="preserve">
+				<source>Checkbox-Group</source>
+				<target xml:lang="de" state="translated">Auswahlkasten-Gruppe</target>
+			</trans-unit>
+			<trans-unit id="fields.checkbox.checked" xml:space="preserve">
+				<source>Checked</source>
+				<target xml:lang="de" state="translated">Vorausgewählt</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

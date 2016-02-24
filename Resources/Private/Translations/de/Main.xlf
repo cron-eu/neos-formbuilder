@@ -18,6 +18,10 @@
 				<source>Please add options</source>
 				<target xml:lang="de" state="translated">Bitte Select-Optionen hinzufügen</target>
 			</trans-unit>
+			<trans-unit id="formBuilder.index.backend.addCheckBoxGroupElements" xml:space="preserve">
+				<source>Please add checkboxes</source>
+				<target xml:lang="de" state="translated">Bitte Auswahlkästen hinzufügen</target>
+			</trans-unit>
 			<trans-unit id="formBuilder.index.errors.title" xml:space="preserve">
 				<source>Following errors occurred:</source>
 				<target xml:lang="de" state="translated">Folgende Fehler sind aufgetreten:</target>
