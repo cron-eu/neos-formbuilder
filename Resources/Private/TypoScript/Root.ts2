@@ -5,10 +5,16 @@ prototype(CRON.FormBuilder:FormElement) < prototype(TYPO3.Neos:Content) {
 	templatePath = ${'resource://CRON.FormBuilder/Private/Templates/NodeTypes/' + String.replace(node.nodeData.nodeType, 'CRON.FormBuilder:', '') + '.html'}
 	layoutName = 'Wrapper'
 
+
+	value = ${request.internalArguments.__submittedArguments.data[node.identifier]}
+	value.@if.valueWasSubmitted = ${request.internalArguments.__submittedArguments.data[node.identifier]}
+	multiple = ${q(node).property('multiple')}
+	formName = ${'--cron_formbuilder-plugin[data][' + node.identifier + ']' + (q(node).property('multiple') ? '[]' : '')}
+
 	attributes.id = ${node.identifier}
-	attributes.name = ${'--cron_formbuilder-plugin[data][' + node.identifier + ']'}
+	attributes.name = ${'--cron_formbuilder-plugin[data][' + node.identifier + ']' + (q(node).property('multiple') ? '[]' : '')}
 	attributes.required = ${q(node).property('required')}
-	attributes.required.@if.isRequired = ${Configuration.setting('CRON.FormBuilder.View.useRequiredAttribute') && this.attributes.required}
+	attributes.required.@if.isRequired = ${Configuration.setting('CRON.FormBuilder.View.useRequiredAttribute') && q(node).property('required')}
 	attributes.class = 'form-control'
 
 	node = ${node}
@@ -18,7 +24,29 @@ prototype(CRON.FormBuilder:FormElement) < prototype(TYPO3.Neos:Content) {
 prototype(CRON.FormBuilder:CheckBox) < prototype(CRON.FormBuilder:FormElement) {
 	layoutName = 'CheckboxWrapper'
 	attributes.class = ''
+	checked = ${this.value || q(node).property('checked')}
 }
+
+prototype(CRON.FormBuilder:CheckBoxGroup) < prototype(CRON.FormBuilder:FormElement) {
+
+	elementsArray = ${q(node).children('elements').children().get()}
+
+	@context.groupValue = ${this.value}
+	@context.groupName = ${this.formName}
+
+	attributes.name >
+	attributes.class >
+
+	elements = TYPO3.Neos:ContentCollection {
+		nodePath = 'elements'
+
+		prototype(CRON.FormBuilder:CheckBox) {
+			attributes.name = ${groupName}
+			checked = ${groupValue ? Array.indexOf(groupValue, q(node).property('value')) > -1 : q(node).property('checked')}
+		}
+	}
+}
+
 
 prototype(CRON.FormBuilder:Input) < prototype(CRON.FormBuilder:FormElement) {
 }
@@ -29,13 +57,25 @@ prototype(CRON.FormBuilder:Option) < prototype(CRON.FormBuilder:FormElement) {
 prototype(CRON.FormBuilder:Select) < prototype(CRON.FormBuilder:FormElement) {
 
 	elementsArray = ${q(node).children('elements').children().get()}
+	@context.selectValue = ${this.value}
+	@context.selectMultiple = ${this.multiple}
 
 	elements = TYPO3.Neos:ContentCollection {
 		nodePath = 'elements'
+
+		prototype(CRON.FormBuilder:Option) {
+			selected = ${selectValue ? (selectMultiple ? Array.indexOf(selectValue, q(node).property('value')) > -1 : selectValue == q(node).property('value')) : q(node).property('selected')}
+		}
 	}
 }
 
 prototype(CRON.FormBuilder:TextArea) < prototype(CRON.FormBuilder:FormElement) {
+}
+
+prototype(CRON.FormBuilder:Text) < prototype(CRON.FormBuilder:FormElement) {
+	attributes.name >
+	attributes.class >
+	text = ${q(node).property('text')}
 }
 
 

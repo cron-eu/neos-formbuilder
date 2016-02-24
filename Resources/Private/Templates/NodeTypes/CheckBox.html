@@ -5,10 +5,10 @@
 		<label>
 			<f:if condition="{neos:rendering.inBackend()}">
 				<f:then>
-					<input {attributes -> f:format.raw()} type="checkbox" readonly/> {node.properties.label}
+					<input {attributes -> f:format.raw()} type="checkbox" {f:if(condition: checked, then: 'checked')} readonly/> {node.properties.label}
 				</f:then>
 				<f:else>
-					<input {attributes -> f:format.raw()} type="checkbox" value="{node.properties.value}"/> {node.properties.label}
+					<input {attributes -> f:format.raw()} type="checkbox" value="{node.properties.value}" {f:if(condition: checked, then: 'checked')}/> {node.properties.label}
 				</f:else>
 			</f:if>
 		</label>

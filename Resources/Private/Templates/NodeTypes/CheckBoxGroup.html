@@ -1,0 +1,19 @@
+{namespace neos=TYPO3\Neos\ViewHelpers}
+<f:layout name="{layoutName}" />
+<f:section name="Content">
+    <f:if condition="{neos:rendering.inBackend()}">
+        <f:then>
+            <f:if condition="{f:count(subject: elementsArray)}">
+                <f:else>
+                    <strong><f:translate id="formBuilder.index.backend.addCheckBoxGroupElements" package="CRON.FormBuilder" /></strong>
+                </f:else>
+            </f:if>
+            {elements -> f:format.raw()}
+        </f:then>
+        <f:else>
+            <div {attributes -> f:format.raw()}>
+                 {elements -> f:format.raw()}
+            </div>
+        </f:else>
+    </f:if>
+</f:section>

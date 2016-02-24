@@ -46,8 +46,14 @@
           'CRON.FormBuilder:Input': true
           'CRON.FormBuilder:Select': true
           'CRON.FormBuilder:CheckBox': true
+          'CRON.FormBuilder:CheckBoxGroup': true
           'CRON.FormBuilder:TextArea': true
+          'CRON.FormBuilder:Text': true
           '*': false
+
+'CRON.FormBuilder:Text':
+  superTypes:
+    'TYPO3.Neos.NodeTypes:Text': true
 
 'CRON.FormBuilder:FormElementMixin':
   superTypes:
@@ -92,7 +98,7 @@
 'CRON.FormBuilder:FormElementPlaceholderMixin':
   abstract: true
   properties:
-    value:
+    placeholder:
       type: string
       ui:
         label: CRON.FormBuilder:NodeTypes.Plugin:field.placeholder
@@ -103,7 +109,6 @@
 'CRON.FormBuilder:Input':
   superTypes:
     'CRON.FormBuilder:FormElementMixin': true
-    'CRON.FormBuilder:FormElementValueMixin': true
     'CRON.FormBuilder:FormElementPlaceholderMixin': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield
@@ -138,7 +143,6 @@
 'CRON.FormBuilder:Select':
   superTypes:
     'CRON.FormBuilder:FormElementMixin': true
-    'CRON.FormBuilder:FormElementValueMixin': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.select
   childNodes:
@@ -149,8 +153,6 @@
           'CRON.FormBuilder:Option': true
           '*': false
   properties:
-    value:
-      ui: ~
     multiple:
       type: boolean
       ui:
@@ -188,18 +190,45 @@
         inspector:
           group: options
 
+'CRON.FormBuilder:CheckBoxGroup':
+  superTypes:
+    'CRON.FormBuilder:FormElementMixin': true
+  ui:
+    label: CRON.FormBuilder:NodeTypes.Plugin:fields.checkbox.group
+  childNodes:
+    elements:
+      type: 'TYPO3.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          'CRON.FormBuilder:CheckBox': true
+          '*': false
+  properties:
+    required:
+      ui: ~
+    multiple:
+      type: boolean
+      defaultValue: true
+
+
 'CRON.FormBuilder:CheckBox':
   superTypes:
     'CRON.FormBuilder:FormElementMixin': true
     'CRON.FormBuilder:FormElementValueMixin': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.checkbox
+  properties:
+    checked:
+      type: boolean
+      ui:
+        label: CRON.FormBuilder:NodeTypes.Plugin:fields.checkbox.checked
+        reloadIfChanged: true
+        inspector:
+          group: options
 
 
 'CRON.FormBuilder:TextArea':
   superTypes:
     'CRON.FormBuilder:FormElementMixin': true
-    'CRON.FormBuilder:FormElementValueMixin': true
     'CRON.FormBuilder:FormElementPlaceholderMixin': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.textarea
