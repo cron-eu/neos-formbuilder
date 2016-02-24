@@ -1,6 +1,7 @@
 'CRON.FormBuilder:Plugin':
   superTypes:
     'TYPO3.Neos:Plugin': true
+    'CRON.FormBuilder:FormElementContainerMixin': true
   ui:
     label: i18n
     icon: 'icon-edit'
@@ -40,6 +41,26 @@
         'TYPO3.Neos/Validation/NotEmptyValidator': []
   childNodes:
     elements:
+      constraints:
+        nodeTypes:
+          'CRON.FormBuilder:FieldSet': true
+
+
+'CRON.FormBuilder:FieldSet':
+  superTypes:
+    'TYPO3.Neos:Content': true
+    'CRON.FormBuilder:FormElementContainerMixin': true
+    'CRON.FormBuilder:FormElementLabelMixin': true
+  ui:
+    label: CRON.FormBuilder:NodeTypes.Plugin:fields.fieldset
+    icon: 'icon-edit'
+    inlineEditable: true
+
+
+'CRON.FormBuilder:FormElementContainerMixin':
+  abstract: true
+  childNodes:
+    elements:
       type: 'TYPO3.Neos:ContentCollection'
       constraints:
         nodeTypes:
@@ -51,11 +72,7 @@
           'CRON.FormBuilder:Text': true
           '*': false
 
-'CRON.FormBuilder:Text':
-  superTypes:
-    'TYPO3.Neos.NodeTypes:Text': true
-
-'CRON.FormBuilder:FormElementMixin':
+'CRON.FormBuilder:FormElementLabelMixin':
   superTypes:
     'TYPO3.Neos:Content': true
   abstract: true
@@ -76,6 +93,10 @@
           group: options
       validation:
         'TYPO3.Neos/Validation/NotEmptyValidator': []
+
+'CRON.FormBuilder:FormElementRequiredMixin':
+  abstract: true
+  properties:
     required:
       type: boolean
       ui:
@@ -106,9 +127,15 @@
         inspector:
           group: options
 
+
+'CRON.FormBuilder:Text':
+  superTypes:
+    'TYPO3.Neos.NodeTypes:Text': true
+
 'CRON.FormBuilder:Input':
   superTypes:
-    'CRON.FormBuilder:FormElementMixin': true
+    'CRON.FormBuilder:FormElementLabelMixin': true
+    'CRON.FormBuilder:FormElementRequiredMixin': true
     'CRON.FormBuilder:FormElementPlaceholderMixin': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield
@@ -142,7 +169,8 @@
 
 'CRON.FormBuilder:Select':
   superTypes:
-    'CRON.FormBuilder:FormElementMixin': true
+    'CRON.FormBuilder:FormElementLabelMixin': true
+    'CRON.FormBuilder:FormElementRequiredMixin': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.select
   childNodes:
@@ -192,7 +220,7 @@
 
 'CRON.FormBuilder:CheckBoxGroup':
   superTypes:
-    'CRON.FormBuilder:FormElementMixin': true
+    'CRON.FormBuilder:FormElementLabelMixin': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.checkbox.group
   childNodes:
@@ -203,8 +231,6 @@
           'CRON.FormBuilder:CheckBox': true
           '*': false
   properties:
-    required:
-      ui: ~
     multiple:
       type: boolean
       defaultValue: true
@@ -212,7 +238,8 @@
 
 'CRON.FormBuilder:CheckBox':
   superTypes:
-    'CRON.FormBuilder:FormElementMixin': true
+    'CRON.FormBuilder:FormElementLabelMixin': true
+    'CRON.FormBuilder:FormElementRequiredMixin': true
     'CRON.FormBuilder:FormElementValueMixin': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.checkbox
@@ -228,7 +255,8 @@
 
 'CRON.FormBuilder:TextArea':
   superTypes:
-    'CRON.FormBuilder:FormElementMixin': true
+    'CRON.FormBuilder:FormElementLabelMixin': true
+    'CRON.FormBuilder:FormElementRequiredMixin': true
     'CRON.FormBuilder:FormElementPlaceholderMixin': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.textarea

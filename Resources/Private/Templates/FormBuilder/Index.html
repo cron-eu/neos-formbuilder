@@ -18,7 +18,7 @@
 			<f:else>
 				<f:for each="{elementsArray}" as="element">
 					<f:validation.results for="data.{element.identifier}">
-						<ts:render path="{tsPath}"  typoScriptPackageKey="{tsPackageKey}" context="{node: element, flattenedErrors: validationResults.flattenedErrors}"/>
+						<ts:render path="{tsPath}"  typoScriptPackageKey="{tsPackageKey}" context="{node: element, flattenedErrors: validationResults.flattenedErrors, tsPath: tsPath, tsPackageKey: tsPackageKey}"/>
 					</f:validation.results>
 				</f:for>
 				<fb:formBuilder elements="{elementsArray}"/>
