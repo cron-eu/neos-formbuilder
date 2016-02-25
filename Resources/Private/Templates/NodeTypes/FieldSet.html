@@ -1,0 +1,25 @@
+{namespace neos=TYPO3\Neos\ViewHelpers}
+{namespace ts=TYPO3\TypoScript\ViewHelpers}
+
+<fieldset {attributes -> f:format.raw()}>
+	<f:if condition="{node.properties.label}">
+		<legend>{node.properties.label}</legend>
+	</f:if>
+	<f:if condition="{neos:rendering.inBackend(node: documentNode)}">
+		<f:then>
+			<f:if condition="{f:count(subject: elementsArray)}">
+				<f:else>
+					<strong><f:translate id="formBuilder.index.backend.addFormElements" package="CRON.FormBuilder" /></strong>
+				</f:else>
+			</f:if>
+			{elements -> f:format.raw()}
+		</f:then>
+		<f:else>
+			<f:for each="{elementsArray}" as="element">
+				<f:validation.results for="data.{element.identifier}">
+					<ts:render path="{tsPath}"  typoScriptPackageKey="{tsPackageKey}" context="{node: element, flattenedErrors: validationResults.flattenedErrors}"/>
+				</f:validation.results>
+			</f:for>
+		</f:else>
+	</f:if>
+</fieldset>

@@ -104,6 +104,9 @@
 			<trans-unit id="fields.checkbox.checked" xml:space="preserve">
 				<source>Checked</source>
 			</trans-unit>
+			<trans-unit id="fields.fieldset" xml:space="preserve">
+				<source>Fieldset</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

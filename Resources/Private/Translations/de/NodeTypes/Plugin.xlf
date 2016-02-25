@@ -137,6 +137,10 @@
 				<source>Checked</source>
 				<target xml:lang="de" state="translated">Vorausgewählt</target>
 			</trans-unit>
+			<trans-unit id="fields.fieldset" xml:space="preserve">
+				<source>Fieldset</source>
+				<target xml:lang="de" state="translated">Feld-Gruppe</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

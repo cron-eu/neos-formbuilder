@@ -1,4 +1,4 @@
-<div class="form-group" {f:if(condition: node.properties.required, then: 'required')} {f:if(condition: flattenedErrors, then: 'has-error')}">
+<div {layoutAttributes -> f:format.raw()}>
 	<label for="{node.identifier}">{node.properties.label}</label>
 	<div>
 		<f:render section="Content"/>

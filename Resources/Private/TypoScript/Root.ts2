@@ -3,8 +3,28 @@ include: resource://TYPO3.Neos/Private/TypoScript/*
 
 prototype(CRON.FormBuilder:FormElement) < prototype(TYPO3.Neos:Content) {
 	templatePath = ${'resource://CRON.FormBuilder/Private/Templates/NodeTypes/' + String.replace(node.nodeData.nodeType, 'CRON.FormBuilder:', '') + '.html'}
+
 	layoutName = 'Wrapper'
 
+	layoutAttributes = TYPO3.TypoScript:Attributes
+	layoutAttributes.class = ''
+	layoutAttributes.class.@process.nodeType = TYPO3.TypoScript:Case {
+		@context.nodeTypeClassName = ${String.toLowerCase(String.pregReplace(q(node).property('_nodeType.name'), '/[[:^alnum:]]/', '-')) + '-layout'}
+
+		classIsString {
+			condition = ${Type.isString(value)}
+			renderer = ${String.trim(value) + ' ' + nodeTypeClassName}
+		}
+
+		classIsArray {
+			condition = ${Type.isArray(value)}
+			renderer = ${Array.push(value, nodeTypeClassName)}
+		}
+	}
+
+	layoutAttributes.class = 'form-group'
+	layoutAttributes.class.@process.required = ${value + (q(node).property('required') ? ' required' : '')}
+	layoutAttributes.class.@process.errors = ${value + (flattenedErrors ? ' has-error' : '')}
 
 	value = ${request.internalArguments.__submittedArguments.data[node.identifier]}
 	value.@if.valueWasSubmitted = ${request.internalArguments.__submittedArguments.data[node.identifier]}
@@ -19,6 +39,8 @@ prototype(CRON.FormBuilder:FormElement) < prototype(TYPO3.Neos:Content) {
 
 	node = ${node}
 	flattenedErrors = ${flattenedErrors}
+	tsPath = ${tsPath}
+	tsPackageKey = ${tsPackageKey}
 }
 
 prototype(CRON.FormBuilder:CheckBox) < prototype(CRON.FormBuilder:FormElement) {
@@ -41,6 +63,8 @@ prototype(CRON.FormBuilder:CheckBoxGroup) < prototype(CRON.FormBuilder:FormEleme
 		nodePath = 'elements'
 
 		prototype(CRON.FormBuilder:CheckBox) {
+
+			layoutAttributes.class >
 			attributes.name = ${groupName}
 			checked = ${groupValue ? Array.indexOf(groupValue, q(node).property('value')) > -1 : q(node).property('checked')}
 		}
@@ -78,6 +102,18 @@ prototype(CRON.FormBuilder:Text) < prototype(CRON.FormBuilder:FormElement) {
 	text = ${q(node).property('text')}
 }
 
+prototype(CRON.FormBuilder:FieldSet) < prototype(CRON.FormBuilder:FormElement) {
+
+	elementsArray = ${q(node).children('elements').children().get()}
+
+	attributes.name >
+	attributes.class >
+
+	elements = TYPO3.Neos:ContentCollection {
+		nodePath = 'elements'
+	}
+}
+
 
 prototype(CRON.FormBuilder:Plugin) < prototype(TYPO3.Neos:Plugin) {
 	package = 'CRON.FormBuilder'
@@ -85,7 +121,6 @@ prototype(CRON.FormBuilder:Plugin) < prototype(TYPO3.Neos:Plugin) {
 	action = 'index'
 
 	attributes = TYPO3.TypoScript:RawArray
-	attributes.class = 'form-auto'
 	attributes.role = 'form'
 
 	elementsArray = ${q(node).children('elements').children().get()}
