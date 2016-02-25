@@ -68,19 +68,14 @@ class FormBuilderController extends ActionController {
 	 */
 	public function submitAction($data) {
 
-		$siteNode = $this->siteService->getSiteNode();
-
 		$fields = [];
 
-		foreach($data as $identifier => $value) {
-			$node = $this->nodeDataRepository->findOneByIdentifier($identifier, $siteNode->getWorkspace());
+		/** @var NodeInterface $formNode */
+		$formNode = $this->request->getInternalArgument('__node');
 
-			//we can only handle registered nodes, must be a form manipulation
-			if($node === NULL) $this->throwStatus(403);
-
-			if (is_array($value)) $value = implode(', ', $value);
-
-			$fields[] = array('label' => $node->getProperty('label'), 'value' => $value);
+		/** @var NodeInterface $element */
+		foreach($formNode->getNode('elements')->getChildNodes() as $element) {
+			$fields[$element->getIdentifier()] = $this->createMailData($element, $data);
 		}
 
 		$this->sendMail($fields);
@@ -104,10 +99,42 @@ class FormBuilderController extends ActionController {
 
 
 	/**
+	 * Creates the data to render in the mail
+	 *
+	 * @param NodeInterface $node
+	 * @param array $data
+	 *
+	 * @return array
+	 */
+	protected function createMailData($node, $data) {
+
+		if ($node->getNodeType()->isOfType('CRON.FormBuilder:FieldSet')) {
+
+			$fields = [];
+
+			foreach($node->getNode('elements')->getChildNodes() as $subElement) {
+				$fields[] = $this->createMailData($subElement, $data);
+			}
+
+			return array('node' => $node, 'values' => $fields);
+
+		} else if (array_key_exists($node->getIdentifier(), $data)) {
+
+			$value = $data[$node->getIdentifier()];
+			if (is_array($value)) $value = implode(', ', $value);
+			return array('node' => $node, 'value' => $value);
+		} else {
+			return [];
+		}
+
+	}
+
+
+	/**
 	 * For multiple forms on one page we check which form is submitted and forward to index if necessary
 	 * @return void
 	 */
-	private function checkFormId() {
+	protected function checkFormId() {
 		/** @var NodeInterface $node */
 		$node = $this->request->getInternalArgument('__node');
 
@@ -121,7 +148,7 @@ class FormBuilderController extends ActionController {
 	 * @param array $fields
 	 * @return void
 	 */
-	private function sendMail($fields) {
+	protected function sendMail($fields) {
 
 		$receiver = explode(',', $this->request->getInternalArgument('__receiver'));
 
