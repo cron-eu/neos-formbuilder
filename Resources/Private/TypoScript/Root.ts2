@@ -96,12 +96,6 @@ prototype(CRON.FormBuilder:Select) < prototype(CRON.FormBuilder:FormElement) {
 prototype(CRON.FormBuilder:TextArea) < prototype(CRON.FormBuilder:FormElement) {
 }
 
-prototype(CRON.FormBuilder:Text) < prototype(CRON.FormBuilder:FormElement) {
-	attributes.name >
-	attributes.class >
-	text = ${q(node).property('text')}
-}
-
 prototype(CRON.FormBuilder:FieldSet) < prototype(CRON.FormBuilder:FormElement) {
 
 	elementsArray = ${q(node).children('elements').children().get()}
@@ -127,6 +121,10 @@ prototype(CRON.FormBuilder:Plugin) < prototype(TYPO3.Neos:Plugin) {
 	
 	elements = TYPO3.Neos:ContentCollection {
 		nodePath = 'elements'
+	}
+
+	responseElements = TYPO3.Neos:ContentCollection {
+		nodePath = 'responseElements'
 	}
 
 	tsPath = 'formElementRenderer'

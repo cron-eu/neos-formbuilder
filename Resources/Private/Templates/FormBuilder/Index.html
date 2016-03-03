@@ -14,6 +14,9 @@
 					</f:else>
 				</f:if>
 				{elements -> f:format.raw()}
+
+				<strong><f:translate id="formBuilder.index.backend.addFormResponseElements" package="CRON.FormBuilder" /></strong>
+				{responseElements -> f:format.raw()}
 			</f:then>
 			<f:else>
 				<f:for each="{elementsArray}" as="element">

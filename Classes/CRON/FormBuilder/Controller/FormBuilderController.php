@@ -42,6 +42,7 @@ class FormBuilderController extends ActionController {
 		$this->view->assign('attributes',$this->request->getInternalArgument('__attributes'));
 		$this->view->assign('elements',$this->request->getInternalArgument('__elements'));
 		$this->view->assign('elementsArray',$this->request->getInternalArgument('__elementsArray'));
+		$this->view->assign('responseElements',$this->request->getInternalArgument('__responseElements'));
 		$this->view->assign('documentNode',$this->request->getInternalArgument('__documentNode'));
 		$this->view->assign('node',$this->request->getInternalArgument('__node'));
 		$this->view->assign('submitButtonLabel',$this->request->getInternalArgument('__submitButtonLabel'));
@@ -96,6 +97,7 @@ class FormBuilderController extends ActionController {
 	 */
 	public function submitPendingAction() {
 		$this->view->assign('node',$this->request->getInternalArgument('__node'));
+		$this->view->assign('responseElements',$this->request->getInternalArgument('__responseElements'));
 	}
 
 
