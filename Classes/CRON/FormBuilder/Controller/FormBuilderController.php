@@ -58,7 +58,9 @@ class FormBuilderController extends ActionController {
 	 * @return void
 	 */
 	public function initializeSubmitAction() {
+
 		$this->checkFormId();
+		$this->checkHmac();
 	}
 
 	/**
@@ -130,6 +132,37 @@ class FormBuilderController extends ActionController {
 	}
 
 
+
+	/**
+	 * Checks the HMAC for the form submitted data
+	 */
+	protected function checkHmac() {
+
+		$trustedProperties = $this->request->getInternalArgument('__trustedProperties');
+
+		if ($trustedProperties) {
+
+			if ($this->request->hasArgument('data')
+			    && $this->mvcPropertyMappingConfigurationService->generateTrustedPropertiesToken(
+					array_merge(
+						array_map(
+							function($key) { return "data[$key]"; },
+							array_keys($this->request->getArgument('data'))
+						),
+						['__formId']
+					)) == $trustedProperties) {
+				return;
+			} else {
+				// hmac does not match: unauthorized request!
+				$this->throwStatus(403);
+			}
+		} else {
+			// hmac not present: unauthorized request!
+			$this->throwStatus(403);
+		}
+	}
+
+
 	/**
 	 * For multiple forms on one page we check which form is submitted and forward to index if necessary
 	 * @return void
@@ -142,6 +175,7 @@ class FormBuilderController extends ActionController {
 			$this->forward('index');
 		}
 	}
+
 
 	/**
 	 * Sends your details to recipient

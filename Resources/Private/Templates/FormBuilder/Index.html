@@ -21,7 +21,7 @@
 						<ts:render path="{tsPath}"  typoScriptPackageKey="{tsPackageKey}" context="{node: element, flattenedErrors: validationResults.flattenedErrors, tsPath: tsPath, tsPackageKey: tsPackageKey}"/>
 					</f:validation.results>
 				</f:for>
-				<fb:formBuilder elements="{elementsArray}"/>
+				<fb:registerNode node="{node}"/>
 				<f:form.hidden name="__formId" value="{node.identifier}"></f:form.hidden>
 			</f:else>
 		</f:if>
