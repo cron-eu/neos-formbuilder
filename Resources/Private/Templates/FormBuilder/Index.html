@@ -14,9 +14,6 @@
 					</f:else>
 				</f:if>
 				{elements -> f:format.raw()}
-
-				<strong><f:translate id="formBuilder.index.backend.addFormResponseElements" package="CRON.FormBuilder" /></strong>
-				{responseElements -> f:format.raw()}
 			</f:then>
 			<f:else>
 				<f:for each="{elementsArray}" as="element">
@@ -30,4 +27,8 @@
 		</f:if>
 		<button type="submit" class="btn btn-default">{submitButtonLabel}</button>
 	</f:form>
+	<f:if condition="{neos:rendering.inBackend(node: documentNode)}">
+		<strong><f:translate id="formBuilder.index.backend.addFormResponseElements" package="CRON.FormBuilder" /></strong>
+		{responseElements -> f:format.raw()}
+	</f:if>
 </f:section>
