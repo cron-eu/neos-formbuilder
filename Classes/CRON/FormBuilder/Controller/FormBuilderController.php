@@ -71,7 +71,7 @@ class FormBuilderController extends ActionController {
 	 */
 	public function submitAction($data) {
 
-		$this->handleFormData($data);
+		$this->handleFormData($this->request->getInternalArgument('__node'), $data);
 	}
 
 
@@ -88,14 +88,12 @@ class FormBuilderController extends ActionController {
 	/**
 	 * The actual handling of the submitted form data. Can be used as AOP hook
 	 *
+	 * @param NodeInterface $formNode
 	 * @param array $data
 	 * @return void
 	 */
-	public function handleFormData($data) {
+	public function handleFormData($formNode, $data) {
 		$fields = [];
-
-		/** @var NodeInterface $formNode */
-		$formNode = $this->request->getInternalArgument('__node');
 
 		/** @var NodeInterface $element */
 		foreach($formNode->getNode('elements')->getChildNodes() as $element) {
