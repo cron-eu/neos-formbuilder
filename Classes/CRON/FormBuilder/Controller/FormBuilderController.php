@@ -71,6 +71,27 @@ class FormBuilderController extends ActionController {
 	 */
 	public function submitAction($data) {
 
+		$this->handleFormData($data);
+	}
+
+
+	/**
+	 * @return void
+	 */
+	public function submitPendingAction() {
+		$this->view->assign('node',$this->request->getInternalArgument('__node'));
+		$this->view->assign('responseElements',$this->request->getInternalArgument('__responseElements'));
+	}
+
+
+
+	/**
+	 * The actual handling of the submitted form data. Can be used as AOP hook
+	 *
+	 * @param array $data
+	 * @return void
+	 */
+	public function handleFormData($data) {
 		$fields = [];
 
 		/** @var NodeInterface $formNode */
@@ -88,18 +109,7 @@ class FormBuilderController extends ActionController {
 		} else {
 			$this->redirect('submitPending');
 		}
-
 	}
-
-
-	/**
-	 * @return void
-	 */
-	public function submitPendingAction() {
-		$this->view->assign('node',$this->request->getInternalArgument('__node'));
-		$this->view->assign('responseElements',$this->request->getInternalArgument('__responseElements'));
-	}
-
 
 
 	/**
