@@ -42,6 +42,7 @@ class FormBuilderController extends ActionController {
 		$this->view->assign('attributes',$this->request->getInternalArgument('__attributes'));
 		$this->view->assign('elements',$this->request->getInternalArgument('__elements'));
 		$this->view->assign('elementsArray',$this->request->getInternalArgument('__elementsArray'));
+		$this->view->assign('responseElements',$this->request->getInternalArgument('__responseElements'));
 		$this->view->assign('documentNode',$this->request->getInternalArgument('__documentNode'));
 		$this->view->assign('node',$this->request->getInternalArgument('__node'));
 		$this->view->assign('submitButtonLabel',$this->request->getInternalArgument('__submitButtonLabel'));
@@ -58,7 +59,9 @@ class FormBuilderController extends ActionController {
 	 * @return void
 	 */
 	public function initializeSubmitAction() {
+
 		$this->checkFormId();
+		$this->checkHmac();
 	}
 
 	/**
@@ -68,10 +71,29 @@ class FormBuilderController extends ActionController {
 	 */
 	public function submitAction($data) {
 
-		$fields = [];
+		$this->handleFormData($this->request->getInternalArgument('__node'), $data);
+	}
 
-		/** @var NodeInterface $formNode */
-		$formNode = $this->request->getInternalArgument('__node');
+
+	/**
+	 * @return void
+	 */
+	public function submitPendingAction() {
+		$this->view->assign('node',$this->request->getInternalArgument('__node'));
+		$this->view->assign('responseElements',$this->request->getInternalArgument('__responseElements'));
+	}
+
+
+
+	/**
+	 * The actual handling of the submitted form data. Can be used as AOP hook
+	 *
+	 * @param NodeInterface $formNode
+	 * @param array $data
+	 * @return void
+	 */
+	public function handleFormData($formNode, $data) {
+		$fields = [];
 
 		/** @var NodeInterface $element */
 		foreach($formNode->getNode('elements')->getChildNodes() as $element) {
@@ -85,17 +107,7 @@ class FormBuilderController extends ActionController {
 		} else {
 			$this->redirect('submitPending');
 		}
-
 	}
-
-
-	/**
-	 * @return void
-	 */
-	public function submitPendingAction() {
-		$this->view->assign('node',$this->request->getInternalArgument('__node'));
-	}
-
 
 
 	/**
@@ -130,6 +142,37 @@ class FormBuilderController extends ActionController {
 	}
 
 
+
+	/**
+	 * Checks the HMAC for the form submitted data
+	 */
+	protected function checkHmac() {
+
+		$trustedProperties = $this->request->getInternalArgument('__trustedProperties');
+
+		if ($trustedProperties) {
+
+			if ($this->request->hasArgument('data')
+			    && $this->mvcPropertyMappingConfigurationService->generateTrustedPropertiesToken(
+					array_merge(
+						array_map(
+							function($key) { return "data[$key]"; },
+							array_keys($this->request->getArgument('data'))
+						),
+						['__formId']
+					)) == $trustedProperties) {
+				return;
+			} else {
+				// hmac does not match: unauthorized request!
+				$this->throwStatus(403);
+			}
+		} else {
+			// hmac not present: unauthorized request!
+			$this->throwStatus(403);
+		}
+	}
+
+
 	/**
 	 * For multiple forms on one page we check which form is submitted and forward to index if necessary
 	 * @return void
@@ -142,6 +185,7 @@ class FormBuilderController extends ActionController {
 			$this->forward('index');
 		}
 	}
+
 
 	/**
 	 * Sends your details to recipient

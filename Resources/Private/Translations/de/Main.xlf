@@ -2,17 +2,13 @@
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
 	<file original="" product-name="CRON.FormBuilder" source-language="en" datatype="plaintext" target-language="de">
 		<body>
-			<trans-unit id="formBuilder.submitPending.thankYou.title" xml:space="preserve">
-				<source>Thank you!</source>
-				<target xml:lang="de" state="translated">Vielen Dank!</target>
-			</trans-unit>
-			<trans-unit id="formBuilder.submitPending.thankYou.message" xml:space="preserve">
-				<source>The form was submitted successfully.</source>
-				<target xml:lang="de" state="translated">Das Formular wurde erfolgreich übermittelt.</target>
-			</trans-unit>
 			<trans-unit id="formBuilder.index.backend.addFormElements" xml:space="preserve">
 				<source>Please add form elements</source>
-				<target xml:lang="de" state="translated">Bitte Formelemente hinzufügen</target>
+				<target xml:lang="de" state="translated">Bitte Formularelemente hinzufügen</target>
+			</trans-unit>
+			<trans-unit id="formBuilder.index.backend.addFormResponseElements" xml:space="preserve">
+				<source>Please add form response elements</source>
+				<target xml:lang="de" state="translated">Bitte Formular-Antwortelemente hinzufügen</target>
 			</trans-unit>
 			<trans-unit id="formBuilder.index.backend.addSelectElements" xml:space="preserve">
 				<source>Please add options</source>

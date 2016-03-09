@@ -51,7 +51,7 @@ class SiteService {
 	 * @throws \Exception
 	 * @return \TYPO3\Neos\Domain\Service\ContentContext
 	 */
-	private function createContext($workspace = 'live', $showInvisibleAndInaccessibleContent = TRUE) {
+	public function createContext($workspace = 'live', $showInvisibleAndInaccessibleContent = TRUE) {
 
 		$currentSite = $this->siteRepository->findFirstOnline();
 		if ($currentSite === NULL) {

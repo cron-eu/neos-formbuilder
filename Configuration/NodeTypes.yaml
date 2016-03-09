@@ -44,6 +44,13 @@
       constraints:
         nodeTypes:
           'CRON.FormBuilder:FieldSet': true
+    responseElements:
+      type: 'TYPO3.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          'TYPO3.Neos.NodeTypes:Headline': true
+          'TYPO3.Neos.NodeTypes:Text': true
+          '*': false
 
 
 'CRON.FormBuilder:FieldSet':
@@ -69,7 +76,6 @@
           'CRON.FormBuilder:CheckBox': true
           'CRON.FormBuilder:CheckBoxGroup': true
           'CRON.FormBuilder:TextArea': true
-          'CRON.FormBuilder:Text': true
           '*': false
 
 'CRON.FormBuilder:FormElementLabelMixin':
@@ -127,10 +133,6 @@
         inspector:
           group: options
 
-
-'CRON.FormBuilder:Text':
-  superTypes:
-    'TYPO3.Neos.NodeTypes:Text': true
 
 'CRON.FormBuilder:Input':
   superTypes:
