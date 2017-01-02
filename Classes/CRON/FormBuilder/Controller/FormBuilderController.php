@@ -231,7 +231,10 @@ class FormBuilderController extends ActionController
         $emailMessage = new EmailMessage('Form');
 
         foreach ($files as $id => $data) {
-            $emailMessage->addAttachment($data['node'], $data['file']);
+            // "file" maybe empty, if not uploaded
+            if (is_array($data['file'])) {
+                $emailMessage->addAttachment($data['node'], $data['file']);
+            }
         }
 
         $emailMessage->fluidView->assign('subject', $this->request->getInternalArgument('__subject'));
