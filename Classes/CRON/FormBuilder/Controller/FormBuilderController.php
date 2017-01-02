@@ -6,7 +6,6 @@ namespace CRON\FormBuilder\Controller;
  *                                                                        *
  *                                                                        */
 
-
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\TYPO3CR\Domain\Repository\NodeDataRepository;
 use CRON\FormBuilder\Utils\EmailMessage;
@@ -14,195 +13,234 @@ use TYPO3\Flow\Mvc\Controller\ActionController;
 use CRON\FormBuilder\Service\SiteService;
 use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
 
+class FormBuilderController extends ActionController
+{
 
-class FormBuilderController extends ActionController {
+    /**
+     * @Flow\Inject
+     * @var SiteService
+     */
+    protected $siteService;
 
-	/**
-	 * @Flow\Inject
-	 * @var SiteService
-	 */
-	protected $siteService;
+    /**
+     * @Flow\Inject
+     * @var NodeDataRepository
+     */
+    protected $nodeDataRepository;
 
-	/**
-	 * @Flow\Inject
-	 * @var NodeDataRepository
-	 */
-	protected $nodeDataRepository;
+    /**
+     * @Flow\InjectConfiguration(path="Controller")
+     * @var array
+     */
+    protected $conf;
 
-	/**
-	 * @Flow\InjectConfiguration(path="Controller")
-	 * @var array
-	 */
-	protected $conf;
+    /**
+     * @return void
+     */
+    public function indexAction()
+    {
+        $this->view->assign('attributes', $this->request->getInternalArgument('__attributes'));
+        $this->view->assign('elements', $this->request->getInternalArgument('__elements'));
+        $this->view->assign('elementsArray', $this->request->getInternalArgument('__elementsArray'));
+        $this->view->assign('responseElements', $this->request->getInternalArgument('__responseElements'));
+        $this->view->assign('documentNode', $this->request->getInternalArgument('__documentNode'));
+        $this->view->assign('node', $this->request->getInternalArgument('__node'));
+        $this->view->assign('submitButtonLabel', $this->request->getInternalArgument('__submitButtonLabel'));
+        $this->view->assign('tsPath', $this->request->getInternalArgument('__tsPath'));
+        $this->view->assign('tsPackageKey', $this->request->getInternalArgument('__tsPackageKey'));
+        $this->view->assign('tsPath', $this->request->getInternalArgument('__tsPath'));
+        $this->view->assign('tsPackageKey', $this->request->getInternalArgument('__tsPackageKey'));
+        $this->view->assign('enctype',
+            $this->request->getInternalArgument('__hasUploadElement') ? 'multipart/form-data' : null);
+    }
 
-	/**
-	 * @return void
-	 */
-	public function indexAction() {
-		$this->view->assign('attributes',$this->request->getInternalArgument('__attributes'));
-		$this->view->assign('elements',$this->request->getInternalArgument('__elements'));
-		$this->view->assign('elementsArray',$this->request->getInternalArgument('__elementsArray'));
-		$this->view->assign('responseElements',$this->request->getInternalArgument('__responseElements'));
-		$this->view->assign('documentNode',$this->request->getInternalArgument('__documentNode'));
-		$this->view->assign('node',$this->request->getInternalArgument('__node'));
-		$this->view->assign('submitButtonLabel',$this->request->getInternalArgument('__submitButtonLabel'));
-		$this->view->assign('tsPath',$this->request->getInternalArgument('__tsPath'));
-		$this->view->assign('tsPackageKey',$this->request->getInternalArgument('__tsPackageKey'));
-		$this->view->assign('tsPath',$this->request->getInternalArgument('__tsPath'));
-		$this->view->assign('tsPackageKey',$this->request->getInternalArgument('__tsPackageKey'));
-	}
+    /**
+     * Checks the form id
+     * @return void
+     */
+    public function initializeSubmitAction()
+    {
 
+        $this->checkFormId();
+        $this->checkHmac();
+    }
 
+    /**
+     * @param array $data
+     * @Flow\Validate(argumentName="data", type="\CRON\FormBuilder\Validation\Validator\FormBuilderValidator")
+     * @return void
+     */
+    public function submitAction($data)
+    {
+        $this->handleFormData($this->request->getInternalArgument('__node'), $data);
+    }
 
-	/**
-	 * Checks the form id
-	 * @return void
-	 */
-	public function initializeSubmitAction() {
+    /**
+     * @return void
+     */
+    public function submitPendingAction()
+    {
+        $this->view->assign('node', $this->request->getInternalArgument('__node'));
+        $this->view->assign('responseElements', $this->request->getInternalArgument('__responseElements'));
+    }
 
-		$this->checkFormId();
-		$this->checkHmac();
-	}
+    /**
+     * The actual handling of the submitted form data. Can be used as AOP hook
+     *
+     * @param NodeInterface $formNode
+     * @param array $data
+     * @return void
+     */
+    public function handleFormData($formNode, $data)
+    {
+        $fields = [];
+        $files = [];
 
-	/**
-	 * @param array $data
-	 * @Flow\Validate(argumentName="data", type="\CRON\FormBuilder\Validation\Validator\FormBuilderValidator")
-	 * @return void
-	 */
-	public function submitAction($data) {
+        /** @var NodeInterface $element */
+        foreach ($formNode->getNode('elements')->getChildNodes('!CRON.FormBuilder:FileUpload') as $element) {
+            $fields[$element->getIdentifier()] = $this->createMailData($element, $data);
+        }
 
-		$this->handleFormData($this->request->getInternalArgument('__node'), $data);
-	}
+        foreach ($formNode->getNode('elements')->getChildNodes('CRON.FormBuilder:FileUpload,CRON.FormBuilder:FieldSet') as $element) {
+            if ($element->getNodeType()->isOfType('CRON.FormBuilder:FieldSet')) {
+                foreach ($element->getNode('elements')->getChildNodes('CRON.FormBuilder:FileUpload') as $subElement) {
+                    $files[$element->getIdentifier()] = $this->createMailAttachments($subElement, $data);
+                }
+            } else {
+                $files[$element->getIdentifier()] = $this->createMailAttachments($element, $data);
+            }
+        }
 
+        $this->sendMail($fields, $files);
 
-	/**
-	 * @return void
-	 */
-	public function submitPendingAction() {
-		$this->view->assign('node',$this->request->getInternalArgument('__node'));
-		$this->view->assign('responseElements',$this->request->getInternalArgument('__responseElements'));
-	}
+        if ($this->conf['useForward']) {
+            $this->forward('submitPending');
+        } else {
+            $this->redirect('submitPending');
+        }
+    }
 
+    /**
+     * Creates the data to render in the mail
+     *
+     * @param NodeInterface $node
+     * @param array $data
+     *
+     * @return array
+     */
+    protected function createMailData($node, $data)
+    {
 
+        if ($node->getNodeType()->isOfType('CRON.FormBuilder:FieldSet')) {
 
-	/**
-	 * The actual handling of the submitted form data. Can be used as AOP hook
-	 *
-	 * @param NodeInterface $formNode
-	 * @param array $data
-	 * @return void
-	 */
-	public function handleFormData($formNode, $data) {
-		$fields = [];
+            $fields = [];
 
-		/** @var NodeInterface $element */
-		foreach($formNode->getNode('elements')->getChildNodes() as $element) {
-			$fields[$element->getIdentifier()] = $this->createMailData($element, $data);
-		}
+            foreach ($node->getNode('elements')->getChildNodes('!CRON.FormBuilder:FileUpload') as $subElement) {
+                $fields[] = $this->createMailData($subElement, $data);
+            }
 
-		$this->sendMail($fields);
+            return array('node' => $node, 'values' => $fields);
+        } else {
+            if (array_key_exists($node->getIdentifier(), $data)) {
 
-		if ($this->conf['useForward']) {
-			$this->forward('submitPending');
-		} else {
-			$this->redirect('submitPending');
-		}
-	}
+                $value = $data[$node->getIdentifier()];
+                if (is_array($value)) {
+                    $value = implode(', ', $value);
+                }
+                return array('node' => $node, 'value' => $value);
+            } else {
+                return [];
+            }
+        }
+    }
 
+    /**
+     * Creates the data to attach to the mail
+     *
+     * @param NodeInterface $node
+     * @param array $data
+     *
+     * @return array
+     */
+    protected function createMailAttachments($node, $data)
+    {
+        return array(
+            'node' => $node,
+            'file' => $data[$node->getIdentifier()]
+        );
+    }
 
-	/**
-	 * Creates the data to render in the mail
-	 *
-	 * @param NodeInterface $node
-	 * @param array $data
-	 *
-	 * @return array
-	 */
-	protected function createMailData($node, $data) {
+    /**
+     * Checks the HMAC for the form submitted data
+     */
+    protected function checkHmac()
+    {
 
-		if ($node->getNodeType()->isOfType('CRON.FormBuilder:FieldSet')) {
+        $trustedProperties = $this->request->getInternalArgument('__trustedProperties');
 
-			$fields = [];
+        if ($trustedProperties) {
 
-			foreach($node->getNode('elements')->getChildNodes() as $subElement) {
-				$fields[] = $this->createMailData($subElement, $data);
-			}
+            if ($this->request->hasArgument('data')
+                && $this->mvcPropertyMappingConfigurationService->generateTrustedPropertiesToken(
+                    array_merge(
+                        array_map(
+                            function ($key) {
+                                return "data[$key]";
+                            },
+                            array_keys($this->request->getArgument('data'))
+                        ),
+                        ['__formId']
+                    )) == $trustedProperties
+            ) {
+                return;
+            } else {
+                // hmac does not match: unauthorized request!
+                $this->throwStatus(403);
+            }
+        } else {
+            // hmac not present: unauthorized request!
+            $this->throwStatus(403);
+        }
+    }
 
-			return array('node' => $node, 'values' => $fields);
+    /**
+     * For multiple forms on one page we check which form is submitted and forward to index if necessary
+     * @return void
+     */
+    protected function checkFormId()
+    {
+        /** @var NodeInterface $node */
+        $node = $this->request->getInternalArgument('__node');
 
-		} else if (array_key_exists($node->getIdentifier(), $data)) {
+        if ($this->request->getInternalArgument('__formId') != $node->getIdentifier()) {
+            $this->forward('index');
+        }
+    }
 
-			$value = $data[$node->getIdentifier()];
-			if (is_array($value)) $value = implode(', ', $value);
-			return array('node' => $node, 'value' => $value);
-		} else {
-			return [];
-		}
+    /**
+     * Sends your details to recipient
+     * @param array $fields
+     * @param array $files
+     * @return void
+     */
+    protected function sendMail($fields, $files)
+    {
 
-	}
+        $receiver = explode(',', $this->request->getInternalArgument('__receiver'));
 
+        $emailMessage = new EmailMessage('Form');
 
+        foreach ($files as $id => $data) {
+            // "file" maybe empty, if not uploaded
+            if (is_array($data['file'])) {
+                $emailMessage->addAttachment($data['node'], $data['file']);
+            }
+        }
 
-	/**
-	 * Checks the HMAC for the form submitted data
-	 */
-	protected function checkHmac() {
-
-		$trustedProperties = $this->request->getInternalArgument('__trustedProperties');
-
-		if ($trustedProperties) {
-
-			if ($this->request->hasArgument('data')
-			    && $this->mvcPropertyMappingConfigurationService->generateTrustedPropertiesToken(
-					array_merge(
-						array_map(
-							function($key) { return "data[$key]"; },
-							array_keys($this->request->getArgument('data'))
-						),
-						['__formId']
-					)) == $trustedProperties) {
-				return;
-			} else {
-				// hmac does not match: unauthorized request!
-				$this->throwStatus(403);
-			}
-		} else {
-			// hmac not present: unauthorized request!
-			$this->throwStatus(403);
-		}
-	}
-
-
-	/**
-	 * For multiple forms on one page we check which form is submitted and forward to index if necessary
-	 * @return void
-	 */
-	protected function checkFormId() {
-		/** @var NodeInterface $node */
-		$node = $this->request->getInternalArgument('__node');
-
-		if($this->request->getInternalArgument('__formId') != $node->getIdentifier()) {
-			$this->forward('index');
-		}
-	}
-
-
-	/**
-	 * Sends your details to recipient
-	 * @param array $fields
-	 * @return void
-	 */
-	protected function sendMail($fields) {
-
-		$receiver = explode(',', $this->request->getInternalArgument('__receiver'));
-
-		$emailMessage = new EmailMessage('Form');
-
-		$emailMessage->fluidView->assign('subject', $this->request->getInternalArgument('__subject'));
-		$emailMessage->fluidView->assign('fields', $fields);
-		$emailMessage->fluidView->setControllerContext($this->controllerContext);
-		$emailMessage->send($receiver);
-	}
-
+        $emailMessage->fluidView->assign('subject', $this->request->getInternalArgument('__subject'));
+        $emailMessage->fluidView->assign('fields', $fields);
+        $emailMessage->fluidView->setControllerContext($this->controllerContext);
+        $emailMessage->send($receiver);
+    }
 
 }

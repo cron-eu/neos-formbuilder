@@ -108,6 +108,10 @@ prototype(CRON.FormBuilder:FieldSet) < prototype(CRON.FormBuilder:FormElement) {
 	}
 }
 
+prototype(CRON.FormBuilder:FileUpload) < prototype(CRON.FormBuilder:FormElement) {
+	allowedMimeTypes = ${Array.join(Configuration.setting('CRON.FormBuilder.Upload.allowedMimeTypes'), ',')}
+}
+
 
 prototype(CRON.FormBuilder:Plugin) < prototype(TYPO3.Neos:Plugin) {
 	package = 'CRON.FormBuilder'
@@ -129,6 +133,8 @@ prototype(CRON.FormBuilder:Plugin) < prototype(TYPO3.Neos:Plugin) {
 
 	tsPath = 'formElementRenderer'
 	tsPackageKey = 'CRON.FormBuilder'
+
+	hasUploadElement = ${q(node).find('[instanceof CRON.FormBuilder:FileUpload]').count() > 0}
 }
 
 formElementRenderer =  TYPO3.TypoScript:Case {
