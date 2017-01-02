@@ -1,146 +1,151 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-	<file original="" product-name="CRON.FormBuilder.NodeTypes.Plugin" source-language="en" datatype="plaintext" target-language="de">
-		<body>
-			<trans-unit id="groups.advanced" xml:space="preserve">
-				<source>Settings</source>
-				<target xml:lang="de" state="translated">Einstellungen</target>
-			</trans-unit>
-			<trans-unit id="groups.options" xml:space="preserve">
-				<source>Options</source>
-				<target xml:lang="de" state="translated">Optionen</target>
-			</trans-unit>
-			<trans-unit id="properties.receiver" xml:space="preserve">
-				<source>Receiver-Email(s)</source>
-				<target xml:lang="de" state="translated">Empfänger-Email(s)</target>
-			</trans-unit>
-			<trans-unit id="properties.subject" xml:space="preserve">
-				<source>Subject</source>
-				<target xml:lang="de" state="translated">Betreff</target>
-			</trans-unit>
-			<trans-unit id="properties.submitButtonLabel" xml:space="preserve">
-				<source>Submit-Button-Label</source>
-				<target xml:lang="de" state="translated">Absende-Knopf-Bezeichner</target>
-			</trans-unit>
-			<trans-unit id="ui.label" xml:space="preserve">
-				<source>FormBuilder</source>
-				<target xml:lang="de" state="translated">FormBuilder</target>
-			</trans-unit>
-			<trans-unit id="field.label" xml:space="preserve">
-				<source>Label</source>
-				<target xml:lang="de" state="translated">Bezeichner</target>
-			</trans-unit>
-			<trans-unit id="field.value" xml:space="preserve">
-				<source>Value</source>
-				<target xml:lang="de" state="translated">Wert</target>
-			</trans-unit>
-			<trans-unit id="field.name" xml:space="preserve">
-				<source>Name</source>
-				<target xml:lang="de" state="translated">Name</target>
-			</trans-unit>
-			<trans-unit id="field.required" xml:space="preserve">
-				<source>Required</source>
-				<target xml:lang="de" state="translated">Pflichtfeld</target>
-			</trans-unit>
-			<trans-unit id="field.checked" xml:space="preserve">
-				<source>Checked</source>
-				<target xml:lang="de" state="translated">aktiviert</target>
-			</trans-unit>
-			<trans-unit id="field.placeholder" xml:space="preserve">
-				<source>Placeholder</source>
-				<target xml:lang="de" state="translated">Platzhalter</target>
-			</trans-unit>
-			<trans-unit id="fields.textfield" xml:space="preserve">
-				<source>Textfield</source>
-				<target xml:lang="de" state="translated">Textfeld</target>
-			</trans-unit>
-			<trans-unit id="fields.textfield.inputtype" xml:space="preserve">
-				<source>Input Type</source>
-				<target xml:lang="de" state="translated">Feld-Typ</target>
-			</trans-unit>
-			<trans-unit id="fields.textfield.text" xml:space="preserve">
-				<source>Text</source>
-				<target xml:lang="de" state="translated">Text</target>
-			</trans-unit>
-			<trans-unit id="fields.textfield.number" xml:space="preserve">
-				<source>Number</source>
-				<target xml:lang="de" state="translated">Ziffern</target>
-			</trans-unit>
-			<trans-unit id="fields.textfield.password" xml:space="preserve">
-				<source>Password</source>
-				<target xml:lang="de" state="translated">Passwort</target>
-			</trans-unit>
-			<trans-unit id="fields.textfield.email" xml:space="preserve">
-				<source>E-Mail</source>
-				<target xml:lang="de" state="translated">E-Mail</target>
-			</trans-unit>
-			<trans-unit id="fields.textfield.tel" xml:space="preserve">
-				<source>Telephone</source>
-				<target xml:lang="de" state="translated">Telefon</target>
-			</trans-unit>
-			<trans-unit id="fields.textfield.url" xml:space="preserve">
-				<source>Url</source>
-				<target xml:lang="de" state="translated">Url</target>
-			</trans-unit>
-			<trans-unit id="fields.textfield.date" xml:space="preserve">
-				<source>Date</source>
-				<target xml:lang="de" state="translated">Datum</target>
-			</trans-unit>
-			<trans-unit id="fields.textfield.time" xml:space="preserve">
-				<source>Time</source>
-				<target xml:lang="de" state="translated">Zeit</target>
-			</trans-unit>
-			<trans-unit id="fields.textarea" xml:space="preserve">
-				<source>Textarea</source>
-				<target xml:lang="de" state="translated">Mehrzeiliges Textfeld</target>
-			</trans-unit>
-			<trans-unit id="fields.textarea.cols" xml:space="preserve">
-				<source>Cols</source>
-				<target xml:lang="de" state="translated">Spalten</target>
-			</trans-unit>
-			<trans-unit id="fields.textarea.rows" xml:space="preserve">
-				<source>Rows</source>
-				<target xml:lang="de" state="translated">Zeilen</target>
-			</trans-unit>
-			<trans-unit id="fields.submit.caption" xml:space="preserve">
-				<source>Caption</source>
-				<target xml:lang="de" state="translated">Beschriftung</target>
-			</trans-unit>
-			<trans-unit id="fields.select" xml:space="preserve">
-				<source>Selectbox</source>
-				<target xml:lang="de" state="translated">Auswahlbox</target>
-			</trans-unit>
-			<trans-unit id="fields.select.multiple" xml:space="preserve">
-				<source>Multiple Selection</source>
-				<target xml:lang="de" state="translated">Mehrfach-Auswahl</target>
-			</trans-unit>
-			<trans-unit id="fields.select.options" xml:space="preserve">
-				<source>Option</source>
-				<target xml:lang="de" state="translated">Option</target>
-			</trans-unit>
-			<trans-unit id="fields.select.options.text" xml:space="preserve">
-				<source>Text displayed</source>
-			</trans-unit>
-			<trans-unit id="fields.select.options.selected" xml:space="preserve">
-				<source>Selected</source>
-				<target xml:lang="de" state="translated">Vorausgewählt</target>
-			</trans-unit>
-			<trans-unit id="fields.checkbox" xml:space="preserve">
-				<source>Checkbox</source>
-				<target xml:lang="de" state="translated">Auswahlkasten</target>
-			</trans-unit>
-			<trans-unit id="fields.checkbox.group" xml:space="preserve">
-				<source>Checkbox-Group</source>
-				<target xml:lang="de" state="translated">Auswahlkasten-Gruppe</target>
-			</trans-unit>
-			<trans-unit id="fields.checkbox.checked" xml:space="preserve">
-				<source>Checked</source>
-				<target xml:lang="de" state="translated">Vorausgewählt</target>
-			</trans-unit>
-			<trans-unit id="fields.fieldset" xml:space="preserve">
-				<source>Fieldset</source>
-				<target xml:lang="de" state="translated">Feld-Gruppe</target>
-			</trans-unit>
-		</body>
-	</file>
+  <file original="" product-name="CRON.FormBuilder.NodeTypes.Plugin" source-language="en" datatype="plaintext"
+        target-language="de">
+    <body>
+      <trans-unit id="groups.advanced" xml:space="preserve">
+        <source>Settings</source>
+        <target xml:lang="de" state="translated">Einstellungen</target>
+      </trans-unit>
+      <trans-unit id="groups.options" xml:space="preserve">
+        <source>Options</source>
+        <target xml:lang="de" state="translated">Optionen</target>
+      </trans-unit>
+      <trans-unit id="properties.receiver" xml:space="preserve">
+        <source>Receiver-Email(s)</source>
+        <target xml:lang="de" state="translated">Empfänger-Email(s)</target>
+      </trans-unit>
+      <trans-unit id="properties.subject" xml:space="preserve">
+        <source>Subject</source>
+        <target xml:lang="de" state="translated">Betreff</target>
+      </trans-unit>
+      <trans-unit id="properties.submitButtonLabel" xml:space="preserve">
+        <source>Submit-Button-Label</source>
+        <target xml:lang="de" state="translated">Absende-Knopf-Bezeichner</target>
+      </trans-unit>
+      <trans-unit id="ui.label" xml:space="preserve">
+        <source>FormBuilder</source>
+        <target xml:lang="de" state="translated">FormBuilder</target>
+      </trans-unit>
+      <trans-unit id="field.label" xml:space="preserve">
+        <source>Label</source>
+        <target xml:lang="de" state="translated">Bezeichner</target>
+      </trans-unit>
+      <trans-unit id="field.value" xml:space="preserve">
+        <source>Value</source>
+        <target xml:lang="de" state="translated">Wert</target>
+      </trans-unit>
+      <trans-unit id="field.name" xml:space="preserve">
+        <source>Name</source>
+        <target xml:lang="de" state="translated">Name</target>
+      </trans-unit>
+      <trans-unit id="field.required" xml:space="preserve">
+        <source>Required</source>
+        <target xml:lang="de" state="translated">Pflichtfeld</target>
+      </trans-unit>
+      <trans-unit id="field.checked" xml:space="preserve">
+        <source>Checked</source>
+        <target xml:lang="de" state="translated">aktiviert</target>
+      </trans-unit>
+      <trans-unit id="field.placeholder" xml:space="preserve">
+        <source>Placeholder</source>
+        <target xml:lang="de" state="translated">Platzhalter</target>
+      </trans-unit>
+      <trans-unit id="fields.textfield" xml:space="preserve">
+        <source>Textfield</source>
+        <target xml:lang="de" state="translated">Textfeld</target>
+      </trans-unit>
+      <trans-unit id="fields.textfield.inputtype" xml:space="preserve">
+        <source>Input Type</source>
+        <target xml:lang="de" state="translated">Feld-Typ</target>
+      </trans-unit>
+      <trans-unit id="fields.textfield.text" xml:space="preserve">
+        <source>Text</source>
+        <target xml:lang="de" state="translated">Text</target>
+      </trans-unit>
+      <trans-unit id="fields.textfield.number" xml:space="preserve">
+        <source>Number</source>
+        <target xml:lang="de" state="translated">Ziffern</target>
+      </trans-unit>
+      <trans-unit id="fields.textfield.password" xml:space="preserve">
+        <source>Password</source>
+        <target xml:lang="de" state="translated">Passwort</target>
+      </trans-unit>
+      <trans-unit id="fields.textfield.email" xml:space="preserve">
+        <source>E-Mail</source>
+        <target xml:lang="de" state="translated">E-Mail</target>
+      </trans-unit>
+      <trans-unit id="fields.textfield.tel" xml:space="preserve">
+        <source>Telephone</source>
+        <target xml:lang="de" state="translated">Telefon</target>
+      </trans-unit>
+      <trans-unit id="fields.textfield.url" xml:space="preserve">
+        <source>Url</source>
+        <target xml:lang="de" state="translated">Url</target>
+      </trans-unit>
+      <trans-unit id="fields.textfield.date" xml:space="preserve">
+        <source>Date</source>
+        <target xml:lang="de" state="translated">Datum</target>
+      </trans-unit>
+      <trans-unit id="fields.textfield.time" xml:space="preserve">
+        <source>Time</source>
+        <target xml:lang="de" state="translated">Zeit</target>
+      </trans-unit>
+      <trans-unit id="fields.textarea" xml:space="preserve">
+        <source>Textarea</source>
+        <target xml:lang="de" state="translated">Mehrzeiliges Textfeld</target>
+      </trans-unit>
+      <trans-unit id="fields.textarea.cols" xml:space="preserve">
+        <source>Cols</source>
+        <target xml:lang="de" state="translated">Spalten</target>
+      </trans-unit>
+      <trans-unit id="fields.textarea.rows" xml:space="preserve">
+        <source>Rows</source>
+        <target xml:lang="de" state="translated">Zeilen</target>
+      </trans-unit>
+      <trans-unit id="fields.submit.caption" xml:space="preserve">
+        <source>Caption</source>
+        <target xml:lang="de" state="translated">Beschriftung</target>
+      </trans-unit>
+      <trans-unit id="fields.select" xml:space="preserve">
+        <source>Selectbox</source>
+        <target xml:lang="de" state="translated">Auswahlbox</target>
+      </trans-unit>
+      <trans-unit id="fields.select.multiple" xml:space="preserve">
+        <source>Multiple Selection</source>
+        <target xml:lang="de" state="translated">Mehrfach-Auswahl</target>
+      </trans-unit>
+      <trans-unit id="fields.select.options" xml:space="preserve">
+        <source>Option</source>
+        <target xml:lang="de" state="translated">Option</target>
+      </trans-unit>
+      <trans-unit id="fields.select.options.text" xml:space="preserve">
+        <source>Text displayed</source>
+      </trans-unit>
+      <trans-unit id="fields.select.options.selected" xml:space="preserve">
+        <source>Selected</source>
+        <target xml:lang="de" state="translated">Vorausgewählt</target>
+      </trans-unit>
+      <trans-unit id="fields.checkbox" xml:space="preserve">
+        <source>Checkbox</source>
+        <target xml:lang="de" state="translated">Auswahlkasten</target>
+      </trans-unit>
+      <trans-unit id="fields.checkbox.group" xml:space="preserve">
+        <source>Checkbox-Group</source>
+        <target xml:lang="de" state="translated">Auswahlkasten-Gruppe</target>
+      </trans-unit>
+      <trans-unit id="fields.checkbox.checked" xml:space="preserve">
+        <source>Checked</source>
+        <target xml:lang="de" state="translated">Vorausgewählt</target>
+      </trans-unit>
+      <trans-unit id="fields.fieldset" xml:space="preserve">
+        <source>Fieldset</source>
+        <target xml:lang="de" state="translated">Feld-Gruppe</target>
+      </trans-unit>
+      <trans-unit id="fields.fileupload" xml:space="preserve">
+        <source>File-Upload</source>
+        <target xml:lang="de" state="translated">Datei-Upload</target>
+      </trans-unit>
+    </body>
+  </file>
 </xliff>
