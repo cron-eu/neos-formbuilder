@@ -76,6 +76,7 @@
           'CRON.FormBuilder:CheckBox': true
           'CRON.FormBuilder:CheckBoxGroup': true
           'CRON.FormBuilder:TextArea': true
+          'CRON.FormBuilder:FileUpload': true
           '*': false
 
 'CRON.FormBuilder:FormElementLabelMixin':
@@ -279,3 +280,10 @@
         reloadIfChanged: TRUE
         inspector:
           group: options
+
+'CRON.FormBuilder:FileUpload':
+  superTypes:
+    'CRON.FormBuilder:FormElementLabelMixin': true
+    'CRON.FormBuilder:FormElementRequiredMixin': true
+  ui:
+    label: CRON.FormBuilder:NodeTypes.Plugin:fields.fileupload

@@ -50,6 +50,8 @@ class FormBuilderController extends ActionController
         $this->view->assign('tsPackageKey', $this->request->getInternalArgument('__tsPackageKey'));
         $this->view->assign('tsPath', $this->request->getInternalArgument('__tsPath'));
         $this->view->assign('tsPackageKey', $this->request->getInternalArgument('__tsPackageKey'));
+        $this->view->assign('enctype',
+            $this->request->getInternalArgument('__hasUploadElement') ? 'multipart/form-data' : null);
     }
 
     /**
@@ -70,7 +72,6 @@ class FormBuilderController extends ActionController
      */
     public function submitAction($data)
     {
-
         $this->handleFormData($this->request->getInternalArgument('__node'), $data);
     }
 
@@ -93,13 +94,24 @@ class FormBuilderController extends ActionController
     public function handleFormData($formNode, $data)
     {
         $fields = [];
+        $files = [];
 
         /** @var NodeInterface $element */
-        foreach ($formNode->getNode('elements')->getChildNodes() as $element) {
+        foreach ($formNode->getNode('elements')->getChildNodes('!CRON.FormBuilder:FileUpload') as $element) {
             $fields[$element->getIdentifier()] = $this->createMailData($element, $data);
         }
 
-        $this->sendMail($fields);
+        foreach ($formNode->getNode('elements')->getChildNodes('CRON.FormBuilder:FileUpload,CRON.FormBuilder:FieldSet') as $element) {
+            if ($element->getNodeType()->isOfType('CRON.FormBuilder:FieldSet')) {
+                foreach ($element->getNode('elements')->getChildNodes('CRON.FormBuilder:FileUpload') as $subElement) {
+                    $files[$element->getIdentifier()] = $this->createMailAttachments($subElement, $data);
+                }
+            } else {
+                $files[$element->getIdentifier()] = $this->createMailAttachments($element, $data);
+            }
+        }
+
+        $this->sendMail($fields, $files);
 
         if ($this->conf['useForward']) {
             $this->forward('submitPending');
@@ -123,7 +135,7 @@ class FormBuilderController extends ActionController
 
             $fields = [];
 
-            foreach ($node->getNode('elements')->getChildNodes() as $subElement) {
+            foreach ($node->getNode('elements')->getChildNodes('!CRON.FormBuilder:FileUpload') as $subElement) {
                 $fields[] = $this->createMailData($subElement, $data);
             }
 
@@ -140,6 +152,22 @@ class FormBuilderController extends ActionController
                 return [];
             }
         }
+    }
+
+    /**
+     * Creates the data to attach to the mail
+     *
+     * @param NodeInterface $node
+     * @param array $data
+     *
+     * @return array
+     */
+    protected function createMailAttachments($node, $data)
+    {
+        return array(
+            'node' => $node,
+            'file' => $data[$node->getIdentifier()]
+        );
     }
 
     /**
@@ -192,14 +220,19 @@ class FormBuilderController extends ActionController
     /**
      * Sends your details to recipient
      * @param array $fields
+     * @param array $files
      * @return void
      */
-    protected function sendMail($fields)
+    protected function sendMail($fields, $files)
     {
 
         $receiver = explode(',', $this->request->getInternalArgument('__receiver'));
 
         $emailMessage = new EmailMessage('Form');
+
+        foreach ($files as $id => $data) {
+            $emailMessage->addAttachment($data['node'], $data['file']);
+        }
 
         $emailMessage->fluidView->assign('subject', $this->request->getInternalArgument('__subject'));
         $emailMessage->fluidView->assign('fields', $fields);

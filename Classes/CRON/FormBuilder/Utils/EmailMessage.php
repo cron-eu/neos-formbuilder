@@ -3,6 +3,7 @@ namespace CRON\FormBuilder\Utils;
 
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\SwiftMailer\Message;
+use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
 
 /**
  * @property string viewName
@@ -48,6 +49,23 @@ class EmailMessage
         ));
 
         $this->mail = (new Message())->setFrom($this->conf['defaults']['from']);
+    }
+
+    /**
+     * Attaches an file to the email
+     * @param NodeInterface $node
+     * @param array $data
+     */
+    public function addAttachment($node, $data)
+    {
+
+        $this->mail->attach(
+            \Swift_Attachment::newInstance(
+                file_get_contents($data['tmp_name']),
+                join('-', [$node->getProperty('label'), $data['name']]),
+                $data['type']
+            )
+        );
     }
 
     /**

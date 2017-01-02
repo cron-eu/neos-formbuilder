@@ -3,9 +3,8 @@
 {namespace ts=TYPO3\TypoScript\ViewHelpers}
 
 <f:layout name="Default" />
-
 <f:section name="Content">
-	<f:form action="submit" method="post" additionalAttributes="{attributes}" section="{node.identifier}" id="{node.identifier}">
+	<f:form action="submit" method="post" additionalAttributes="{attributes}" section="{node.identifier}" id="{node.identifier}" enctype="{enctype}">
 		<f:if condition="{neos:rendering.inBackend(node: documentNode)}">
 			<f:then>
 				<f:if condition="{f:count(subject: elementsArray)}">
