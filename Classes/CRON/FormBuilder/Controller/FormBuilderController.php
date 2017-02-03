@@ -41,14 +41,10 @@ class FormBuilderController extends ActionController
     {
         $this->view->assign('attributes', $this->request->getInternalArgument('__attributes'));
         $this->view->assign('elements', $this->request->getInternalArgument('__elements'));
-        $this->view->assign('elementsArray', $this->request->getInternalArgument('__elementsArray'));
         $this->view->assign('responseElements', $this->request->getInternalArgument('__responseElements'));
         $this->view->assign('documentNode', $this->request->getInternalArgument('__documentNode'));
         $this->view->assign('node', $this->request->getInternalArgument('__node'));
         $this->view->assign('submitButtonLabel', $this->request->getInternalArgument('__submitButtonLabel'));
-        $this->view->assign('tsPath', $this->request->getInternalArgument('__tsPath'));
-        $this->view->assign('tsPackageKey', $this->request->getInternalArgument('__tsPackageKey'));
-        $this->view->assign('tsPath', $this->request->getInternalArgument('__tsPath'));
         $this->view->assign('tsPackageKey', $this->request->getInternalArgument('__tsPackageKey'));
         $this->view->assign('enctype',
             $this->request->getInternalArgument('__hasUploadElement') ? 'multipart/form-data' : null);
@@ -60,9 +56,7 @@ class FormBuilderController extends ActionController
      */
     public function initializeSubmitAction()
     {
-
         $this->checkFormId();
-        $this->checkHmac();
     }
 
     /**
@@ -73,6 +67,12 @@ class FormBuilderController extends ActionController
     public function submitAction($data)
     {
         $this->handleFormData($this->request->getInternalArgument('__node'), $data);
+
+        if ($this->conf['useForward']) {
+            $this->forward('submitPending');
+        } else {
+            $this->redirect('submitPending');
+        }
     }
 
     /**
@@ -112,12 +112,6 @@ class FormBuilderController extends ActionController
         }
 
         $this->sendMail($fields, $files);
-
-        if ($this->conf['useForward']) {
-            $this->forward('submitPending');
-        } else {
-            $this->redirect('submitPending');
-        }
     }
 
     /**
@@ -168,39 +162,6 @@ class FormBuilderController extends ActionController
             'node' => $node,
             'file' => $data[$node->getIdentifier()]
         );
-    }
-
-    /**
-     * Checks the HMAC for the form submitted data
-     */
-    protected function checkHmac()
-    {
-
-        $trustedProperties = $this->request->getInternalArgument('__trustedProperties');
-
-        if ($trustedProperties) {
-
-            if ($this->request->hasArgument('data')
-                && $this->mvcPropertyMappingConfigurationService->generateTrustedPropertiesToken(
-                    array_merge(
-                        array_map(
-                            function ($key) {
-                                return "data[$key]";
-                            },
-                            array_keys($this->request->getArgument('data'))
-                        ),
-                        ['__formId']
-                    )) == $trustedProperties
-            ) {
-                return;
-            } else {
-                // hmac does not match: unauthorized request!
-                $this->throwStatus(403);
-            }
-        } else {
-            // hmac not present: unauthorized request!
-            $this->throwStatus(403);
-        }
     }
 
     /**

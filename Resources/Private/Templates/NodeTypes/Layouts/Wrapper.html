@@ -1,7 +1,9 @@
-<div {layoutAttributes -> f:format.raw()}>
-	<label for="{node.identifier}">{node.properties.label}</label>
-	<div>
-		<f:render section="Content"/>
+<f:validation.results for="data.{node.identifier}">
+	<div class="form-group{f:if(condition: validationResults.flattenedErrors, then: ' has-error')}{f:if(condition: node.properties.required, then: ' required')}">
+		<label for="{node.identifier}">{node.properties.label}</label>
+		<div>
+			<f:render section="Content"/>
+		</div>
+			<f:render partial="FlattenedErrors" arguments="{_all}" />
 	</div>
-	<f:render partial="FlattenedErrors" arguments="{_all}" />
-</div>
+</f:validation.results>
