@@ -13,6 +13,6 @@
 	</f:form>
 	<f:if condition="{neos:rendering.inBackend(node: documentNode)}">
 		<strong><f:translate id="formBuilder.index.backend.addFormResponseElements" package="CRON.FormBuilder" /></strong>
-		<ts:render path="responseElements"  typoScriptPackageKey="{tsPackageKey}" context="{node: responseElements}"/>
+		{responseElements -> f:format.raw()}
 	</f:if>
 </f:section>

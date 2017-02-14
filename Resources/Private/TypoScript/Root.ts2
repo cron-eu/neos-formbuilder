@@ -108,7 +108,9 @@ prototype(CRON.FormBuilder:Plugin) < prototype(TYPO3.Neos:Plugin) {
 
 	elements = ${q(node).children('elements').get(0)}
 
-	responseElements = ${q(node).children('responseElements').get(0)}
+	responseElements = TYPO3.Neos:ContentCollection {
+		nodePath = 'responseElements'
+	}
 
 	tsPackageKey = 'CRON.FormBuilder'
 
@@ -117,8 +119,4 @@ prototype(CRON.FormBuilder:Plugin) < prototype(TYPO3.Neos:Plugin) {
 
 elements = TYPO3.Neos:ContentCollection {
 	nodePath = 'elements'
-}
-
-responseElements = TYPO3.Neos:ContentCollection {
-	nodePath = 'responseElements'
 }
