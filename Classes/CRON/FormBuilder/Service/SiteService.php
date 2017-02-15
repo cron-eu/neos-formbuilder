@@ -1,7 +1,6 @@
 <?php
 namespace CRON\FormBuilder\Service;
 
-
 use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
 use TYPO3\Flow\Annotations as Flow;
 
@@ -10,59 +9,61 @@ use TYPO3\Flow\Annotations as Flow;
  *
  * @Flow\Scope("singleton")
  */
-class SiteService {
+class SiteService
+{
 
-	/**
-	 * @Flow\Inject
-	 * @var \TYPO3\TYPO3CR\Domain\Service\ContextFactoryInterface
-	 */
-	protected $contextFactory;
+    /**
+     * @Flow\Inject
+     * @var \TYPO3\TYPO3CR\Domain\Service\ContextFactoryInterface
+     */
+    protected $contextFactory;
 
-	/**
-	 * @Flow\Inject
-	 * @var \TYPO3\Neos\Domain\Repository\SiteRepository
-	 */
-	protected $siteRepository;
+    /**
+     * @Flow\Inject
+     * @var \TYPO3\Neos\Domain\Repository\SiteRepository
+     */
+    protected $siteRepository;
 
-	/**
-	 * @var NodeInterface $siteNode
-	 */
-	protected $siteNode = NULL;
+    /**
+     * @var NodeInterface $siteNode
+     */
+    protected $siteNode = null;
 
+    /**
+     * Get the root site node
+     *
+     * @return \TYPO3\TYPO3CR\Domain\Model\NodeInterface
+     */
+    public function getSiteNode()
+    {
 
-	/**
-	 * Get the root site node
-	 *
-	 * @return \TYPO3\TYPO3CR\Domain\Model\NodeInterface
-	 */
-	public function getSiteNode() {
+        if (!$this->siteNode) {
+            $this->siteNode = $this->createContext()->getCurrentSiteNode();
+        }
 
-		if (!$this->siteNode) {
-			$this->siteNode = $this->createContext()->getCurrentSiteNode();
-		}
+        return $this->siteNode;
+    }
 
-		return $this->siteNode;
-	}
+    /**
+     * @param string $workspace
+     * @param bool $showInvisibleAndInaccessibleContent
+     *
+     * @throws \Exception
+     * @return \TYPO3\Neos\Domain\Service\ContentContext
+     */
+    public function createContext($workspace = 'live', $showInvisibleAndInaccessibleContent = true)
+    {
 
-	/**
-	 * @param string $workspace
-	 * @param bool   $showInvisibleAndInaccessibleContent
-	 *
-	 * @throws \Exception
-	 * @return \TYPO3\Neos\Domain\Service\ContentContext
-	 */
-	private function createContext($workspace = 'live', $showInvisibleAndInaccessibleContent = TRUE) {
+        $currentSite = $this->siteRepository->findFirstOnline();
+        if ($currentSite === null) {
+            throw new \Exception('no online site available');
+        }
 
-		$currentSite = $this->siteRepository->findFirstOnline();
-		if ($currentSite === NULL) {
-			throw new \Exception('no online site available');
-		}
-
-		return $this->contextFactory->create([
-			                                     'workspaceName'            => $workspace,
-			                                     'currentSite'              => $currentSite,
-			                                     'invisibleContentShown'    => $showInvisibleAndInaccessibleContent,
-			                                     'inaccessibleContentShown' => $showInvisibleAndInaccessibleContent
-		                                     ]);
-	}
+        return $this->contextFactory->create([
+            'workspaceName' => $workspace,
+            'currentSite' => $currentSite,
+            'invisibleContentShown' => $showInvisibleAndInaccessibleContent,
+            'inaccessibleContentShown' => $showInvisibleAndInaccessibleContent
+        ]);
+    }
 }

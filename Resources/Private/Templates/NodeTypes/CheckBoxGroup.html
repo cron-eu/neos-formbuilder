@@ -3,11 +3,7 @@
 <f:section name="Content">
     <f:if condition="{neos:rendering.inBackend()}">
         <f:then>
-            <f:if condition="{f:count(subject: elementsArray)}">
-                <f:else>
-                    <strong><f:translate id="formBuilder.index.backend.addCheckBoxGroupElements" package="CRON.FormBuilder" /></strong>
-                </f:else>
-            </f:if>
+            <strong><f:translate id="formBuilder.index.backend.addCheckBoxGroupElements" package="CRON.FormBuilder" /></strong>
             {elements -> f:format.raw()}
         </f:then>
         <f:else>

@@ -3,8 +3,24 @@ include: resource://TYPO3.Neos/Private/TypoScript/*
 
 prototype(CRON.FormBuilder:FormElement) < prototype(TYPO3.Neos:Content) {
 	templatePath = ${'resource://CRON.FormBuilder/Private/Templates/NodeTypes/' + String.replace(node.nodeData.nodeType, 'CRON.FormBuilder:', '') + '.html'}
+
 	layoutName = 'Wrapper'
 
+	layoutAttributes = TYPO3.TypoScript:Attributes
+	layoutAttributes.class = ''
+	layoutAttributes.class.@process.nodeType = TYPO3.TypoScript:Case {
+		@context.nodeTypeClassName = ${String.toLowerCase(String.pregReplace(q(node).property('_nodeType.name'), '/[[:^alnum:]]/', '-')) + '-layout'}
+
+		classIsString {
+			condition = ${Type.isString(value)}
+			renderer = ${String.trim(value) + ' ' + nodeTypeClassName}
+		}
+
+		classIsArray {
+			condition = ${Type.isArray(value)}
+			renderer = ${Array.push(value, nodeTypeClassName)}
+		}
+	}
 
 	value = ${request.internalArguments.__submittedArguments.data[node.identifier]}
 	value.@if.valueWasSubmitted = ${request.internalArguments.__submittedArguments.data[node.identifier]}
@@ -16,9 +32,6 @@ prototype(CRON.FormBuilder:FormElement) < prototype(TYPO3.Neos:Content) {
 	attributes.required = ${q(node).property('required')}
 	attributes.required.@if.isRequired = ${Configuration.setting('CRON.FormBuilder.View.useRequiredAttribute') && q(node).property('required')}
 	attributes.class = 'form-control'
-
-	node = ${node}
-	flattenedErrors = ${flattenedErrors}
 }
 
 prototype(CRON.FormBuilder:CheckBox) < prototype(CRON.FormBuilder:FormElement) {
@@ -28,8 +41,6 @@ prototype(CRON.FormBuilder:CheckBox) < prototype(CRON.FormBuilder:FormElement) {
 }
 
 prototype(CRON.FormBuilder:CheckBoxGroup) < prototype(CRON.FormBuilder:FormElement) {
-
-	elementsArray = ${q(node).children('elements').children().get()}
 
 	@context.groupValue = ${this.value}
 	@context.groupName = ${this.formName}
@@ -49,6 +60,7 @@ prototype(CRON.FormBuilder:CheckBoxGroup) < prototype(CRON.FormBuilder:FormEleme
 
 
 prototype(CRON.FormBuilder:Input) < prototype(CRON.FormBuilder:FormElement) {
+
 }
 
 prototype(CRON.FormBuilder:Option) < prototype(CRON.FormBuilder:FormElement) {
@@ -56,7 +68,6 @@ prototype(CRON.FormBuilder:Option) < prototype(CRON.FormBuilder:FormElement) {
 
 prototype(CRON.FormBuilder:Select) < prototype(CRON.FormBuilder:FormElement) {
 
-	elementsArray = ${q(node).children('elements').children().get()}
 	@context.selectValue = ${this.value}
 	@context.selectMultiple = ${this.multiple}
 
@@ -72,10 +83,18 @@ prototype(CRON.FormBuilder:Select) < prototype(CRON.FormBuilder:FormElement) {
 prototype(CRON.FormBuilder:TextArea) < prototype(CRON.FormBuilder:FormElement) {
 }
 
-prototype(CRON.FormBuilder:Text) < prototype(CRON.FormBuilder:FormElement) {
+prototype(CRON.FormBuilder:FieldSet) < prototype(CRON.FormBuilder:FormElement) {
+
 	attributes.name >
 	attributes.class >
-	text = ${q(node).property('text')}
+
+	elements = TYPO3.Neos:ContentCollection {
+		nodePath = 'elements'
+	}
+}
+
+prototype(CRON.FormBuilder:FileUpload) < prototype(CRON.FormBuilder:FormElement) {
+	allowedMimeTypes = ${Array.join(Configuration.setting('CRON.FormBuilder.Upload.allowedMimeTypes'), ',')}
 }
 
 
@@ -85,22 +104,19 @@ prototype(CRON.FormBuilder:Plugin) < prototype(TYPO3.Neos:Plugin) {
 	action = 'index'
 
 	attributes = TYPO3.TypoScript:RawArray
-	attributes.class = 'form-auto'
 	attributes.role = 'form'
 
-	elementsArray = ${q(node).children('elements').children().get()}
-	
-	elements = TYPO3.Neos:ContentCollection {
-		nodePath = 'elements'
+	elements = ${q(node).children('elements').get(0)}
+
+	responseElements = TYPO3.Neos:ContentCollection {
+		nodePath = 'responseElements'
 	}
 
-	tsPath = 'formElementRenderer'
 	tsPackageKey = 'CRON.FormBuilder'
+
+	hasUploadElement = ${q(node).find('[instanceof CRON.FormBuilder:FileUpload]').count() > 0}
 }
 
-formElementRenderer =  TYPO3.TypoScript:Case {
-	fallback {
-		condition = ${true}
-		type = ${node.nodeData.nodeType}
-	}
+elements = TYPO3.Neos:ContentCollection {
+	nodePath = 'elements'
 }

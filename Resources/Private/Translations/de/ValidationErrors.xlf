@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+	<file original="" product-name="CRON.FormBuilder" source-language="en" datatype="plaintext" target-language="de">
+		<body>
+			<trans-unit id="1221560910" xml:space="preserve" approved="yes">
+				<source>This property is required</source>
+			<target xml:lang="de">Diese Eigenschaft ist erforderlich</target></trans-unit>
+			<trans-unit id="1221560718" xml:space="preserve" approved="yes">
+				<source>This property is required</source>
+			<target xml:lang="de">Diese Eigenschaft ist erforderlich</target></trans-unit>
+			<trans-unit id="1483368544" xml:space="preserve" approved="yes">
+				<source>The media type "{0}" is not allowed for this file</source>
+			<target xml:lang="de">Der Medientyp "{0}" ist für diese Datei nicht zulässig</target></trans-unit>
+			<trans-unit id="1483368545" xml:space="preserve" approved="yes">
+				<source>The size of this file is too big</source>
+			<target xml:lang="de">Die Größe dieser Datei ist nicht zulässig</target></trans-unit>
+		</body>
+	</file>
+</xliff>

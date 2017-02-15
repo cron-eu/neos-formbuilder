@@ -1,7 +1,7 @@
-<f:if condition="{flattenedErrors}">
-	<f:for each="{flattenedErrors}" as="errors">
+<f:if condition="{validationResults.flattenedErrors}">
+	<f:for each="{validationResults.flattenedErrors}" as="errors">
 		<f:for each="{errors}" as="error">
-			<p class="help-block">{error -> f:translate(id: error.code, arguments: error.arguments, package: 'TYPO3.Flow', source: 'ValidationErrors')}</p>
+			<p class="help-block">{error -> f:translate(id: error.code, arguments: error.arguments, package: 'CRON.FormBuilder', source: 'ValidationErrors')}</p>
 		</f:for>
 	</f:for>
 </f:if>

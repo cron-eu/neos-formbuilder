@@ -1,6 +1,8 @@
-<div class="form-group" {f:if(condition: node.properties.required, then: 'required')} {f:if(condition: flattenedErrors, then: 'has-error')}">
+<f:validation.results for="data.{node.identifier}">
 	<div>
-		<f:render section="Content"/>
+		<div>
+			<f:render section="Content"/>
+		</div>
+		<f:render partial="FlattenedErrors" arguments="{_all}" />
 	</div>
-	<f:render partial="FlattenedErrors" arguments="{_all}" />
-</div>
+</f:validation.results>

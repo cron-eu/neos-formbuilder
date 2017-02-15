@@ -20,3 +20,10 @@ CRON:
       useForward: true
     View:
       useRequiredAttribute: true
+    Upload:
+      maxFileSize: 10000000
+      allowedMimeTypes:
+        - 'application/pdf'
+        - 'image/bmp'
+        - 'image/jpeg'
+        - 'image/png'

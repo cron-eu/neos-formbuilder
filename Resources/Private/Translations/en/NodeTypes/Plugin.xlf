@@ -1,109 +1,115 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-	<file original="" product-name="CRON.FormBuilder.NodeTypes.Plugin" source-language="en" datatype="plaintext">
-		<body>
-			<trans-unit id="groups.advanced" xml:space="preserve">
-				<source>Settings</source>
-			</trans-unit>
-			<trans-unit id="groups.options" xml:space="preserve">
-				<source>Options</source>
-			</trans-unit>
-			<trans-unit id="properties.receiver" xml:space="preserve">
-				<source>Receiver-Email(s)</source>
-			</trans-unit>
-			<trans-unit id="properties.subject" xml:space="preserve">
-				<source>Subject</source>
-			</trans-unit>
-			<trans-unit id="properties.submitButtonLabel" xml:space="preserve">
-				<source>Submit-Button-Label</source>
-			</trans-unit>
-			<trans-unit id="ui.label" xml:space="preserve">
-				<source>FormBuilder</source>
-			</trans-unit>
-			<trans-unit id="field.label" xml:space="preserve">
-				<source>Label</source>
-			</trans-unit>
-			<trans-unit id="field.value" xml:space="preserve">
-				<source>Value</source>
-			</trans-unit>
-			<trans-unit id="field.name" xml:space="preserve">
-				<source>Name</source>
-			</trans-unit>
-			<trans-unit id="field.required" xml:space="preserve">
-				<source>Required</source>
-			</trans-unit>
-			<trans-unit id="field.checked" xml:space="preserve">
-				<source>Checked</source>
-			</trans-unit>
-			<trans-unit id="field.placeholder" xml:space="preserve">
-				<source>Placeholder</source>
-			</trans-unit>
-			<trans-unit id="fields.textfield" xml:space="preserve">
-				<source>Textfield</source>
-			</trans-unit>
-			<trans-unit id="fields.textfield.inputtype" xml:space="preserve">
-				<source>Input Type</source>
-			</trans-unit>
-			<trans-unit id="fields.textfield.text" xml:space="preserve">
-				<source>Text</source>
-			</trans-unit>
-			<trans-unit id="fields.textfield.number" xml:space="preserve">
-				<source>Number</source>
-			</trans-unit>
-			<trans-unit id="fields.textfield.password" xml:space="preserve">
-				<source>Password</source>
-			</trans-unit>
-			<trans-unit id="fields.textfield.email" xml:space="preserve">
-				<source>E-Mail</source>
-			</trans-unit>
-			<trans-unit id="fields.textfield.tel" xml:space="preserve">
-				<source>Telephone</source>
-			</trans-unit>
-			<trans-unit id="fields.textfield.url" xml:space="preserve">
-				<source>Url</source>
-			</trans-unit>
-			<trans-unit id="fields.textfield.date" xml:space="preserve">
-				<source>Date</source>
-			</trans-unit>
-			<trans-unit id="fields.textfield.time" xml:space="preserve">
-				<source>Time</source>
-			</trans-unit>
-			<trans-unit id="fields.textarea" xml:space="preserve">
-				<source>Textarea</source>
-			</trans-unit>
-			<trans-unit id="fields.textarea.cols" xml:space="preserve">
-				<source>Cols</source>
-			</trans-unit>
-			<trans-unit id="fields.textarea.rows" xml:space="preserve">
-				<source>Rows</source>
-			</trans-unit>
-			<trans-unit id="fields.submit.caption" xml:space="preserve">
-				<source>Caption</source>
-			</trans-unit>
-			<trans-unit id="fields.select" xml:space="preserve">
-				<source>Selectbox</source>
-			</trans-unit>
-			<trans-unit id="fields.select.multiple" xml:space="preserve">
-				<source>Multiple Selection</source>
-			</trans-unit>
-			<trans-unit id="fields.select.options" xml:space="preserve">
-				<source>Option</source>
-			</trans-unit>
-			<trans-unit id="fields.select.options.text" xml:space="preserve">
-				<source>Text displayed</source>
-			</trans-unit>
-			<trans-unit id="fields.select.options.selected" xml:space="preserve">
-				<source>Selected</source>
-			</trans-unit>
-			<trans-unit id="fields.checkbox" xml:space="preserve">
-				<source>Checkbox</source>
-			</trans-unit>
-			<trans-unit id="fields.checkbox.group" xml:space="preserve">
-				<source>Checkbox-Group</source>
-			</trans-unit>
-			<trans-unit id="fields.checkbox.checked" xml:space="preserve">
-				<source>Checked</source>
-			</trans-unit>
-		</body>
-	</file>
+  <file original="" product-name="CRON.FormBuilder.NodeTypes.Plugin" source-language="en" datatype="plaintext">
+    <body>
+      <trans-unit id="groups.advanced" xml:space="preserve">
+        <source>Settings</source>
+      </trans-unit>
+      <trans-unit id="groups.options" xml:space="preserve">
+        <source>Options</source>
+      </trans-unit>
+      <trans-unit id="properties.receiver" xml:space="preserve">
+        <source>Receiver-Email(s)</source>
+      </trans-unit>
+      <trans-unit id="properties.subject" xml:space="preserve">
+        <source>Subject</source>
+      </trans-unit>
+      <trans-unit id="properties.submitButtonLabel" xml:space="preserve">
+        <source>Submit-Button-Label</source>
+      </trans-unit>
+      <trans-unit id="ui.label" xml:space="preserve">
+        <source>FormBuilder</source>
+      </trans-unit>
+      <trans-unit id="field.label" xml:space="preserve">
+        <source>Label</source>
+      </trans-unit>
+      <trans-unit id="field.value" xml:space="preserve">
+        <source>Value</source>
+      </trans-unit>
+      <trans-unit id="field.name" xml:space="preserve">
+        <source>Name</source>
+      </trans-unit>
+      <trans-unit id="field.required" xml:space="preserve">
+        <source>Required</source>
+      </trans-unit>
+      <trans-unit id="field.checked" xml:space="preserve">
+        <source>Checked</source>
+      </trans-unit>
+      <trans-unit id="field.placeholder" xml:space="preserve">
+        <source>Placeholder</source>
+      </trans-unit>
+      <trans-unit id="fields.textfield" xml:space="preserve">
+        <source>Textfield</source>
+      </trans-unit>
+      <trans-unit id="fields.textfield.inputtype" xml:space="preserve">
+        <source>Input Type</source>
+      </trans-unit>
+      <trans-unit id="fields.textfield.text" xml:space="preserve">
+        <source>Text</source>
+      </trans-unit>
+      <trans-unit id="fields.textfield.number" xml:space="preserve">
+        <source>Number</source>
+      </trans-unit>
+      <trans-unit id="fields.textfield.password" xml:space="preserve">
+        <source>Password</source>
+      </trans-unit>
+      <trans-unit id="fields.textfield.email" xml:space="preserve">
+        <source>E-Mail</source>
+      </trans-unit>
+      <trans-unit id="fields.textfield.tel" xml:space="preserve">
+        <source>Telephone</source>
+      </trans-unit>
+      <trans-unit id="fields.textfield.url" xml:space="preserve">
+        <source>Url</source>
+      </trans-unit>
+      <trans-unit id="fields.textfield.date" xml:space="preserve">
+        <source>Date</source>
+      </trans-unit>
+      <trans-unit id="fields.textfield.time" xml:space="preserve">
+        <source>Time</source>
+      </trans-unit>
+      <trans-unit id="fields.textarea" xml:space="preserve">
+        <source>Textarea</source>
+      </trans-unit>
+      <trans-unit id="fields.textarea.cols" xml:space="preserve">
+        <source>Cols</source>
+      </trans-unit>
+      <trans-unit id="fields.textarea.rows" xml:space="preserve">
+        <source>Rows</source>
+      </trans-unit>
+      <trans-unit id="fields.submit.caption" xml:space="preserve">
+        <source>Caption</source>
+      </trans-unit>
+      <trans-unit id="fields.select" xml:space="preserve">
+        <source>Selectbox</source>
+      </trans-unit>
+      <trans-unit id="fields.select.multiple" xml:space="preserve">
+        <source>Multiple Selection</source>
+      </trans-unit>
+      <trans-unit id="fields.select.options" xml:space="preserve">
+        <source>Option</source>
+      </trans-unit>
+      <trans-unit id="fields.select.options.text" xml:space="preserve">
+        <source>Text displayed</source>
+      </trans-unit>
+      <trans-unit id="fields.select.options.selected" xml:space="preserve">
+        <source>Selected</source>
+      </trans-unit>
+      <trans-unit id="fields.checkbox" xml:space="preserve">
+        <source>Checkbox</source>
+      </trans-unit>
+      <trans-unit id="fields.checkbox.group" xml:space="preserve">
+        <source>Checkbox-Group</source>
+      </trans-unit>
+      <trans-unit id="fields.checkbox.checked" xml:space="preserve">
+        <source>Checked</source>
+      </trans-unit>
+      <trans-unit id="fields.fieldset" xml:space="preserve">
+        <source>Fieldset</source>
+      </trans-unit>
+      <trans-unit id="fields.fileupload" xml:space="preserve">
+        <source>File-Upload</source>
+      </trans-unit>
+    </body>
+  </file>
 </xliff>
