@@ -1,29 +1,14 @@
 {namespace neos=TYPO3\Neos\ViewHelpers}
-{namespace fb=CRON\FormBuilder\ViewHelpers}
 {namespace ts=TYPO3\TypoScript\ViewHelpers}
 
 <f:layout name="Default" />
 <f:section name="Content">
 	<f:form action="submit" method="post" additionalAttributes="{attributes}" section="{node.identifier}" id="{node.identifier}" enctype="{enctype}">
 		<f:if condition="{neos:rendering.inBackend(node: documentNode)}">
-			<f:then>
-				<f:if condition="{f:count(subject: elementsArray)}">
-					<f:else>
-						<strong><f:translate id="formBuilder.index.backend.addFormElements" package="CRON.FormBuilder" /></strong>
-					</f:else>
-				</f:if>
-				{elements -> f:format.raw()}
-			</f:then>
-			<f:else>
-				<f:for each="{elementsArray}" as="element">
-					<f:validation.results for="data.{element.identifier}">
-						<ts:render path="{tsPath}"  typoScriptPackageKey="{tsPackageKey}" context="{node: element, flattenedErrors: validationResults.flattenedErrors, tsPath: tsPath, tsPackageKey: tsPackageKey}"/>
-					</f:validation.results>
-				</f:for>
-				<fb:registerNode node="{node}"/>
-				<f:form.hidden name="__formId" value="{node.identifier}"></f:form.hidden>
-			</f:else>
+			<strong><f:translate id="formBuilder.index.backend.addFormElements" package="CRON.FormBuilder" /></strong>
 		</f:if>
+		<ts:render path="elements" typoScriptPackageKey="{tsPackageKey}" context="{node: elements}"/>
+		<f:form.hidden name="__formId" value="{node.identifier}"></f:form.hidden>
 		<button type="submit" class="btn btn-default">{submitButtonLabel}</button>
 	</f:form>
 	<f:if condition="{neos:rendering.inBackend(node: documentNode)}">
