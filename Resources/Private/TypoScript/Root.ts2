@@ -7,7 +7,7 @@ prototype(CRON.FormBuilder:FormElement) < prototype(TYPO3.Neos:Content) {
 	layoutName = 'Wrapper'
 
 	layoutAttributes = TYPO3.TypoScript:Attributes
-	layoutAttributes.class = ''
+	layoutAttributes.class = ${'form-group' + (q(node).property('required') ? ' required' : '')}
 	layoutAttributes.class.@process.nodeType = TYPO3.TypoScript:Case {
 		@context.nodeTypeClassName = ${String.toLowerCase(String.pregReplace(q(node).property('_nodeType.name'), '/[[:^alnum:]]/', '-')) + '-layout'}
 
@@ -52,6 +52,7 @@ prototype(CRON.FormBuilder:CheckBoxGroup) < prototype(CRON.FormBuilder:FormEleme
 		nodePath = 'elements'
 
 		prototype(CRON.FormBuilder:CheckBox) {
+			layoutAttributes.class = ''
 			attributes.name = ${groupName}
 			checked = ${groupValue ? Array.indexOf(groupValue, q(node).property('value')) > -1 : q(node).property('checked')}
 		}
