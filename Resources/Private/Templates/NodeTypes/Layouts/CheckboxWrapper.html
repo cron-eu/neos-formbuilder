@@ -1,8 +1,6 @@
-<f:validation.results for="data.{node.identifier}">
-	<div>
-		<div>
-			<f:render section="Content"/>
-		</div>
+<div {layoutAttributes -> f:format.raw()}>
+	<f:validation.results for="data.{node.identifier}">
+		<f:render section="Content"/>
 		<f:render partial="FlattenedErrors" arguments="{_all}" />
-	</div>
-</f:validation.results>
+	</f:validation.results>
+</div>
