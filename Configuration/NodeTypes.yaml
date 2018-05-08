@@ -48,8 +48,8 @@
       type: 'TYPO3.Neos:ContentCollection'
       constraints:
         nodeTypes:
-          'TYPO3.Neos.NodeTypes:Headline': true
-          'TYPO3.Neos.NodeTypes:Text': true
+          'Neos.NodeTypes:Headline': true
+          'Neos.NodeTypes:Text': true
           '*': false
 
 
