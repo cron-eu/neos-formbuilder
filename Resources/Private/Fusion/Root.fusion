@@ -1,5 +1,5 @@
-include: resource://Neos.Fusion/Private/TypoScript/*
-include: resource://Neos.Neos/Private/TypoScript/*
+include: resource://Neos.Fusion/Private/Fusion/*
+include: resource://Neos.Neos/Private/Fusion/*
 
 prototype(CRON.FormBuilder:FormElement) < prototype(Neos.Neos:Content) {
 	templatePath = ${'resource://CRON.FormBuilder/Private/Templates/NodeTypes/' + String.replace(node.nodeData.nodeType, 'CRON.FormBuilder:', '') + '.html'}
