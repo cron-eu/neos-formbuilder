@@ -20,11 +20,11 @@ CRON:
         - image/png
 Neos:
   Neos:
-    typoScript:
-      autoInclude:
-        CRON.FormBuilder: true
     userInterface:
       translation:
         autoInclude:
           CRON.FormBuilder:
             - 'NodeTypes/*'
+    fusion:
+      autoInclude:
+        CRON.FormBuilder: true
