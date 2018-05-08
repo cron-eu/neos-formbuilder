@@ -2,7 +2,7 @@
 namespace CRON\FormBuilder\Service;
 
 use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Annotations as Flow;
 
 /**
  * Validator for not empty values.
