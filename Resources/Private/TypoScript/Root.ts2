@@ -1,4 +1,4 @@
-include: resource://TYPO3.TypoScript/Private/TypoScript/*
+include: resource://Neos.Fusion/Private/TypoScript/*
 include: resource://TYPO3.Neos/Private/TypoScript/*
 
 prototype(CRON.FormBuilder:FormElement) < prototype(TYPO3.Neos:Content) {
@@ -6,9 +6,9 @@ prototype(CRON.FormBuilder:FormElement) < prototype(TYPO3.Neos:Content) {
 
 	layoutName = 'Wrapper'
 
-	layoutAttributes = TYPO3.TypoScript:Attributes
+	layoutAttributes = Neos.Fusion:Attributes
 	layoutAttributes.class = ${'form-group' + (q(node).property('required') ? ' required' : '')}
-	layoutAttributes.class.@process.nodeType = TYPO3.TypoScript:Case {
+	layoutAttributes.class.@process.nodeType = Neos.Fusion:Case {
 		@context.nodeTypeClassName = ${String.toLowerCase(String.pregReplace(q(node).property('_nodeType.name'), '/[[:^alnum:]]/', '-')) + '-layout'}
 
 		classIsString {
@@ -104,7 +104,7 @@ prototype(CRON.FormBuilder:Plugin) < prototype(TYPO3.Neos:Plugin) {
 	controller = 'FormBuilder'
 	action = 'index'
 
-	attributes = TYPO3.TypoScript:RawArray
+	attributes = Neos.Fusion:RawArray
 	attributes.role = 'form'
 
 	elements = ${q(node).children('elements').get(0)}
