@@ -1,7 +1,7 @@
 include: resource://Neos.Fusion/Private/TypoScript/*
-include: resource://TYPO3.Neos/Private/TypoScript/*
+include: resource://Neos.Neos/Private/TypoScript/*
 
-prototype(CRON.FormBuilder:FormElement) < prototype(TYPO3.Neos:Content) {
+prototype(CRON.FormBuilder:FormElement) < prototype(Neos.Neos:Content) {
 	templatePath = ${'resource://CRON.FormBuilder/Private/Templates/NodeTypes/' + String.replace(node.nodeData.nodeType, 'CRON.FormBuilder:', '') + '.html'}
 
 	layoutName = 'Wrapper'
@@ -48,7 +48,7 @@ prototype(CRON.FormBuilder:CheckBoxGroup) < prototype(CRON.FormBuilder:FormEleme
 	attributes.name >
 	attributes.class >
 
-	elements = TYPO3.Neos:ContentCollection {
+	elements = Neos.Neos:ContentCollection {
 		nodePath = 'elements'
 
 		prototype(CRON.FormBuilder:CheckBox) {
@@ -72,7 +72,7 @@ prototype(CRON.FormBuilder:Select) < prototype(CRON.FormBuilder:FormElement) {
 	@context.selectValue = ${this.value}
 	@context.selectMultiple = ${this.multiple}
 
-	elements = TYPO3.Neos:ContentCollection {
+	elements = Neos.Neos:ContentCollection {
 		nodePath = 'elements'
 
 		prototype(CRON.FormBuilder:Option) {
@@ -89,7 +89,7 @@ prototype(CRON.FormBuilder:FieldSet) < prototype(CRON.FormBuilder:FormElement) {
 	attributes.name >
 	attributes.class >
 
-	elements = TYPO3.Neos:ContentCollection {
+	elements = Neos.Neos:ContentCollection {
 		nodePath = 'elements'
 	}
 }
@@ -99,7 +99,7 @@ prototype(CRON.FormBuilder:FileUpload) < prototype(CRON.FormBuilder:FormElement)
 }
 
 
-prototype(CRON.FormBuilder:Plugin) < prototype(TYPO3.Neos:Plugin) {
+prototype(CRON.FormBuilder:Plugin) < prototype(Neos.Neos:Plugin) {
 	package = 'CRON.FormBuilder'
 	controller = 'FormBuilder'
 	action = 'index'
@@ -109,7 +109,7 @@ prototype(CRON.FormBuilder:Plugin) < prototype(TYPO3.Neos:Plugin) {
 
 	elements = ${q(node).children('elements').get(0)}
 
-	responseElements = TYPO3.Neos:ContentCollection {
+	responseElements = Neos.Neos:ContentCollection {
 		nodePath = 'responseElements'
 	}
 
@@ -118,6 +118,6 @@ prototype(CRON.FormBuilder:Plugin) < prototype(TYPO3.Neos:Plugin) {
 	hasUploadElement = ${q(node).find('[instanceof CRON.FormBuilder:FileUpload]').count() > 0}
 }
 
-elements = TYPO3.Neos:ContentCollection {
+elements = Neos.Neos:ContentCollection {
 	nodePath = 'elements'
 }
