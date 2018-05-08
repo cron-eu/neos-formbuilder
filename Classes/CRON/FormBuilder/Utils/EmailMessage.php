@@ -13,7 +13,7 @@ class EmailMessage
 
     /**
      * @Flow\Inject
-     * @var \TYPO3\Fluid\View\StandaloneView
+     * @var \Neos\FluidAdaptor\View\StandaloneView
      */
     public $fluidView;
 
