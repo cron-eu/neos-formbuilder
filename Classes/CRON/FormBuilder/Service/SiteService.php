@@ -20,7 +20,7 @@ class SiteService
 
     /**
      * @Flow\Inject
-     * @var \TYPO3\Neos\Domain\Repository\SiteRepository
+     * @var \Neos\Neos\Domain\Repository\SiteRepository
      */
     protected $siteRepository;
 
@@ -49,7 +49,7 @@ class SiteService
      * @param bool $showInvisibleAndInaccessibleContent
      *
      * @throws \Exception
-     * @return \TYPO3\Neos\Domain\Service\ContentContext
+     * @return \Neos\Neos\Domain\Service\ContentContext
      */
     public function createContext($workspace = 'live', $showInvisibleAndInaccessibleContent = true)
     {

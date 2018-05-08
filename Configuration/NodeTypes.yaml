@@ -1,6 +1,6 @@
 'CRON.FormBuilder:Plugin':
   superTypes:
-    'TYPO3.Neos:Plugin': true
+    'Neos.Neos:Plugin': true
     'CRON.FormBuilder:FormElementContainerMixin': true
   ui:
     label: i18n
@@ -19,7 +19,7 @@
         inspector:
           group: advanced
       validation:
-        'TYPO3.Neos/Validation/NotEmptyValidator': []
+        'Neos.Neos/Validation/NotEmptyValidator': []
     subject:
       type: string
       ui:
@@ -28,7 +28,7 @@
         inspector:
           group: advanced
       validation:
-        'TYPO3.Neos/Validation/NotEmptyValidator': []
+        'Neos.Neos/Validation/NotEmptyValidator': []
     submitButtonLabel:
       type: string
       defaultValue: Absenden
@@ -38,14 +38,14 @@
         inspector:
           group: advanced
       validation:
-        'TYPO3.Neos/Validation/NotEmptyValidator': []
+        'Neos.Neos/Validation/NotEmptyValidator': []
   childNodes:
     elements:
       constraints:
         nodeTypes:
           'CRON.FormBuilder:FieldSet': true
     responseElements:
-      type: 'TYPO3.Neos:ContentCollection'
+      type: 'Neos.Neos:ContentCollection'
       constraints:
         nodeTypes:
           'Neos.NodeTypes:Headline': true
@@ -55,7 +55,7 @@
 
 'CRON.FormBuilder:FieldSet':
   superTypes:
-    'TYPO3.Neos:Content': true
+    'Neos.Neos:Content': true
     'CRON.FormBuilder:FormElementContainerMixin': true
     'CRON.FormBuilder:FormElementLabelMixin': true
   ui:
@@ -68,7 +68,7 @@
   abstract: true
   childNodes:
     elements:
-      type: 'TYPO3.Neos:ContentCollection'
+      type: 'Neos.Neos:ContentCollection'
       constraints:
         nodeTypes:
           'CRON.FormBuilder:Input': true
@@ -81,7 +81,7 @@
 
 'CRON.FormBuilder:FormElementLabelMixin':
   superTypes:
-    'TYPO3.Neos:Content': true
+    'Neos.Neos:Content': true
   abstract: true
   ui:
     icon: 'icon-edit-sign'
@@ -99,7 +99,7 @@
         inspector:
           group: options
       validation:
-        'TYPO3.Neos/Validation/NotEmptyValidator': []
+        'Neos.Neos/Validation/NotEmptyValidator': []
 
 'CRON.FormBuilder:FormElementRequiredMixin':
   abstract: true
@@ -178,7 +178,7 @@
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.select
   childNodes:
     elements:
-      type: 'TYPO3.Neos:ContentCollection'
+      type: 'Neos.Neos:ContentCollection'
       constraints:
         nodeTypes:
           'CRON.FormBuilder:Option': true
@@ -195,7 +195,7 @@
 
 'CRON.FormBuilder:Option':
   superTypes:
-    'TYPO3.Neos:Content': true
+    'Neos.Neos:Content': true
     'CRON.FormBuilder:FormElementValueMixin': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.select.options
@@ -228,7 +228,7 @@
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.checkbox.group
   childNodes:
     elements:
-      type: 'TYPO3.Neos:ContentCollection'
+      type: 'Neos.Neos:ContentCollection'
       constraints:
         nodeTypes:
           'CRON.FormBuilder:CheckBox': true
