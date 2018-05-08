@@ -5,7 +5,7 @@ use Neos\Flow\Annotations as Flow;
 use CRON\FormBuilder\Service\SiteService;
 use Neos\Error\Messages\Error;
 use Neos\Flow\Validation\Validator\CollectionValidator;
-use TYPO3\TYPO3CR\Domain\Repository\NodeDataRepository;
+use Neos\ContentRepository\Domain\Repository\NodeDataRepository;
 
 class FormBuilderValidator extends CollectionValidator
 {

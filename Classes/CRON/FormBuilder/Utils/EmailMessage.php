@@ -3,7 +3,7 @@ namespace CRON\FormBuilder\Utils;
 
 use Neos\Flow\Annotations as Flow;
 use TYPO3\SwiftMailer\Message;
-use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
+use Neos\ContentRepository\Domain\Model\NodeInterface;
 
 /**
  * @property string viewName

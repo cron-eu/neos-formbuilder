@@ -1,7 +1,7 @@
 <?php
 namespace CRON\FormBuilder\Service;
 
-use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
+use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\Flow\Annotations as Flow;
 
 /**
@@ -14,7 +14,7 @@ class SiteService
 
     /**
      * @Flow\Inject
-     * @var \TYPO3\TYPO3CR\Domain\Service\ContextFactoryInterface
+     * @var \Neos\ContentRepository\Domain\Service\ContextFactoryInterface
      */
     protected $contextFactory;
 
@@ -32,7 +32,7 @@ class SiteService
     /**
      * Get the root site node
      *
-     * @return \TYPO3\TYPO3CR\Domain\Model\NodeInterface
+     * @return \Neos\ContentRepository\Domain\Model\NodeInterface
      */
     public function getSiteNode()
     {
