@@ -1,13 +1,4 @@
-TYPO3:
-  Neos:
-    typoScript:
-      autoInclude:
-        'CRON.FormBuilder': TRUE
 
-    userInterface:
-      translation:
-        autoInclude:
-          'CRON.FormBuilder': ['NodeTypes/*']
 CRON:
   FormBuilder:
     Email:
@@ -15,7 +6,7 @@ CRON:
       templatePathAndFilenameFormat: 'resource://CRON.FormBuilder/Private/Templates/Email/%s.txt'
       defaults:
         from: dev@cron.eu
-        subject: New Message from FormBuilder
+        subject: 'New Message from FormBuilder'
     Controller:
       useForward: true
     View:
@@ -23,7 +14,17 @@ CRON:
     Upload:
       maxFileSize: 10000000
       allowedMimeTypes:
-        - 'application/pdf'
-        - 'image/bmp'
-        - 'image/jpeg'
-        - 'image/png'
+        - application/pdf
+        - image/bmp
+        - image/jpeg
+        - image/png
+Neos:
+  Neos:
+    userInterface:
+      translation:
+        autoInclude:
+          CRON.FormBuilder:
+            - 'NodeTypes/*'
+    fusion:
+      autoInclude:
+        CRON.FormBuilder: true

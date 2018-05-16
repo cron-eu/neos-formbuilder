@@ -1,9 +1,9 @@
 <?php
 namespace CRON\FormBuilder\Utils;
 
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\SwiftMailer\Message;
-use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
+use Neos\Flow\Annotations as Flow;
+use Neos\SwiftMailer\Message;
+use Neos\ContentRepository\Domain\Model\NodeInterface;
 
 /**
  * @property string viewName
@@ -13,7 +13,7 @@ class EmailMessage
 
     /**
      * @Flow\Inject
-     * @var \TYPO3\Fluid\View\StandaloneView
+     * @var \Neos\FluidAdaptor\View\StandaloneView
      */
     public $fluidView;
 

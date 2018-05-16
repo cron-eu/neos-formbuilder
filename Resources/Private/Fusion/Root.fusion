@@ -1,14 +1,14 @@
-include: resource://TYPO3.TypoScript/Private/TypoScript/*
-include: resource://TYPO3.Neos/Private/TypoScript/*
+include: resource://Neos.Fusion/Private/Fusion/*
+include: resource://Neos.Neos/Private/Fusion/*
 
-prototype(CRON.FormBuilder:FormElement) < prototype(TYPO3.Neos:Content) {
+prototype(CRON.FormBuilder:FormElement) < prototype(Neos.Neos:Content) {
 	templatePath = ${'resource://CRON.FormBuilder/Private/Templates/NodeTypes/' + String.replace(node.nodeData.nodeType, 'CRON.FormBuilder:', '') + '.html'}
 
 	layoutName = 'Wrapper'
 
-	layoutAttributes = TYPO3.TypoScript:Attributes
+	layoutAttributes = Neos.Fusion:Attributes
 	layoutAttributes.class = ${'form-group' + (q(node).property('required') ? ' required' : '')}
-	layoutAttributes.class.@process.nodeType = TYPO3.TypoScript:Case {
+	layoutAttributes.class.@process.nodeType = Neos.Fusion:Case {
 		@context.nodeTypeClassName = ${String.toLowerCase(String.pregReplace(q(node).property('_nodeType.name'), '/[[:^alnum:]]/', '-')) + '-layout'}
 
 		classIsString {
@@ -48,7 +48,7 @@ prototype(CRON.FormBuilder:CheckBoxGroup) < prototype(CRON.FormBuilder:FormEleme
 	attributes.name >
 	attributes.class >
 
-	elements = TYPO3.Neos:ContentCollection {
+	elements = Neos.Neos:ContentCollection {
 		nodePath = 'elements'
 
 		prototype(CRON.FormBuilder:CheckBox) {
@@ -72,7 +72,7 @@ prototype(CRON.FormBuilder:Select) < prototype(CRON.FormBuilder:FormElement) {
 	@context.selectValue = ${this.value}
 	@context.selectMultiple = ${this.multiple}
 
-	elements = TYPO3.Neos:ContentCollection {
+	elements = Neos.Neos:ContentCollection {
 		nodePath = 'elements'
 
 		prototype(CRON.FormBuilder:Option) {
@@ -89,7 +89,7 @@ prototype(CRON.FormBuilder:FieldSet) < prototype(CRON.FormBuilder:FormElement) {
 	attributes.name >
 	attributes.class >
 
-	elements = TYPO3.Neos:ContentCollection {
+	elements = Neos.Neos:ContentCollection {
 		nodePath = 'elements'
 	}
 }
@@ -99,17 +99,17 @@ prototype(CRON.FormBuilder:FileUpload) < prototype(CRON.FormBuilder:FormElement)
 }
 
 
-prototype(CRON.FormBuilder:Plugin) < prototype(TYPO3.Neos:Plugin) {
+prototype(CRON.FormBuilder:Plugin) < prototype(Neos.Neos:Plugin) {
 	package = 'CRON.FormBuilder'
 	controller = 'FormBuilder'
 	action = 'index'
 
-	attributes = TYPO3.TypoScript:RawArray
+	attributes = Neos.Fusion:RawArray
 	attributes.role = 'form'
 
 	elements = ${q(node).children('elements').get(0)}
 
-	responseElements = TYPO3.Neos:ContentCollection {
+	responseElements = Neos.Neos:ContentCollection {
 		nodePath = 'responseElements'
 	}
 
@@ -118,6 +118,6 @@ prototype(CRON.FormBuilder:Plugin) < prototype(TYPO3.Neos:Plugin) {
 	hasUploadElement = ${q(node).find('[instanceof CRON.FormBuilder:FileUpload]').count() > 0}
 }
 
-elements = TYPO3.Neos:ContentCollection {
+elements = Neos.Neos:ContentCollection {
 	nodePath = 'elements'
 }
