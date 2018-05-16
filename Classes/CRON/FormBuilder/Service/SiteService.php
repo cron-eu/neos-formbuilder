@@ -1,8 +1,8 @@
 <?php
 namespace CRON\FormBuilder\Service;
 
-use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
-use TYPO3\Flow\Annotations as Flow;
+use Neos\ContentRepository\Domain\Model\NodeInterface;
+use Neos\Flow\Annotations as Flow;
 
 /**
  * Validator for not empty values.
@@ -14,13 +14,13 @@ class SiteService
 
     /**
      * @Flow\Inject
-     * @var \TYPO3\TYPO3CR\Domain\Service\ContextFactoryInterface
+     * @var \Neos\ContentRepository\Domain\Service\ContextFactoryInterface
      */
     protected $contextFactory;
 
     /**
      * @Flow\Inject
-     * @var \TYPO3\Neos\Domain\Repository\SiteRepository
+     * @var \Neos\Neos\Domain\Repository\SiteRepository
      */
     protected $siteRepository;
 
@@ -32,7 +32,7 @@ class SiteService
     /**
      * Get the root site node
      *
-     * @return \TYPO3\TYPO3CR\Domain\Model\NodeInterface
+     * @return \Neos\ContentRepository\Domain\Model\NodeInterface
      */
     public function getSiteNode()
     {
@@ -49,7 +49,7 @@ class SiteService
      * @param bool $showInvisibleAndInaccessibleContent
      *
      * @throws \Exception
-     * @return \TYPO3\Neos\Domain\Service\ContentContext
+     * @return \Neos\Neos\Domain\Service\ContentContext
      */
     public function createContext($workspace = 'live', $showInvisibleAndInaccessibleContent = true)
     {

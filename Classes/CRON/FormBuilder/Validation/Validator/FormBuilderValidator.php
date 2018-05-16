@@ -1,11 +1,11 @@
 <?php
 namespace CRON\FormBuilder\Validation\Validator;
 
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Annotations as Flow;
 use CRON\FormBuilder\Service\SiteService;
-use TYPO3\Flow\Error\Error;
-use TYPO3\Flow\Validation\Validator\CollectionValidator;
-use TYPO3\TYPO3CR\Domain\Repository\NodeDataRepository;
+use Neos\Error\Messages\Error;
+use Neos\Flow\Validation\Validator\CollectionValidator;
+use Neos\ContentRepository\Domain\Repository\NodeDataRepository;
 
 class FormBuilderValidator extends CollectionValidator
 {
