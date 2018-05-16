@@ -3,7 +3,7 @@
     "type": "neos-package",
     "description": "Component to build and populate forms in the backend",
     "require": {
-        "neos/neos": "*",
+        "neos/neos": "~3.3.0",
         "neos/swiftmailer": "~6.0.0",
         "neos/nodetypes": "~3.0"
     },
