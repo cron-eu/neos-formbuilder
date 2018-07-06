@@ -98,6 +98,15 @@
       <trans-unit id="fields.checkbox" xml:space="preserve">
         <source>Checkbox</source>
       </trans-unit>
+      <trans-unit id="fields.checkbox.enhanced" xml:space="preserve">
+        <source>Enhanced-Checkbox</source>
+      </trans-unit>
+      <trans-unit id="fields.checkbox.enhanced.text" xml:space="preserve">
+        <source>Enter text here ...</source>
+      </trans-unit>
+      <trans-unit id="fields.checkbox.enhanced.text.dsgvo" xml:space="preserve">
+        <source>DSGVO-Text</source>
+      </trans-unit>
       <trans-unit id="fields.checkbox.group" xml:space="preserve">
         <source>Checkbox-Group</source>
       </trans-unit>

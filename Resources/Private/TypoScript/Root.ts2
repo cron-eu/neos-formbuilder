@@ -59,7 +59,13 @@ prototype(CRON.FormBuilder:CheckBoxGroup) < prototype(CRON.FormBuilder:FormEleme
 	}
 }
 
-
+prototype(CRON.FormBuilder:CheckBoxEnhanced) < prototype(CRON.FormBuilder:FormElement) {
+	layoutName = 'CheckboxWrapper'
+	attributes.class = ''
+	checked = ${this.value || q(node).property('checked')}
+	text = ${q(node).property('text')}
+	mainText = ${q(node).property('mainText')}
+}
 prototype(CRON.FormBuilder:Input) < prototype(CRON.FormBuilder:FormElement) {
 
 }
