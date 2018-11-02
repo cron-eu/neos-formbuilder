@@ -83,10 +83,11 @@ class EmailMessage
         // set the subject only if not already set
         if (!$this->mail->getSubject()) {
 
-            // render the subject from template, if available
-            if ($subject = $this->fluidView->renderSection('Subject', null, true)) {
+            try {
+                // render the subject from template, if available
+                $subject = $this->fluidView->renderSection('Subject');
                 $this->mail->setSubject($subject);
-            } else {
+            } catch (\Exception $e) {
                 // else use the default subject from settings
                 $this->mail->setSubject($this->conf['defaults']['subject']);
             }
