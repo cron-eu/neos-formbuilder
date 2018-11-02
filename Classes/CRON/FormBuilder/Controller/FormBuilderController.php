@@ -36,15 +36,19 @@ class FormBuilderController extends ActionController
 
     /**
      * @return void
+     * @throws \Neos\ContentRepository\Exception\NodeException
      */
     public function indexAction()
     {
+        /** @var NodeInterface $node */
+        $node = $this->request->getInternalArgument('__node');
+
         $this->view->assign('attributes', $this->request->getInternalArgument('__attributes'));
         $this->view->assign('elements', $this->request->getInternalArgument('__elements'));
         $this->view->assign('responseElements', $this->request->getInternalArgument('__responseElements'));
         $this->view->assign('documentNode', $this->request->getInternalArgument('__documentNode'));
-        $this->view->assign('node', $this->request->getInternalArgument('__node'));
-        $this->view->assign('submitButtonLabel', $this->request->getInternalArgument('__submitButtonLabel'));
+        $this->view->assign('node', $node);
+        $this->view->assign('submitButtonLabel', $node->getProperty('submitButtonLabel'));
         $this->view->assign('tsPackageKey', $this->request->getInternalArgument('__tsPackageKey'));
         $this->view->assign('enctype',
             $this->request->getInternalArgument('__hasUploadElement') ? 'multipart/form-data' : null);
@@ -183,11 +187,14 @@ class FormBuilderController extends ActionController
      * @param array $fields
      * @param array $files
      * @return void
+     * @throws \Neos\ContentRepository\Exception\NodeException
      */
     protected function sendMail($fields, $files)
     {
 
-        $receiver = explode(',', $this->request->getInternalArgument('__receiver'));
+        /** @var NodeInterface $node */
+        $node = $this->request->getInternalArgument('__node');
+        $receiver = explode(',', $node->getProperty('receiver'));
 
         $emailMessage = new EmailMessage('Form');
 
