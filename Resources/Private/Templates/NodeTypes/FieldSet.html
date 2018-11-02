@@ -2,9 +2,7 @@
 {namespace ts=Neos\Fusion\ViewHelpers}
 <f:section name="Content">
 	<fieldset {attributes -> f:format.raw()}>
-		<f:if condition="{node.properties.label}">
-			<legend>{node.properties.label}</legend>
-		</f:if>
+
 		<f:if condition="{neos:rendering.inBackend()}">
 			<strong><f:translate id="formBuilder.index.backend.addFormElements" package="CRON.FormBuilder" /></strong>
 		</f:if>
