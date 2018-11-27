@@ -5,16 +5,20 @@
         <f:if condition="{neos:rendering.inBackend()}">
             <f:then>
                 <f:if condition="{mainText}">
-                    {mainText -> f:format.raw()}
-                </f:if><br/><br/>
+                    <div>
+                        {mainText -> f:format.raw()}
+                    </div>
+                </f:if>
                 <label>
                     <input {attributes -> f:format.raw()} type="checkbox" onclick="return false;"/> {neos:contentElement.editable(property: 'text', tag: 'p')}
                 </label>
             </f:then>
             <f:else>
                 <f:if condition="{mainText}">
-                    {mainText -> f:format.raw()}
-                </f:if><br/><br/>
+                    <div>
+                        {mainText -> f:format.raw()}
+                    </div>
+                </f:if>
                 <label>
                     <input {attributes -> f:format.raw()} type="hidden" value="">
                     <input {attributes -> f:format.raw()} type="checkbox" value="{node.properties.value}" {f:if(condition: checked, then: 'checked')}/> {text -> f:format.raw()}
