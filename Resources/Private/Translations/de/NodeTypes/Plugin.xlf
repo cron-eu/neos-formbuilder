@@ -138,9 +138,9 @@
         <source>Enter text here ...</source>
         <target xml:lang="de" state="translated">Text hier eingeben ...</target>
       </trans-unit>
-      <trans-unit id="fields.checkbox.enhanced.text.dsgvo" xml:space="preserve">
-        <source>DSGVO-Text</source>
-        <target xml:lang="de" state="translated">DSGVO-Text</target>
+      <trans-unit id="fields.checkbox.enhanced.mainText" xml:space="preserve">
+        <source>Main-Text</source>
+        <target xml:lang="de" state="translated">Haupt-Text</target>
       </trans-unit>
       <trans-unit id="fields.checkbox.group" xml:space="preserve">
         <source>Checkbox-Group</source>

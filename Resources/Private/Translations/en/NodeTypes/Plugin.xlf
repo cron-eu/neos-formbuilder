@@ -104,8 +104,8 @@
       <trans-unit id="fields.checkbox.enhanced.text" xml:space="preserve">
         <source>Enter text here ...</source>
       </trans-unit>
-      <trans-unit id="fields.checkbox.enhanced.text.dsgvo" xml:space="preserve">
-        <source>DSGVO-Text</source>
+      <trans-unit id="fields.checkbox.enhanced.mainText" xml:space="preserve">
+        <source>Main-Text</source>
       </trans-unit>
       <trans-unit id="fields.checkbox.group" xml:space="preserve">
         <source>Checkbox-Group</source>
