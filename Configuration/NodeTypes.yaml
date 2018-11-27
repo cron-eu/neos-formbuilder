@@ -278,7 +278,7 @@
     mainText:
       type: string
       ui:
-        label: CRON.FormBuilder:NodeTypes.Plugin:fields.checkbox.enhanced.text.dsgvo
+        label: CRON.FormBuilder:NodeTypes.Plugin:fields.checkbox.enhanced.mainText
         reloadIfChanged: true
         inspector:
           group: options
