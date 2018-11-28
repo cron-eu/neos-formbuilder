@@ -22,6 +22,10 @@
         <source>Following errors occurred:</source>
         <target xml:lang="de" state="translated">Folgende Fehler sind aufgetreten:</target>
       </trans-unit>
+      <trans-unit id="formBuilder.requiredField" xml:space="preserve">
+        <source>This field is required</source>
+        <target xml:lang="de" state="translated">Dies ist ein Pflichtfeld</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
