@@ -17,6 +17,9 @@
       <trans-unit id="formBuilder.index.errors.title" xml:space="preserve">
         <source>Following errors occurred:</source>
       </trans-unit>
+      <trans-unit id="formBuilder.requiredField" xml:space="preserve">
+        <source>This field is required</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
