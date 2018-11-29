@@ -2,7 +2,7 @@
 namespace CRON\FormBuilder\Controller;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "CRON.FormBuilder".      *
+ * This script belongs to the Neos Flow package "CRON.FormBuilder".       *
  *                                                                        *
  *                                                                        */
 

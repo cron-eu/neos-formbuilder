@@ -31,7 +31,7 @@ In your site package NodeTypes.yaml add the FormBuilder plugin like:
 ```
 childNodes:
     main:
-      type: 'TYPO3.Neos:ContentCollection'
+      type: 'Neos.Neos:ContentCollection'
       constraints:
         nodeTypes:
           'CRON.FormBuilder:Plugin': true
