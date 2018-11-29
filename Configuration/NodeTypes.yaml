@@ -259,7 +259,7 @@
 
 'CRON.FormBuilder:CheckBoxEnhanced':
   superTypes:
-    'TYPO3.Neos:Content': true
+    'Neos.Neos:Content': true
     'CRON.FormBuilder:CheckBox': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.checkbox.enhanced
@@ -282,7 +282,7 @@
         reloadIfChanged: true
         inspector:
           group: options
-          editor: 'TYPO3.Neos/Inspector/Editors/TextAreaEditor'
+          editor: 'Neos.Neos/Inspector/Editors/TextAreaEditor'
           editorOptions:
             rows: 10
 
