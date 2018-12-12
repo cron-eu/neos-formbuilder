@@ -75,6 +75,7 @@
           'CRON.FormBuilder:Select': true
           'CRON.FormBuilder:CheckBox': true
           'CRON.FormBuilder:CheckBoxGroup': true
+          'CRON.FormBuilder:CheckBoxEnhanced': true
           'CRON.FormBuilder:TextArea': true
           'CRON.FormBuilder:FileUpload': true
           '*': false
@@ -254,6 +255,36 @@
         reloadIfChanged: true
         inspector:
           group: options
+
+
+'CRON.FormBuilder:CheckBoxEnhanced':
+  superTypes:
+    'Neos.Neos:Content': true
+    'CRON.FormBuilder:CheckBox': true
+  ui:
+    label: CRON.FormBuilder:NodeTypes.Plugin:fields.checkbox.enhanced
+  properties:
+    text:
+      type: string
+      ui:
+        label: Text
+        inlineEditable: true
+        aloha:
+          placeholder: CRON.FormBuilder:NodeTypes.Plugin:fields.checkbox.enhanced.text
+          format:
+            'p': true
+          link:
+            'a': true
+    mainText:
+      type: string
+      ui:
+        label: CRON.FormBuilder:NodeTypes.Plugin:fields.checkbox.enhanced.mainText
+        reloadIfChanged: true
+        inspector:
+          group: options
+          editor: 'Neos.Neos/Inspector/Editors/TextAreaEditor'
+          editorOptions:
+            rows: 10
 
 
 'CRON.FormBuilder:TextArea':
