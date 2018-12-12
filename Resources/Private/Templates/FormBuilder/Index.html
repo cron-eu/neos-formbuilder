@@ -9,6 +9,9 @@
 		</f:if>
 		<ts:render path="elements" typoScriptPackageKey="{tsPackageKey}" context="{node: elements}"/>
 		<f:form.hidden name="__formId" value="{node.identifier}"></f:form.hidden>
+		<div>
+			<p><span>* </span><f:translate id="formBuilder.requiredField" package="CRON.FormBuilder"/></p>
+		</div>
 		<button type="submit" class="btn btn-default">{submitButtonLabel}</button>
 	</f:form>
 	<f:if condition="{neos:rendering.inBackend(node: documentNode)}">
