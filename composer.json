@@ -5,7 +5,8 @@
     "require": {
         "neos/neos": "^3.3.0",
         "neos/swiftmailer": "~6.0.0",
-        "neos/nodetypes": "~3.3.0"
+        "neos/nodetypes": "~3.3.0",
+        "swiftmailer/swiftmailer": "^6.0 || ^5.4"
     },
     "autoload": {
         "psr-0": {
