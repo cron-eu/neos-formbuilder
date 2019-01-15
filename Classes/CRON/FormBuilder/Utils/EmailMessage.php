@@ -55,12 +55,13 @@ class EmailMessage
      * Attaches an file to the email
      * @param NodeInterface $node
      * @param array $data
+     * @throws \Neos\ContentRepository\Exception\NodeException
      */
     public function addAttachment($node, $data)
     {
 
         $this->mail->attach(
-            \Swift_Attachment::newInstance(
+            new \Swift_Attachment(
                 file_get_contents($data['tmp_name']),
                 join('-', [$node->getProperty('label'), $data['name']]),
                 $data['type']
