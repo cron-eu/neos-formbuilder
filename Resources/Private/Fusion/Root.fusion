@@ -105,6 +105,9 @@ prototype(CRON.FormBuilder:FileUpload) < prototype(CRON.FormBuilder:FormElement)
 	allowedMimeTypes = ${Array.join(Configuration.setting('CRON.FormBuilder.Upload.allowedMimeTypes'), ',')}
 }
 
+prototype(CRON.FormBuilder:Text) < prototype(CRON.FormBuilder:FormElement) {
+	text = ${q(node).property('text')}
+}
 
 prototype(CRON.FormBuilder:Plugin) < prototype(Neos.Neos:Plugin) {
 	package = 'CRON.FormBuilder'

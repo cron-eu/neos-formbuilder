@@ -78,6 +78,7 @@
           'CRON.FormBuilder:CheckBoxEnhanced': true
           'CRON.FormBuilder:TextArea': true
           'CRON.FormBuilder:FileUpload': true
+          'CRON.FormBuilder:Text': true
           '*': false
 
 'CRON.FormBuilder:FormElementLabelMixin':
@@ -318,3 +319,17 @@
     'CRON.FormBuilder:FormElementRequiredMixin': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.fileupload
+
+'CRON.FormBuilder:Text':
+  superTypes:
+    'Neos.Neos:Content': true
+  ui:
+    label: CRON.FormBuilder:NodeTypes.Plugin:fields.text
+    icon: 'icon-edit-sign'
+  properties:
+    text:
+      type: string
+      ui:
+        inlineEditable: true
+        aloha:
+          placeholder: CRON.FormBuilder:NodeTypes.Plugin:fields.text.placeholder
