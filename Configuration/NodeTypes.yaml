@@ -264,6 +264,10 @@
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.checkbox.enhanced
   properties:
+    label:
+      defaultValue: 'Agreement'
+    value:
+      defaultValue: 'accepted'
     text:
       type: string
       ui:
