@@ -1,0 +1,12 @@
+{namespace neos=Neos\Neos\ViewHelpers}
+<f:layout name="{layoutName}" />
+<f:section name="Content">
+	<f:if condition="{neos:rendering.inBackend()}">
+		<f:then>
+			<p>{neos:contentElement.editable(property: 'text')}</p>
+		</f:then>
+		<f:else>
+			<p>{text -> f:format.raw()}</p>
+		</f:else>
+	</f:if>
+</f:section>
