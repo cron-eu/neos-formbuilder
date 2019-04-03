@@ -7,11 +7,11 @@
 {field.node.properties.label}
 =============================
 <f:for each="{field.values}" as="subField">
-{subField.node.properties.label}: {subField.value}
+{subField.node.properties.label -> f:format.stripTags()}: {subField.value}
 </f:for>
 </f:then>
 <f:else>
-{field.node.properties.label}: {field.value}
+{field.node.properties.label -> f:format.stripTags()}: {field.value}
 </f:else>
 </f:if>
 </f:for>
