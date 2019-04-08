@@ -78,6 +78,7 @@
           'CRON.FormBuilder:CheckBoxEnhanced': true
           'CRON.FormBuilder:TextArea': true
           'CRON.FormBuilder:FileUpload': true
+          'CRON.FormBuilder:Text': true
           '*': false
 
 'CRON.FormBuilder:FormElementLabelMixin':
@@ -255,7 +256,8 @@
         reloadIfChanged: true
         inspector:
           group: options
-
+    value:
+      defaultValue: 'Checked'
 
 'CRON.FormBuilder:CheckBoxEnhanced':
   superTypes:
@@ -264,9 +266,9 @@
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.checkbox.enhanced
   properties:
-    text:
-      type: string
+    label:
       ui:
+        inspector: []
         label: Text
         inlineEditable: true
         aloha:
@@ -275,17 +277,6 @@
             'p': true
           link:
             'a': true
-    mainText:
-      type: string
-      ui:
-        label: CRON.FormBuilder:NodeTypes.Plugin:fields.checkbox.enhanced.mainText
-        reloadIfChanged: true
-        inspector:
-          group: options
-          editor: 'Neos.Neos/Inspector/Editors/TextAreaEditor'
-          editorOptions:
-            rows: 10
-
 
 'CRON.FormBuilder:TextArea':
   superTypes:
@@ -318,3 +309,17 @@
     'CRON.FormBuilder:FormElementRequiredMixin': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.fileupload
+
+'CRON.FormBuilder:Text':
+  superTypes:
+    'Neos.Neos:Content': true
+  ui:
+    label: CRON.FormBuilder:NodeTypes.Plugin:fields.text
+    icon: 'icon-edit-sign'
+  properties:
+    text:
+      type: string
+      ui:
+        inlineEditable: true
+        aloha:
+          placeholder: CRON.FormBuilder:NodeTypes.Plugin:fields.text.placeholder

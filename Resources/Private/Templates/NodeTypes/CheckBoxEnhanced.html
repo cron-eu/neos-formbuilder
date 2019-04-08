@@ -1,29 +1,20 @@
 {namespace neos=Neos\Neos\ViewHelpers}
 <f:layout name="{layoutName}" />
 <f:section name="Content">
-    <div class="checkbox-enhanced {f:if(condition: validationResults.flattenedErrors, then: 'has-error')}">
+    <div class=" checkbox-enhanced {f:if(condition: validationResults.flattenedErrors, then: 'has-error')}">
         <f:if condition="{neos:rendering.inBackend()}">
             <f:then>
-                <f:if condition="{mainText}">
-                    <div>
-                        {mainText -> f:format.raw()}
-                    </div>
-                </f:if>
-                <label>
-                    <input {attributes -> f:format.raw()} type="checkbox" onclick="return false;"/> {neos:contentElement.editable(property: 'text', tag: 'p')}
-                </label>
+                <div class="checkbox-enhanced-label">
+                    <input style="margin-right: 10px;" {attributes -> f:format.raw()} type="checkbox" onclick="return false;"/>
+                    {neos:contentElement.editable(property: 'label', tag: 'p')}
+                </div>
             </f:then>
             <f:else>
-                <f:if condition="{mainText}">
-                    <div>
-                        {mainText -> f:format.raw()}
-                    </div>
-                </f:if>
                 <div class="checkbox-enhanced-label">
                     <input {attributes -> f:format.raw()} type="hidden" value="">
                     <input {attributes -> f:format.raw()} type="checkbox" value="{node.properties.value}" {f:if(condition: checked, then: 'checked')}/>
                     <label>
-                        {text -> f:format.raw()}
+                        {label -> f:format.raw()}
                     </label>
                 </div>
             </f:else>
