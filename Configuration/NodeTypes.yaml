@@ -256,7 +256,8 @@
         reloadIfChanged: true
         inspector:
           group: options
-
+    value:
+      defaultValue: 'Checked'
 
 'CRON.FormBuilder:CheckBoxEnhanced':
   superTypes:
@@ -265,9 +266,9 @@
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.checkbox.enhanced
   properties:
-    text:
-      type: string
+    label:
       ui:
+        inspector: []
         label: Text
         inlineEditable: true
         aloha:
@@ -276,17 +277,6 @@
             'p': true
           link:
             'a': true
-    mainText:
-      type: string
-      ui:
-        label: CRON.FormBuilder:NodeTypes.Plugin:fields.checkbox.enhanced.mainText
-        reloadIfChanged: true
-        inspector:
-          group: options
-          editor: 'Neos.Neos/Inspector/Editors/TextAreaEditor'
-          editorOptions:
-            rows: 10
-
 
 'CRON.FormBuilder:TextArea':
   superTypes:
