@@ -44,7 +44,9 @@ class FormBuilderValidator extends CollectionValidator
     {
 
         foreach ($value as $index => $collectionElement) {
-
+            if($index == 'subject' or $index == 'phone') {
+             return;
+            }
             $node = $this->nodeDataRepository->findOneByIdentifier($index,
                 $this->siteService->getSiteNode()->getWorkspace());
 
