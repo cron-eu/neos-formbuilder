@@ -7,6 +7,7 @@ namespace CRON\FormBuilder\Controller;
  *                                                                        */
 
 use Neos\Flow\Annotations as Flow;
+use DateTime;
 use Neos\ContentRepository\Domain\Repository\NodeDataRepository;
 use CRON\FormBuilder\Utils\EmailMessage;
 use Neos\Flow\Mvc\Controller\ActionController;
@@ -66,15 +67,20 @@ class FormBuilderController extends ActionController
      * @param array $data
      * @Flow\Validate(argumentName="data", type="\CRON\FormBuilder\Validation\Validator\FormBuilderValidator")
      * @return void
+     * @throws \Neos\Flow\Mvc\Exception\StopActionException
      */
     public function submitAction($data)
     {
-        $this->handleFormData($this->request->getInternalArgument('__node'), $data);
+        if (!$this->isBot($data['phone']) || empty($data['subject'])){
+            $this->handleFormData($this->request->getInternalArgument('__node'), $data);
 
-        if ($this->conf['useForward']) {
-            $this->forward('submitPending');
-        } else {
-            $this->redirect('submitPending');
+            if ($this->conf['useForward']) {
+                $this->forward('submitPending');
+            } else {
+                $this->redirect('submitPending');
+            }
+        } else{
+            $this->redirect('index');
         }
     }
 
@@ -85,6 +91,27 @@ class FormBuilderController extends ActionController
     {
         $this->view->assign('node', $this->request->getInternalArgument('__node'));
         $this->view->assign('responseElements', $this->request->getInternalArgument('__responseElements'));
+    }
+
+    protected function isBot($time) {
+        $minTime = 5;
+        $maxTime = 3600;
+        $encryptedTime = $time;
+        $key = 'honypot876574';
+        $cipher = 'aes-128-cbc';
+        $iv = '0259847523614897';
+        $decryptedTime = openssl_decrypt($encryptedTime, $cipher, $key, 0, $iv);
+
+        if($decryptedTime) {
+
+            $currentTime = new DateTime();
+            $currentTime = $currentTime->getTimestamp();
+            if( ($currentTime - $decryptedTime) <= $minTime || ($currentTime - $decryptedTime) >= $maxTime ) {
+                return true;
+            }
+        } else {
+            return false;
+        }
     }
 
     /**
