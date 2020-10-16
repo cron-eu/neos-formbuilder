@@ -28,3 +28,6 @@ Neos:
     fusion:
       autoInclude:
         CRON.FormBuilder: true
+  Fusion:
+    defaultContext:
+      'CRON.TimeHash': 'CRON\FormBuilder\Eel\Helper\TimeHashHelper'

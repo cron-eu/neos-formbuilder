@@ -42,7 +42,6 @@ class FormBuilderController extends ActionController
     {
         /** @var NodeInterface $node */
         $node = $this->request->getInternalArgument('__node');
-
         $this->view->assign('attributes', $this->request->getInternalArgument('__attributes'));
         $this->view->assign('elements', $this->request->getInternalArgument('__elements'));
         $this->view->assign('responseElements', $this->request->getInternalArgument('__responseElements'));
