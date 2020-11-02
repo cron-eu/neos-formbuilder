@@ -44,11 +44,12 @@ class FormBuilderValidator extends CollectionValidator
     {
 
         foreach ($value as $index => $collectionElement) {
-            if($index == 'subject' or $index == 'phone') {
-             return;
+
+            if($this->nodeDataRepository->findOneByIdentifier($index, $this->siteService->getSiteNode()->getWorkspace())) {
+                $node = $this->nodeDataRepository->findOneByIdentifier($index, $this->siteService->getSiteNode()->getWorkspace());
+            } else {
+                return;
             }
-            $node = $this->nodeDataRepository->findOneByIdentifier($index,
-                $this->siteService->getSiteNode()->getWorkspace());
 
             if ($node->getProperty('required')) {
                 $requiredElementValidator = $this->validatorResolver->createValidator('NotEmpty');
