@@ -6,6 +6,7 @@ namespace CRON\FormBuilder\Controller;
  *                                                                        *
  *                                                                        */
 
+use Neos\Eel\Exception;
 use Neos\Flow\Annotations as Flow;
 use DateTime;
 use Neos\ContentRepository\Domain\Repository\NodeDataRepository;
@@ -71,7 +72,7 @@ class FormBuilderController extends ActionController
      */
     public function submitAction($data)
     {
-        if (!$this->isBot($data['phone']) && empty($data['subject'])){
+        if (!$this->checkTimestamp($data['phone']) && empty($data['subject'])){
             $this->handleFormData($this->request->getInternalArgument('__node'), $data);
             if ($this->conf['Controller']['useForward']) {
                 $this->forward('submitPending');
@@ -92,15 +93,21 @@ class FormBuilderController extends ActionController
         $this->view->assign('responseElements', $this->request->getInternalArgument('__responseElements'));
     }
 
-    protected function isBot($time) {
-        $minTime = $this->conf['botProtection']['minTime'];
-        $maxTime = $this->conf['botProtection']['maxTime'];
+    /**
+     * Checks and decodes the transferred timestamp
+     * @param string $encryptedTime
+     * @return bool
+     * @throws Exception
+     */
+    protected function checkTimestamp($encryptedTime) {
 
-        $key = $this->conf['botProtection']['key'];
-        $cipher = $this->conf['botProtection']['cipher'];
-        $iv = $this->conf['botProtection']['iv'];
+        $minTime = $this->conf['Protection']['minTime'];
+        $maxTime = $this->conf['Protection']['maxTime'];
 
-        $encryptedTime = $time;
+        $key = $this->conf['Protection']['key'];
+        $cipher = $this->conf['Protection']['cipher'];
+        $iv = $this->conf['Protection']['iv'];
+
         $decryptedTime = (int)openssl_decrypt($encryptedTime, $cipher, $key, 0, $iv);
 
         if($decryptedTime) {
@@ -109,9 +116,11 @@ class FormBuilderController extends ActionController
 
             if( ($currentTime - $decryptedTime) <= $minTime || ($currentTime - $decryptedTime) >= $maxTime ) {
                 return true;
+            } else {
+                return false;
             }
         } else {
-            return false;
+            throw new Exception('Encrypted Time could not be decrypted, input field was edited');
         }
     }
 

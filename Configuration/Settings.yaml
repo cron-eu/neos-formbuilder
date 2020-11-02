@@ -11,7 +11,7 @@ CRON:
       useForward: true
     View:
       useRequiredAttribute: true
-    botProtection:
+    Protection:
       # Minimum time in seconds after delivery of the page
       # must pass by to not end up in the bot filter
       minTime: 5

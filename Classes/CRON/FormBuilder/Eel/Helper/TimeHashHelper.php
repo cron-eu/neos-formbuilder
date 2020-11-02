@@ -5,6 +5,7 @@ namespace CRON\FormBuilder\Eel\Helper;
 use DateTime;
 use Neos\Flow\Annotations as Flow;
 use Neos\Eel\ProtectedContextAwareInterface;
+use Neos\Flow\Exception;
 
 class TimeHashHelper implements ProtectedContextAwareInterface {
 
@@ -33,20 +34,20 @@ class TimeHashHelper implements ProtectedContextAwareInterface {
     /**
      * Creates an encrypted timestamp
      * @return string
+     * @throws Exception
      */
     protected function createTimeHash()
     {
 
-        $key = $this->conf['botProtection']['key'];
-        $cipher = $this->conf['botProtection']['cipher'];
-        $iv = $this->conf['botProtection']['iv'];
+        $key = $this->conf['Protection']['key'];
+        $cipher = $this->conf['Protection']['cipher'];
+        $iv = $this->conf['Protection']['iv'];
 
         $time = new DateTime();
-        try {
+        if(in_array($cipher, openssl_get_cipher_methods())) {
             return openssl_encrypt($time->getTimestamp(), $cipher, $key, 0, $iv);
-        } catch (\Exception $e) {
-            $this->systemLogger->logThrowable($e);
         }
+        throw new Exception('Encryption method not available');
     }
 
     /**
