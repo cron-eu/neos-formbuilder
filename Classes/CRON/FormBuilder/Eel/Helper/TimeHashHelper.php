@@ -17,6 +17,12 @@ class TimeHashHelper implements ProtectedContextAwareInterface {
     protected $systemLogger;
 
     /**
+     * @Flow\InjectConfiguration
+     * @var array
+     */
+    protected $conf;
+
+    /**
      * @return string a encrypted timestamp to protect the form for spam bots
      */
     public function getTimeHash()
@@ -31,9 +37,9 @@ class TimeHashHelper implements ProtectedContextAwareInterface {
     protected function createTimeHash()
     {
 
-        $key = 'honypot876574';
-        $iv = '0259847523614897';
-        $cipher = 'aes-128-cbc';
+        $key = $this->conf['botProtection']['key'];
+        $cipher = $this->conf['botProtection']['cipher'];
+        $iv = $this->conf['botProtection']['iv'];
 
         $time = new DateTime();
         try {

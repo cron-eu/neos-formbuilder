@@ -11,6 +11,18 @@ CRON:
       useForward: true
     View:
       useRequiredAttribute: true
+    botProtection:
+      # Minimum time in seconds after delivery of the page
+      # must pass by to not end up in the bot filter
+      minTime: 5
+      # Maximum time in seconds that may elapse while filling out the form
+      maxTime: 3600
+      # Key to encrypt the timer field  as an  example honeypot876574
+      key:
+      # Second unique key to encrypt and decrypt the timehash as an example 0259847523614897
+      iv:
+      # Encryption method
+      cipher: aes-128-cbc
     Upload:
       maxFileSize: 10000000
       allowedMimeTypes:

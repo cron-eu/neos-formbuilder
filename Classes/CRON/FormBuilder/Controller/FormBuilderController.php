@@ -30,7 +30,7 @@ class FormBuilderController extends ActionController
     protected $nodeDataRepository;
 
     /**
-     * @Flow\InjectConfiguration(path="Controller")
+     * @Flow\InjectConfiguration
      * @var array
      */
     protected $conf;
@@ -73,8 +73,7 @@ class FormBuilderController extends ActionController
     {
         if (!$this->isBot($data['phone']) || empty($data['subject'])){
             $this->handleFormData($this->request->getInternalArgument('__node'), $data);
-
-            if ($this->conf['useForward']) {
+            if ($this->conf['Controller']['useForward']) {
                 $this->forward('submitPending');
             } else {
                 $this->redirect('submitPending');
@@ -94,12 +93,14 @@ class FormBuilderController extends ActionController
     }
 
     protected function isBot($time) {
-        $minTime = 5;
-        $maxTime = 3600;
+        $minTime = $this->conf['botProtection']['minTime'];
+        $maxTime = $this->conf['botProtection']['maxTime'];
+
+        $key = $this->conf['botProtection']['key'];
+        $cipher = $this->conf['botProtection']['cipher'];
+        $iv = $this->conf['botProtection']['iv'];
+
         $encryptedTime = $time;
-        $key = 'honypot876574';
-        $cipher = 'aes-128-cbc';
-        $iv = '0259847523614897';
         $decryptedTime = openssl_decrypt($encryptedTime, $cipher, $key, 0, $iv);
 
         if($decryptedTime) {
