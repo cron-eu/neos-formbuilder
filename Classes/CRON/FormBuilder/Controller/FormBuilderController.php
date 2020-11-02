@@ -14,6 +14,7 @@ use CRON\FormBuilder\Utils\EmailMessage;
 use Neos\Flow\Mvc\Controller\ActionController;
 use CRON\FormBuilder\Service\SiteService;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
+use Neos\Flow\Mvc\Exception\StopActionException;
 
 class FormBuilderController extends ActionController
 {
@@ -68,7 +69,8 @@ class FormBuilderController extends ActionController
      * @param array $data
      * @Flow\Validate(argumentName="data", type="\CRON\FormBuilder\Validation\Validator\FormBuilderValidator")
      * @return void
-     * @throws \Neos\Flow\Mvc\Exception\StopActionException
+     * @throws Exception
+     * @throws StopActionException
      */
     public function submitAction($data)
     {
