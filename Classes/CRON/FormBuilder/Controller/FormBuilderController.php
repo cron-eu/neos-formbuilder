@@ -101,12 +101,12 @@ class FormBuilderController extends ActionController
         $iv = $this->conf['botProtection']['iv'];
 
         $encryptedTime = $time;
-        $decryptedTime = openssl_decrypt($encryptedTime, $cipher, $key, 0, $iv);
+        $decryptedTime = (int)openssl_decrypt($encryptedTime, $cipher, $key, 0, $iv);
 
         if($decryptedTime) {
-
             $currentTime = new DateTime();
             $currentTime = $currentTime->getTimestamp();
+
             if( ($currentTime - $decryptedTime) <= $minTime || ($currentTime - $decryptedTime) >= $maxTime ) {
                 return true;
             }
