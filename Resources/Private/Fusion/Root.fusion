@@ -1,6 +1,14 @@
 include: resource://Neos.Fusion/Private/Fusion/*
 include: resource://Neos.Neos/Private/Fusion/*
 
+prototype(Neos.Neos:Page) {
+	head {
+		stylesheets.FormBuilder = Neos.Fusion:Template {
+			templatePath = 'resource://CRON.FormBuilder/Private/Templates/Page/Default.html'
+			sectionName = 'formBuilderStylesheets'
+		}
+	}
+}
 prototype(CRON.FormBuilder:FormElement) < prototype(Neos.Neos:Content) {
 	templatePath = ${'resource://CRON.FormBuilder/Private/Templates/NodeTypes/' + String.replace(node.nodeData.nodeType, 'CRON.FormBuilder:', '') + '.html'}
 

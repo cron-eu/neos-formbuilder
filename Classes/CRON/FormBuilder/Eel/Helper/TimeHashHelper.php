@@ -25,6 +25,7 @@ class TimeHashHelper implements ProtectedContextAwareInterface {
 
     /**
      * @return string a encrypted timestamp to protect the form for spam bots
+     * @throws Exception
      */
     public function getTimeHash()
     {
