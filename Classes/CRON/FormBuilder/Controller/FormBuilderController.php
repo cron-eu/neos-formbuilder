@@ -71,7 +71,7 @@ class FormBuilderController extends ActionController
      */
     public function submitAction($data)
     {
-        if (!$this->isBot($data['phone']) || empty($data['subject'])){
+        if (!$this->isBot($data['phone']) && empty($data['subject'])){
             $this->handleFormData($this->request->getInternalArgument('__node'), $data);
             if ($this->conf['Controller']['useForward']) {
                 $this->forward('submitPending');
@@ -79,7 +79,7 @@ class FormBuilderController extends ActionController
                 $this->redirect('submitPending');
             }
         } else{
-            $this->redirect('index');
+            $this->forward('submitPending');
         }
     }
 
