@@ -7,7 +7,8 @@ use Neos\Flow\Annotations as Flow;
 use Neos\Eel\ProtectedContextAwareInterface;
 use Neos\Flow\Security\Cryptography\HashService;
 
-class TimeHashHelper implements ProtectedContextAwareInterface {
+class TimeHashHelper implements ProtectedContextAwareInterface
+{
 
     /**
      * @Flow\Inject

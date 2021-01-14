@@ -1,4 +1,5 @@
 <?php
+
 namespace CRON\FormBuilder\Validation\Validator;
 
 use Neos\Flow\Annotations as Flow;
@@ -44,9 +45,16 @@ class FormBuilderValidator extends CollectionValidator
     {
 
         foreach ($value as $index => $collectionElement) {
-
-            if($this->nodeDataRepository->findOneByIdentifier($index, $this->siteService->getSiteNode()->getWorkspace())) {
-                $node = $this->nodeDataRepository->findOneByIdentifier($index, $this->siteService->getSiteNode()->getWorkspace());
+            if (
+                $this->nodeDataRepository->findOneByIdentifier(
+                    $index,
+                    $this->siteService->getSiteNode()->getWorkspace()
+                )
+            ) {
+                $node = $this->nodeDataRepository->findOneByIdentifier(
+                    $index,
+                    $this->siteService->getSiteNode()->getWorkspace()
+                );
             } else {
                 return;
             }
@@ -58,11 +66,19 @@ class FormBuilderValidator extends CollectionValidator
 
             if ($node->getNodeType()->isOfType('CRON.FormBuilder:FileUpload') && is_array($collectionElement)) {
                 if (!in_array($collectionElement['type'], $this->uploadConf['allowedMimeTypes'])) {
-                    $this->result->forProperty($index)->addError(new Error('The media type "%s" is not allowed for this file', 1483368544, [$collectionElement['type']]));
+                    $this->result->forProperty($index)
+                        ->addError(new Error(
+                            'The media type "%s" is not allowed for this file',
+                            1483368544,
+                            [$collectionElement['type']]
+                        ));
                 }
 
                 if ($collectionElement['size'] > $this->uploadConf['maxFileSize']) {
-                    $this->result->forProperty($index)->addError(new Error('The size of this file is too big', 1483368545));
+                    $this->result->forProperty($index)->addError(new Error(
+                        'The size of this file is too big',
+                        1483368545
+                    ));
                 }
             }
         }
