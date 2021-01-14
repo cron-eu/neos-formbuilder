@@ -5,50 +5,32 @@ namespace CRON\FormBuilder\Eel\Helper;
 use DateTime;
 use Neos\Flow\Annotations as Flow;
 use Neos\Eel\ProtectedContextAwareInterface;
-use Neos\Flow\Exception;
+use Neos\Flow\Security\Cryptography\HashService;
 
 class TimeHashHelper implements ProtectedContextAwareInterface {
 
     /**
      * @Flow\Inject
-     * @var \Neos\Flow\Log\SystemLoggerInterface
-     *
+     * @var HashService
      */
-
-    protected $systemLogger;
+    protected $hashService;
 
     /**
-     * @Flow\InjectConfiguration
-     * @var array
+     * @return string a hashed timestamp to protect the form for spam bots
      */
-    protected $conf;
-
-    /**
-     * @return string a encrypted timestamp to protect the form for spam bots
-     * @throws Exception
-     */
-    public function getTimeHash()
+    public function getTimeHash(): string
     {
         return $this->createTimeHash();
     }
 
     /**
-     * Creates an encrypted timestamp
+     * Creates an hashed timestamp
      * @return string
-     * @throws Exception
      */
-    protected function createTimeHash()
+    protected function createTimeHash(): string
     {
-
-        $key = $this->conf['Protection']['key'];
-        $cipher = $this->conf['Protection']['cipher'];
-        $iv = $this->conf['Protection']['iv'];
-
         $time = new DateTime();
-        if(in_array($cipher, openssl_get_cipher_methods())) {
-            return openssl_encrypt($time->getTimestamp(), $cipher, $key, 0, $iv);
-        }
-        throw new Exception('Encryption method not available');
+        return $this->hashService->appendHmac((string)$time->getTimestamp());
     }
 
     /**
@@ -56,6 +38,8 @@ class TimeHashHelper implements ProtectedContextAwareInterface {
      *
      * @param string $methodName
      * @return boolean
+     *
+     * @noinspection PhpMissingParamTypeInspection,PhpMissingReturnTypeInspection
      */
     public function allowsCallOfMethod($methodName)
     {

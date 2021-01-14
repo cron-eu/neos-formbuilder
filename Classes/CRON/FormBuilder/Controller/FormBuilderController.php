@@ -6,7 +6,7 @@ namespace CRON\FormBuilder\Controller;
  *                                                                        *
  *                                                                        */
 
-use Neos\Eel\Exception;
+use Neos\Flow\Exception;
 use Neos\Flow\Annotations as Flow;
 use DateTime;
 use Neos\ContentRepository\Domain\Repository\NodeDataRepository;
@@ -15,6 +15,7 @@ use Neos\Flow\Mvc\Controller\ActionController;
 use CRON\FormBuilder\Service\SiteService;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\Flow\Mvc\Exception\StopActionException;
+use Neos\Flow\Security\Cryptography\HashService;
 
 class FormBuilderController extends ActionController
 {
@@ -30,6 +31,12 @@ class FormBuilderController extends ActionController
      * @var NodeDataRepository
      */
     protected $nodeDataRepository;
+
+    /**
+     * @Flow\Inject
+     * @var HashService
+     */
+    protected $hashService;
 
     /**
      * @Flow\InjectConfiguration
@@ -96,33 +103,30 @@ class FormBuilderController extends ActionController
     }
 
     /**
-     * Checks and decodes the transferred timestamp
-     * @param string $encryptedTime
+     * Validates if the Honeypot field has been changed and if the transmission time is correct
+     * @param string $hashedTimeStamp
      * @return bool
      * @throws Exception
      */
-    protected function checkTimestamp($encryptedTime) {
+    protected function checkTimestamp(string $hashedTimeStamp): bool
+    {
+        $minimalSubmitDelayInSeconds = $this->conf['Protection']['minimalSubmitDelayInSeconds'];
+        $maximalSubmitDelayInSeconds = $this->conf['Protection']['maximalSubmitDelayInSeconds'];
 
-        $minTime = $this->conf['Protection']['minTime'];
-        $maxTime = $this->conf['Protection']['maxTime'];
+        $this->hashService->validateAndStripHmac($hashedTimeStamp);
+        $validatedTimeStamp = (int)$this->hashService->validateAndStripHmac($hashedTimeStamp);
 
-        $key = $this->conf['Protection']['key'];
-        $cipher = $this->conf['Protection']['cipher'];
-        $iv = $this->conf['Protection']['iv'];
-
-        $decryptedTime = (int)openssl_decrypt($encryptedTime, $cipher, $key, 0, $iv);
-
-        if($decryptedTime) {
+        if($validatedTimeStamp) {
             $currentTime = new DateTime();
             $currentTime = $currentTime->getTimestamp();
 
-            if( ($currentTime - $decryptedTime) <= $minTime || ($currentTime - $decryptedTime) >= $maxTime ) {
+            if( ($currentTime - $validatedTimeStamp) <= $minimalSubmitDelayInSeconds || ($currentTime - $validatedTimeStamp) >= $maximalSubmitDelayInSeconds ) {
                 return true;
             } else {
                 return false;
             }
         } else {
-            throw new Exception('Encrypted Time could not be decrypted, input field was edited');
+            throw new Exception('Hashed Time could not be validated, input field was edited');
         }
     }
 

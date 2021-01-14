@@ -14,15 +14,9 @@ CRON:
     Protection:
       # Minimum time in seconds after delivery of the page
       # must pass by to not end up in the bot filter
-      minTime: 5
+      minimalSubmitDelayInSeconds: 5
       # Maximum time in seconds that may elapse while filling out the form
-      maxTime: 3600
-      # Key to encrypt the timer field, example honeypot876574
-      key:
-      # Second unique key to encrypt and decrypt the timehash, example 0259847523614897
-      iv:
-      # Encryption method openssl, example aes-128-cbc https://www.php.net/manual/de/function.openssl-get-cipher-methods.php
-      cipher:
+      maximalSubmitDelayInSeconds: 3600
     Upload:
       maxFileSize: 10000000
       allowedMimeTypes:
