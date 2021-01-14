@@ -8,8 +8,8 @@
 			<strong><f:translate id="formBuilder.index.backend.addFormElements" package="CRON.FormBuilder" /></strong>
 		</f:if>
 		<ts:render path="elements" typoScriptPackageKey="{tsPackageKey}" context="{node: elements}"/>
-		<input type="text" class="honeypot" name="--cron_formbuilder-plugin[data][subject]" value="">
-		<input type="text" class="honeypot" name="--cron_formbuilder-plugin[data][phone]" value="{attributes.timehash}">
+		<input type="text" style="display:none !important" tabindex="-1" autocomplete="off" name="--cron_formbuilder-plugin[data][subject]" value="">
+		<input type="text" style="display:none !important" tabindex="-1" autocomplete="off" name="--cron_formbuilder-plugin[data][phone]" value="{attributes.timehash}">
 		<f:form.hidden name="__formId" value="{node.identifier}"></f:form.hidden>
 		<button type="submit" class="btn btn-default">{submitButtonLabel}</button>
 	</f:form>
