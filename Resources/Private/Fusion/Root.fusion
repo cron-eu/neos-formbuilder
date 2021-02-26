@@ -114,14 +114,13 @@ prototype(CRON.FormBuilder:Plugin) < prototype(Neos.Neos:Plugin) {
 	action = 'index'
 	attributes = Neos.Fusion:RawArray
 	attributes.role = 'form'
-	attributes.timehash = ${CRON.TimeHash.getTimeHash()}
 	elements = ${q(node).children('elements').get(0)}
 
 	responseElements = Neos.Neos:ContentCollection {
 		nodePath = 'responseElements'
 	}
 
-	attributes.value = ${CRON.TimeHash.getTimeHash()}
+	attributes.timehash = ${CRON.TimeHash.getTimeHash()}
 	attributes.hasHoneypotField = ${q(node).property('hasHoneypotField')}
 	tsPackageKey = 'CRON.FormBuilder'
 
