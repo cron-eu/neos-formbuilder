@@ -7,17 +7,15 @@ namespace CRON\FormBuilder\Controller;
  *                                                                        *
  *                                                                        */
 
+use CRON\FormBuilder\Service\HoneyPotService;
 use Neos\Flow\Exception;
 use Neos\Flow\Annotations as Flow;
-use DateTime;
 use Neos\ContentRepository\Domain\Repository\NodeDataRepository;
 use CRON\FormBuilder\Utils\EmailMessage;
-use Neos\Flow\Log\SystemLoggerInterface;
 use Neos\Flow\Mvc\Controller\ActionController;
 use CRON\FormBuilder\Service\SiteService;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\Flow\Mvc\Exception\StopActionException;
-use Neos\Flow\Security\Cryptography\HashService;
 
 class FormBuilderController extends ActionController
 {
@@ -29,22 +27,16 @@ class FormBuilderController extends ActionController
     protected $siteService;
 
     /**
-     * @var SystemLoggerInterface
      * @Flow\Inject
+     * @var HoneyPotService
      */
-    protected $systemLogger;
+    protected $honeyPotService;
 
     /**
      * @Flow\Inject
      * @var NodeDataRepository
      */
     protected $nodeDataRepository;
-
-    /**
-     * @Flow\Inject
-     * @var HashService
-     */
-    protected $hashService;
 
     /**
      * @Flow\InjectConfiguration
@@ -92,7 +84,7 @@ class FormBuilderController extends ActionController
     public function submitAction(array $data)
     {
         if (isset($data['subject'], $data['phone'])) {
-            if (!$this->checkTimestamp($data['phone']) && empty($data['subject'])) {
+            if (!$this->honeyPotService->validateSecret($data['phone']) && empty($data['subject'])) {
                 $this->handleFormData($this->request->getInternalArgument('__node'), $data);
                 if ($this->conf['Controller']['useForward']) {
                     $this->forward('submitPending');
@@ -119,46 +111,6 @@ class FormBuilderController extends ActionController
     {
         $this->view->assign('node', $this->request->getInternalArgument('__node'));
         $this->view->assign('responseElements', $this->request->getInternalArgument('__responseElements'));
-    }
-
-    /**
-     * Validates if the Honeypot field has been changed and if the transmission time is correct
-     * @param string $hashedTimeStamp
-     * @return bool
-     * @throws Exception
-     */
-    protected function checkTimestamp(string $hashedTimeStamp): bool
-    {
-        $minimalSubmitDelayInSeconds = $this->conf['Protection']['minimalSubmitDelayInSeconds'];
-        $maximalSubmitDelayInSeconds = $this->conf['Protection']['maximalSubmitDelayInSeconds'];
-
-        try {
-            $this->hashService->validateAndStripHmac($hashedTimeStamp);
-            $validatedTimeStamp = (int)$this->hashService->validateAndStripHmac($hashedTimeStamp);
-
-
-            $currentTime = new DateTime();
-            $currentTime = $currentTime->getTimestamp();
-            if (
-                ($currentTime - $validatedTimeStamp) <= $minimalSubmitDelayInSeconds ||
-                ($currentTime - $validatedTimeStamp) >= $maximalSubmitDelayInSeconds
-            ) {
-                $this->systemLogger->log(
-                    'Minimum oder Maximum time in seconds after delivery of the page was exceeded !',
-                    LOG_ERR
-                );
-                return true;
-            } else {
-                return false;
-            }
-        } catch (\Exception $e) {
-            $this->systemLogger->log(
-                'The current time stamp was changed !',
-                LOG_ERR,
-                ['exception' => $e]
-            );
-            return true;
-        }
     }
 
     /**
