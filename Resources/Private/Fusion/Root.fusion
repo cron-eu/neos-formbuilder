@@ -121,6 +121,8 @@ prototype(CRON.FormBuilder:Plugin) < prototype(Neos.Neos:Plugin) {
 		nodePath = 'responseElements'
 	}
 
+	attributes.value = ${CRON.TimeHash.getTimeHash()}
+	attributes.hasHoneypotField = ${q(node).property('hasHoneypotField')}
 	tsPackageKey = 'CRON.FormBuilder'
 
 	hasUploadElement = ${q(node).find('[instanceof CRON.FormBuilder:FileUpload]').count() > 0}

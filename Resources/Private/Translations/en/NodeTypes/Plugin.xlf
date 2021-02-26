@@ -8,6 +8,12 @@
       <trans-unit id="groups.options" xml:space="preserve">
         <source>Options</source>
       </trans-unit>
+      <trans-unit id="properties.hasHoneypotField" xml:space="preserve">
+        <source>Activate Honeypot Fields</source>
+      </trans-unit>
+      <trans-unit id="properties.hasHoneypotField.ui.help.message" xml:space="preserve">
+        <source>These fields are for protection against bots and extend the form by 2 additional fields. Which consist of an empty field and a field with a timestamp. If the bot fills or changes these the mail will not be sent.</source>
+      </trans-unit>
       <trans-unit id="properties.receiver" xml:space="preserve">
         <source>Receiver-Email(s)</source>
       </trans-unit>

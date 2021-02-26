@@ -11,6 +11,14 @@
         <source>Options</source>
         <target xml:lang="de" state="translated">Optionen</target>
       </trans-unit>
+      <trans-unit id="properties.hasHoneypotField" xml:space="preserve">
+        <source>Activate Honeypot Fields</source>
+        <target xml:lang="de" state="translated">Aktiviere Honeypot Fields</target>
+      </trans-unit>
+      <trans-unit id="properties.hasHoneypotField.ui.help.message" xml:space="preserve">
+        <source>These fields are for protection against bots and extend the form by 2 additional fields. Which consist of an empty field and a field with a timestamp. If the bot fills or changes these the mail will not be sent.</source>
+        <target xml:lang="de" state="translated">Diese Felder sind zum Schutz, gegen Bots und erweitern die Form, um 2 zusätliche Felder. Diese bestehen aus einem Leerenfeld und einem mit Timestamp. Wenn diese der Bot füllt oder verändert wird die Mail nicht versendet.</target>
+      </trans-unit>
       <trans-unit id="properties.receiver" xml:space="preserve">
         <source>Receiver-Email(s)</source>
         <target xml:lang="de" state="translated">Empfänger-Email(s)</target>
