@@ -12,6 +12,7 @@ use Neos\Flow\Annotations as Flow;
 use DateTime;
 use Neos\ContentRepository\Domain\Repository\NodeDataRepository;
 use CRON\FormBuilder\Utils\EmailMessage;
+use Neos\Flow\Log\SystemLoggerInterface;
 use Neos\Flow\Mvc\Controller\ActionController;
 use CRON\FormBuilder\Service\SiteService;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
@@ -77,22 +78,31 @@ class FormBuilderController extends ActionController
 
     /**
      * @param array $data
-     * @Flow\Validate(argumentName="data", type="\CRON\FormBuilder\Validation\Validator\FormBuilderValidator")
      * @return void
      * @throws Exception
      * @throws StopActionException
+     * @Flow\Validate(argumentName="data", type="\CRON\FormBuilder\Validation\Validator\FormBuilderValidator")
      */
-    public function submitAction($data)
+    public function submitAction(array $data)
     {
-        if (!$this->checkTimestamp($data['phone']) && empty($data['subject'])) {
+        if (isset($data['subject'], $data['phone'])) {
+            if (!$this->checkTimestamp($data['phone']) && empty($data['subject'])) {
+                $this->handleFormData($this->request->getInternalArgument('__node'), $data);
+                if ($this->conf['Controller']['useForward']) {
+                    $this->forward('submitPending');
+                } else {
+                    $this->redirect('submitPending');
+                }
+            } else {
+                $this->forward('submitPending');
+            }
+        } else {
             $this->handleFormData($this->request->getInternalArgument('__node'), $data);
             if ($this->conf['Controller']['useForward']) {
                 $this->forward('submitPending');
             } else {
                 $this->redirect('submitPending');
             }
-        } else {
-            $this->forward('submitPending');
         }
     }
 
