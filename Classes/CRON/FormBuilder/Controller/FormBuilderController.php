@@ -29,6 +29,12 @@ class FormBuilderController extends ActionController
     protected $siteService;
 
     /**
+     * @var SystemLoggerInterface
+     * @Flow\Inject
+     */
+    protected $systemLogger;
+
+    /**
      * @Flow\Inject
      * @var NodeDataRepository
      */
@@ -126,23 +132,32 @@ class FormBuilderController extends ActionController
         $minimalSubmitDelayInSeconds = $this->conf['Protection']['minimalSubmitDelayInSeconds'];
         $maximalSubmitDelayInSeconds = $this->conf['Protection']['maximalSubmitDelayInSeconds'];
 
-        $this->hashService->validateAndStripHmac($hashedTimeStamp);
-        $validatedTimeStamp = (int)$this->hashService->validateAndStripHmac($hashedTimeStamp);
+        try {
+            $this->hashService->validateAndStripHmac($hashedTimeStamp);
+            $validatedTimeStamp = (int)$this->hashService->validateAndStripHmac($hashedTimeStamp);
 
-        if ($validatedTimeStamp) {
+
             $currentTime = new DateTime();
             $currentTime = $currentTime->getTimestamp();
-
             if (
                 ($currentTime - $validatedTimeStamp) <= $minimalSubmitDelayInSeconds ||
                 ($currentTime - $validatedTimeStamp) >= $maximalSubmitDelayInSeconds
             ) {
+                $this->systemLogger->log(
+                    'Minimum oder Maximum time in seconds after delivery of the page was exceeded !',
+                    LOG_ERR
+                );
                 return true;
             } else {
                 return false;
             }
-        } else {
-            throw new Exception('Hashed Time could not be validated, input field was edited');
+        } catch (\Exception $e) {
+            $this->systemLogger->log(
+                'The current time stamp was changed !',
+                LOG_ERR,
+                ['exception' => $e]
+            );
+            return true;
         }
     }
 
