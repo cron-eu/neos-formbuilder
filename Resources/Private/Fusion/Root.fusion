@@ -112,16 +112,16 @@ prototype(CRON.FormBuilder:Plugin) < prototype(Neos.Neos:Plugin) {
 	package = 'CRON.FormBuilder'
 	controller = 'FormBuilder'
 	action = 'index'
-
 	attributes = Neos.Fusion:RawArray
 	attributes.role = 'form'
-
 	elements = ${q(node).children('elements').get(0)}
 
 	responseElements = Neos.Neos:ContentCollection {
 		nodePath = 'responseElements'
 	}
 
+	attributes.timehash = ${CRON.TimeHash.getTimeHash()}
+	attributes.hasHoneypotField = ${q(node).property('hasHoneypotField')}
 	tsPackageKey = 'CRON.FormBuilder'
 
 	hasUploadElement = ${q(node).find('[instanceof CRON.FormBuilder:FileUpload]').count() > 0}

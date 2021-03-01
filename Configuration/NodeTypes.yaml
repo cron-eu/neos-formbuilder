@@ -39,6 +39,14 @@
           group: advanced
       validation:
         'Neos.Neos/Validation/NotEmptyValidator': []
+    hasHoneypotField:
+      type: boolean
+      ui:
+        label: i18n
+        help:
+          message: i18n
+        inspector:
+          group: advanced
   childNodes:
     elements:
       constraints:

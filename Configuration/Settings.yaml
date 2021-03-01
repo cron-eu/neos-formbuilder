@@ -11,6 +11,12 @@ CRON:
       useForward: true
     View:
       useRequiredAttribute: true
+    Protection:
+      # Minimum time in seconds after delivery of the page
+      # must pass by to not end up in the bot filter
+      minimalSubmitDelayInSeconds: 5
+      # Maximum time in seconds that may elapse while filling out the form
+      maximalSubmitDelayInSeconds: 3600
     Upload:
       maxFileSize: 10000000
       allowedMimeTypes:
@@ -28,3 +34,6 @@ Neos:
     fusion:
       autoInclude:
         CRON.FormBuilder: true
+  Fusion:
+    defaultContext:
+      'CRON.TimeHash': 'CRON\FormBuilder\Eel\Helper\TimeHashHelper'
