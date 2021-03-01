@@ -1,4 +1,5 @@
 <?php
+
 namespace CRON\FormBuilder\Controller;
 
 /*                                                                        *
@@ -6,12 +7,15 @@ namespace CRON\FormBuilder\Controller;
  *                                                                        *
  *                                                                        */
 
+use CRON\FormBuilder\Service\HoneyPotService;
+use Neos\Flow\Exception;
 use Neos\Flow\Annotations as Flow;
 use Neos\ContentRepository\Domain\Repository\NodeDataRepository;
 use CRON\FormBuilder\Utils\EmailMessage;
 use Neos\Flow\Mvc\Controller\ActionController;
 use CRON\FormBuilder\Service\SiteService;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
+use Neos\Flow\Mvc\Exception\StopActionException;
 
 class FormBuilderController extends ActionController
 {
@@ -24,12 +28,18 @@ class FormBuilderController extends ActionController
 
     /**
      * @Flow\Inject
+     * @var HoneyPotService
+     */
+    protected $honeyPotService;
+
+    /**
+     * @Flow\Inject
      * @var NodeDataRepository
      */
     protected $nodeDataRepository;
 
     /**
-     * @Flow\InjectConfiguration(path="Controller")
+     * @Flow\InjectConfiguration
      * @var array
      */
     protected $conf;
@@ -42,7 +52,6 @@ class FormBuilderController extends ActionController
     {
         /** @var NodeInterface $node */
         $node = $this->request->getInternalArgument('__node');
-
         $this->view->assign('attributes', $this->request->getInternalArgument('__attributes'));
         $this->view->assign('elements', $this->request->getInternalArgument('__elements'));
         $this->view->assign('responseElements', $this->request->getInternalArgument('__responseElements'));
@@ -50,8 +59,10 @@ class FormBuilderController extends ActionController
         $this->view->assign('node', $node);
         $this->view->assign('submitButtonLabel', $node->getProperty('submitButtonLabel'));
         $this->view->assign('tsPackageKey', $this->request->getInternalArgument('__tsPackageKey'));
-        $this->view->assign('enctype',
-            $this->request->getInternalArgument('__hasUploadElement') ? 'multipart/form-data' : null);
+        $this->view->assign(
+            'enctype',
+            $this->request->getInternalArgument('__hasUploadElement') ? 'multipart/form-data' : null
+        );
     }
 
     /**
@@ -65,17 +76,31 @@ class FormBuilderController extends ActionController
 
     /**
      * @param array $data
-     * @Flow\Validate(argumentName="data", type="\CRON\FormBuilder\Validation\Validator\FormBuilderValidator")
      * @return void
+     * @throws Exception
+     * @throws StopActionException
+     * @Flow\Validate(argumentName="data", type="\CRON\FormBuilder\Validation\Validator\FormBuilderValidator")
      */
-    public function submitAction($data)
+    public function submitAction(array $data)
     {
-        $this->handleFormData($this->request->getInternalArgument('__node'), $data);
-
-        if ($this->conf['useForward']) {
-            $this->forward('submitPending');
+        if (isset($data['subject'], $data['phone'])) {
+            if (!$this->honeyPotService->validateSecret($data['phone']) && empty($data['subject'])) {
+                $this->handleFormData($this->request->getInternalArgument('__node'), $data);
+                if ($this->conf['Controller']['useForward']) {
+                    $this->forward('submitPending');
+                } else {
+                    $this->redirect('submitPending');
+                }
+            } else {
+                $this->forward('submitPending');
+            }
         } else {
-            $this->redirect('submitPending');
+            $this->handleFormData($this->request->getInternalArgument('__node'), $data);
+            if ($this->conf['Controller']['useForward']) {
+                $this->forward('submitPending');
+            } else {
+                $this->redirect('submitPending');
+            }
         }
     }
 
@@ -105,7 +130,10 @@ class FormBuilderController extends ActionController
             $fields[$element->getIdentifier()] = $this->createMailData($element, $data);
         }
 
-        foreach ($formNode->getNode('elements')->getChildNodes('CRON.FormBuilder:FileUpload,CRON.FormBuilder:FieldSet') as $element) {
+        foreach (
+            $formNode->getNode('elements')
+                     ->getChildNodes('CRON.FormBuilder:FileUpload,CRON.FormBuilder:FieldSet') as $element
+        ) {
             if ($element->getNodeType()->isOfType('CRON.FormBuilder:FieldSet')) {
                 foreach ($element->getNode('elements')->getChildNodes('CRON.FormBuilder:FileUpload') as $subElement) {
                     $files[$element->getIdentifier()] = $this->createMailAttachments($subElement, $data);
@@ -130,7 +158,6 @@ class FormBuilderController extends ActionController
     {
 
         if ($node->getNodeType()->isOfType('CRON.FormBuilder:FieldSet')) {
-
             $fields = [];
 
             foreach ($node->getNode('elements')->getChildNodes('!CRON.FormBuilder:FileUpload') as $subElement) {
@@ -140,7 +167,6 @@ class FormBuilderController extends ActionController
             return array('node' => $node, 'values' => $fields);
         } else {
             if (array_key_exists($node->getIdentifier(), $data)) {
-
                 $value = $data[$node->getIdentifier()];
                 if (is_array($value)) {
                     $value = implode(', ', $value);
@@ -210,5 +236,4 @@ class FormBuilderController extends ActionController
         $emailMessage->fluidView->setControllerContext($this->controllerContext);
         $emailMessage->send($receiver);
     }
-
 }

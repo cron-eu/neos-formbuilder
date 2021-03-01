@@ -1,4 +1,5 @@
 <?php
+
 namespace CRON\FormBuilder\Utils;
 
 use Neos\Flow\Annotations as Flow;
@@ -83,7 +84,6 @@ class EmailMessage
 
         // set the subject only if not already set
         if (!$this->mail->getSubject()) {
-
             try {
                 // render the subject from template, if available
                 $subject = $this->fluidView->renderSection('Subject');
