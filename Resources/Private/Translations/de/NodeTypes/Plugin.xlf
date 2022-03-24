@@ -11,6 +11,22 @@
         <source>Options</source>
         <target xml:lang="de" state="translated">Optionen</target>
       </trans-unit>
+        <trans-unit id="properties.filter" xml:space="preserve">
+        <source>Do not show in customer mail</source>
+        <target xml:lang="de" state="translated">Zeige nicht in Kunden Mail</target>
+      </trans-unit>
+      <trans-unit id="properties.filter.ui.help.message" xml:space="preserve">
+        <source>If this field is selected, the content will not be displayed in the customer mail.</source>
+        <target xml:lang="de" state="translated">Wenn diese Feld ausgewählt ist, wird der Inhalt nicht in der Kundenmail angezeigt.</target>
+      </trans-unit>
+      <trans-unit id="properties.sendCustomerMail" xml:space="preserve">
+        <source>Send Customer Mail</source>
+        <target xml:lang="de" state="translated">Sende Kunden Mail</target>
+      </trans-unit>
+        <trans-unit id="properties.sendCustomerMail.ui.help.message" xml:space="preserve">
+        <source>To send an email to a customer an input field must be marked as is customer email </source>
+        <target xml:lang="de" state="translated">Um einen Kunden eine Mail zu senden, muss ein Input Feld als Kunden Email gekennzeichnet sein.</target>
+      </trans-unit>
       <trans-unit id="properties.hasHoneypotField" xml:space="preserve">
         <source>Activate Honeypot Fields</source>
         <target xml:lang="de" state="translated">Aktiviere Honeypot Fields</target>
@@ -70,6 +86,10 @@
       <trans-unit id="fields.textfield.text" xml:space="preserve">
         <source>Text</source>
         <target xml:lang="de" state="translated">Text</target>
+      </trans-unit>
+      <trans-unit id="fields.textfield.name" xml:space="preserve">
+        <source>Name</source>
+        <target xml:lang="de" state="translated">Name</target>
       </trans-unit>
       <trans-unit id="fields.textfield.number" xml:space="preserve">
         <source>Number</source>
