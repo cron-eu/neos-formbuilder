@@ -214,6 +214,7 @@ class FormBuilderController extends ActionController
      * @param array $files
      * @return void
      * @throws \Neos\ContentRepository\Exception\NodeException
+     * @throws \Exception
      */
     protected function sendMail($fields, $files)
     {
@@ -222,18 +223,65 @@ class FormBuilderController extends ActionController
         $node = $this->request->getInternalArgument('__node');
         $receiver = explode(',', $node->getProperty('receiver'));
 
-        $emailMessage = new EmailMessage('Form');
+        if ($node->getProperty('sendCustomerMail')) {
 
-        foreach ($files as $id => $data) {
-            // "file" maybe empty, if not uploaded
-            if (is_array($data['file'])) {
-                $emailMessage->addAttachment($data['node'], $data['file']);
+            $customerMail = "";
+            $customerName = "";
+            $customerFields = [];
+
+            foreach ($fields as $field) {
+
+                if ($field['node']->getProperty('type') == "email") {
+                    $customerMail = $field['value'];
+                }
+
+                if ($field['node']->getProperty('type') == "name") {
+                    $customerName = $field['value'];
+                }
             }
+
+            if ($customerMail == "") {
+                throw new \Exception('There must be an email field');
+            }
+
+            $customerFields = array_filter($fields , function( $v ) {
+                return $v['node']->getProperty('filter') != true;
+            });
+
+            $emailMessageCustomer = new EmailMessage('CustomerMail');
+            $this->getAttachments($files, $emailMessageCustomer);
+            $emailMessageCustomer->fluidView->assign('subject', $node->getProperty('subject'));
+            $emailMessageCustomer->fluidView->assign('name', $customerName);
+            $emailMessageCustomer->fluidView->assign('fields', $customerFields);
+            $emailMessageCustomer->fluidView->setControllerContext($this->controllerContext);
+            $emailMessageCustomer->send($customerMail);
         }
 
-        $emailMessage->fluidView->assign('subject', $this->request->getInternalArgument('__subject'));
+        $emailMessage = new EmailMessage('Form');
+
+        $this->getAttachments($files, $emailMessage);
+
+        $emailMessage->fluidView->assign('subject',$node->getProperty('subject'));
         $emailMessage->fluidView->assign('fields', $fields);
         $emailMessage->fluidView->setControllerContext($this->controllerContext);
         $emailMessage->send($receiver);
+    }
+
+    /**
+     * Add Attachments to the Mail
+     * @param EmailMessage $massage
+     * @param array $files
+     * @throws \Neos\ContentRepository\Exception\NodeException
+     */
+
+    protected function getAttachments ($files, $massage): EmailMessage
+    {
+        foreach ($files as $id => $data) {
+            // "file" maybe empty, if not uploaded
+            if (is_array($data['file'])) {
+                $massage->addAttachment($data['node'], $data['file']);
+            }
+        }
+        return $massage;
     }
 }
