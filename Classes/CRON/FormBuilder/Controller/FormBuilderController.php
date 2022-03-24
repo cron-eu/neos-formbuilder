@@ -169,7 +169,7 @@ class FormBuilderController extends ActionController
             if (array_key_exists($node->getIdentifier(), $data)) {
                 $value = $data[$node->getIdentifier()];
                 if (is_array($value)) {
-                    $value = implode(', ', $value);
+                    $value = implode(', ', array_filter($value, function($v){ return $v !== ''; }));
                 }
                 return array('node' => $node, 'value' => $value);
             } else {
