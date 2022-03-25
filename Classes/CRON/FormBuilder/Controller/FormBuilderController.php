@@ -241,7 +241,7 @@ class FormBuilderController extends ActionController
             }
 
             if ($customerMail == "") {
-                throw new \Exception('There must be an email field');
+                throw new \Exception('There must be an email field and must be marked as customer mail');
             }
 
             $customerFields = array_filter($fields , function( $v ) {
