@@ -203,6 +203,14 @@
                 label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield.date
               time:
                 label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield.time
+    isCustomerMail:
+      type: boolean
+      ui:
+        label: CRON.FormBuilder:NodeTypes.Plugin:properties.isCustomerMail
+        help:
+          message: CRON.FormBuilder:NodeTypes.Plugin:properties.isCustomerMail.ui.help.message
+        inspector:
+          group: options
 'CRON.FormBuilder:Select':
   superTypes:
     'CRON.FormBuilder:CustomerFilterMixin': true

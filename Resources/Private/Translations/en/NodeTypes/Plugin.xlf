@@ -35,6 +35,12 @@
       <trans-unit id="properties.submitButtonLabel" xml:space="preserve">
         <source>Submit-Button-Label</source>
       </trans-unit>
+      <trans-unit id="properties.isCustomerMail" xml:space="preserve">
+        <source>Is Customer Mail</source>
+      </trans-unit>
+      <trans-unit id="properties.isCustomerMail.ui.help.message" xml:space="preserve">
+        <source>Attention you have to set the Input-Type to e-mail</source>
+      </trans-unit>
       <trans-unit id="ui.label" xml:space="preserve">
         <source>FormBuilder</source>
       </trans-unit>

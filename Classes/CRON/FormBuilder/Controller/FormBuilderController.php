@@ -231,7 +231,7 @@ class FormBuilderController extends ActionController
 
             foreach ($fields as $field) {
 
-                if ($field['node']->getProperty('type') == "email") {
+                if ($field['node']->getProperty('type') == "email" && $field['node']->getProperty('isCustomerMail')) {
                     $customerMail = $field['value'];
                 }
 
