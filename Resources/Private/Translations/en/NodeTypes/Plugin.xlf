@@ -32,6 +32,9 @@
       <trans-unit id="properties.subject" xml:space="preserve">
         <source>Subject</source>
       </trans-unit>
+      <trans-unit id="properties.customerSubject" xml:space="preserve">
+        <source>Customer Subject</source>
+      </trans-unit>
       <trans-unit id="properties.submitButtonLabel" xml:space="preserve">
         <source>Submit-Button-Label</source>
       </trans-unit>

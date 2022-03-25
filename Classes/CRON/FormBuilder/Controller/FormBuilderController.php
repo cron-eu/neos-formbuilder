@@ -250,7 +250,7 @@ class FormBuilderController extends ActionController
 
             $emailMessageCustomer = new EmailMessage('CustomerMail');
             $this->getAttachments($files, $emailMessageCustomer);
-            $emailMessageCustomer->fluidView->assign('subject', $node->getProperty('subject'));
+            $emailMessageCustomer->fluidView->assign('subject', $node->getProperty('customerSubject'));
             $emailMessageCustomer->fluidView->assign('name', $customerName);
             $emailMessageCustomer->fluidView->assign('fields', $customerFields);
             $emailMessageCustomer->fluidView->setControllerContext($this->controllerContext);

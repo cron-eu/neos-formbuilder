@@ -43,6 +43,10 @@
         <source>Subject</source>
         <target xml:lang="de" state="translated">Betreff</target>
       </trans-unit>
+      <trans-unit id="properties.customerSubject" xml:space="preserve">
+        <source>Customer Subject</source>
+        <target xml:lang="de" state="translated">Kunden Betreff</target>
+      </trans-unit>
       <trans-unit id="properties.submitButtonLabel" xml:space="preserve">
         <source>Submit-Button-Label</source>
         <target xml:lang="de" state="translated">Absende-Knopf-Bezeichner</target>
