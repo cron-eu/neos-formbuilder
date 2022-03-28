@@ -249,7 +249,7 @@ class FormBuilderController extends ActionController
             });
 
             $emailMessageCustomer = new EmailMessage('CustomerMail');
-            $this->getAttachments($files, $emailMessageCustomer);
+            $this->addAttachments($files, $emailMessageCustomer);
             $emailMessageCustomer->fluidView->assign('subject', $node->getProperty('customerSubject'));
             $emailMessageCustomer->fluidView->assign('name', $customerName);
             $emailMessageCustomer->fluidView->assign('fields', $customerFields);
@@ -259,7 +259,7 @@ class FormBuilderController extends ActionController
 
         $emailMessage = new EmailMessage('Form');
 
-        $this->getAttachments($files, $emailMessage);
+        $this->addAttachments($files, $emailMessage);
 
         $emailMessage->fluidView->assign('subject',$node->getProperty('subject'));
         $emailMessage->fluidView->assign('fields', $fields);
@@ -274,7 +274,7 @@ class FormBuilderController extends ActionController
      * @throws \Neos\ContentRepository\Exception\NodeException
      */
 
-    protected function getAttachments ($files, $message): EmailMessage
+    protected function addAttachments ($files, $message): EmailMessage
     {
         foreach ($files as $id => $data) {
             // "file" maybe empty, if not uploaded
