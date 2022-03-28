@@ -269,19 +269,19 @@ class FormBuilderController extends ActionController
 
     /**
      * Add Attachments to the Mail
-     * @param EmailMessage $massage
+     * @param EmailMessage $message
      * @param array $files
      * @throws \Neos\ContentRepository\Exception\NodeException
      */
 
-    protected function getAttachments ($files, $massage): EmailMessage
+    protected function getAttachments ($files, $message): EmailMessage
     {
         foreach ($files as $id => $data) {
             // "file" maybe empty, if not uploaded
             if (is_array($data['file'])) {
-                $massage->addAttachment($data['node'], $data['file']);
+                $message->addAttachment($data['node'], $data['file']);
             }
         }
-        return $massage;
+        return $message;
     }
 }
