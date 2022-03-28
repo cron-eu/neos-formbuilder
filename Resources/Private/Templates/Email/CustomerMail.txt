@@ -1,0 +1,23 @@
+<f:layout name="Default.txt" />
+<f:section name="Subject">New Message from FormBuilder: {subject}</f:section>
+<f:section name="Content">
+hallo
+<f:for each="{fields}" as="field">
+<f:if condition="{field.values}">
+<f:then>
+{field.node.properties.label}
+=============================
+<f:for each="{field.values}" as="subField">
+<f:if condition="{subField.node.properties.label} != ''">
+{subField.node.properties.label -> f:format.stripTags()}: {subField.value}
+</f:if>
+</f:for>
+</f:then>
+<f:else>
+<f:if condition="{field.node.properties.label} != ''">
+{field.node.properties.label -> f:format.stripTags()}: {field.value}
+</f:if>
+</f:else>
+</f:if>
+</f:for>
+</f:section>

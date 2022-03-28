@@ -29,6 +29,15 @@
           group: advanced
       validation:
         'Neos.Neos/Validation/NotEmptyValidator': []
+    customerSubject:
+      type: string
+      ui:
+        label: i18n
+        reloadIfChanged: false
+        inspector:
+          group: advanced
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': [ ]
     submitButtonLabel:
       type: string
       defaultValue: Absenden
@@ -40,6 +49,14 @@
       validation:
         'Neos.Neos/Validation/NotEmptyValidator': []
     hasHoneypotField:
+      type: boolean
+      ui:
+        label: i18n
+        help:
+          message: i18n
+        inspector:
+          group: advanced
+    sendCustomerMail:
       type: boolean
       ui:
         label: i18n
@@ -88,6 +105,19 @@
           'CRON.FormBuilder:FileUpload': true
           'CRON.FormBuilder:Text': true
           '*': false
+
+'CRON.FormBuilder:CustomerFilterMixin':
+  abstract: true
+  properties:
+    filter:
+      type: boolean
+      ui:
+        label: CRON.FormBuilder:NodeTypes.Plugin:properties.filter
+        help:
+          message: CRON.FormBuilder:NodeTypes.Plugin:properties.filter.ui.help.message
+        reloadIfChanged: true
+        inspector:
+          group: options
 
 'CRON.FormBuilder:FormElementLabelMixin':
   superTypes:
@@ -149,6 +179,7 @@
   superTypes:
     'CRON.FormBuilder:FormElementLabelMixin': true
     'CRON.FormBuilder:FormElementRequiredMixin': true
+    'CRON.FormBuilder:CustomerFilterMixin': true
     'CRON.FormBuilder:FormElementPlaceholderMixin': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield
@@ -165,6 +196,8 @@
             values:
               text:
                 label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield.text
+              name:
+                label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield.name
               number:
                 label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield.number
               password:
@@ -179,9 +212,17 @@
                 label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield.date
               time:
                 label: CRON.FormBuilder:NodeTypes.Plugin:fields.textfield.time
-
+    isCustomerMail:
+      type: boolean
+      ui:
+        label: CRON.FormBuilder:NodeTypes.Plugin:properties.isCustomerMail
+        help:
+          message: CRON.FormBuilder:NodeTypes.Plugin:properties.isCustomerMail.ui.help.message
+        inspector:
+          group: options
 'CRON.FormBuilder:Select':
   superTypes:
+    'CRON.FormBuilder:CustomerFilterMixin': true
     'CRON.FormBuilder:FormElementLabelMixin': true
     'CRON.FormBuilder:FormElementRequiredMixin': true
   ui:
@@ -233,6 +274,7 @@
 
 'CRON.FormBuilder:CheckBoxGroup':
   superTypes:
+    'CRON.FormBuilder:CustomerFilterMixin': true
     'CRON.FormBuilder:FormElementLabelMixin': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.checkbox.group
@@ -270,6 +312,7 @@
 'CRON.FormBuilder:CheckBoxEnhanced':
   superTypes:
     'Neos.Neos:Content': true
+    'CRON.FormBuilder:CustomerFilterMixin': true
     'CRON.FormBuilder:CheckBox': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.checkbox.enhanced
@@ -290,6 +333,7 @@
   superTypes:
     'CRON.FormBuilder:FormElementLabelMixin': true
     'CRON.FormBuilder:FormElementRequiredMixin': true
+    'CRON.FormBuilder:CustomerFilterMixin': true
     'CRON.FormBuilder:FormElementPlaceholderMixin': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.textarea
@@ -320,6 +364,7 @@
 
 'CRON.FormBuilder:Text':
   superTypes:
+    'CRON.FormBuilder:CustomerFilterMixin': true
     'Neos.Neos:Content': true
   ui:
     label: CRON.FormBuilder:NodeTypes.Plugin:fields.text

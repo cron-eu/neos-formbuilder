@@ -169,7 +169,7 @@ class FormBuilderController extends ActionController
             if (array_key_exists($node->getIdentifier(), $data)) {
                 $value = $data[$node->getIdentifier()];
                 if (is_array($value)) {
-                    $value = implode(', ', $value);
+                    $value = implode(', ', array_filter($value, function($v){ return $v !== ''; }));
                 }
                 return array('node' => $node, 'value' => $value);
             } else {
@@ -214,6 +214,7 @@ class FormBuilderController extends ActionController
      * @param array $files
      * @return void
      * @throws \Neos\ContentRepository\Exception\NodeException
+     * @throws \Exception
      */
     protected function sendMail($fields, $files)
     {
@@ -222,18 +223,65 @@ class FormBuilderController extends ActionController
         $node = $this->request->getInternalArgument('__node');
         $receiver = explode(',', $node->getProperty('receiver'));
 
-        $emailMessage = new EmailMessage('Form');
+        if ($node->getProperty('sendCustomerMail')) {
 
-        foreach ($files as $id => $data) {
-            // "file" maybe empty, if not uploaded
-            if (is_array($data['file'])) {
-                $emailMessage->addAttachment($data['node'], $data['file']);
+            $customerMail = "";
+            $customerName = "";
+            $customerFields = [];
+
+            foreach ($fields as $field) {
+
+                if ($field['node']->getProperty('type') == "email" && $field['node']->getProperty('isCustomerMail')) {
+                    $customerMail = $field['value'];
+                }
+
+                if ($field['node']->getProperty('type') == "name") {
+                    $customerName = $field['value'];
+                }
             }
+
+            if ($customerMail == "") {
+                throw new \Exception('There must be an email field and must be marked as customer mail');
+            }
+
+            $customerFields = array_filter($fields , function( $v ) {
+                return $v['node']->getProperty('filter') != true;
+            });
+
+            $emailMessageCustomer = new EmailMessage('CustomerMail');
+            $this->addAttachments($files, $emailMessageCustomer);
+            $emailMessageCustomer->fluidView->assign('subject', $node->getProperty('customerSubject'));
+            $emailMessageCustomer->fluidView->assign('name', $customerName);
+            $emailMessageCustomer->fluidView->assign('fields', $customerFields);
+            $emailMessageCustomer->fluidView->setControllerContext($this->controllerContext);
+            $emailMessageCustomer->send($customerMail);
         }
 
-        $emailMessage->fluidView->assign('subject', $this->request->getInternalArgument('__subject'));
+        $emailMessage = new EmailMessage('Form');
+
+        $this->addAttachments($files, $emailMessage);
+
+        $emailMessage->fluidView->assign('subject',$node->getProperty('subject'));
         $emailMessage->fluidView->assign('fields', $fields);
         $emailMessage->fluidView->setControllerContext($this->controllerContext);
         $emailMessage->send($receiver);
+    }
+
+    /**
+     * Add Attachments to the Mail
+     * @param EmailMessage $message
+     * @param array $files
+     * @throws \Neos\ContentRepository\Exception\NodeException
+     */
+
+    protected function addAttachments ($files, $message): EmailMessage
+    {
+        foreach ($files as $id => $data) {
+            // "file" maybe empty, if not uploaded
+            if (is_array($data['file'])) {
+                $message->addAttachment($data['node'], $data['file']);
+            }
+        }
+        return $message;
     }
 }

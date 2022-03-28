@@ -11,6 +11,18 @@
       <trans-unit id="properties.hasHoneypotField" xml:space="preserve">
         <source>Activate Honeypot Fields</source>
       </trans-unit>
+      <trans-unit id="properties.sendCustomerMail" xml:space="preserve">
+        <source>Send Customer Mail</source>
+      </trans-unit>
+      <trans-unit id="properties.sendCustomerMail.ui.help.message" xml:space="preserve">
+        <source>To send an email to a customer an input field must be marked as customer email.</source>
+      </trans-unit>
+      <trans-unit id="properties.filter" xml:space="preserve">
+        <source>Do not show in customer mail</source>
+      </trans-unit>
+      <trans-unit id="properties.filter.ui.help.message" xml:space="preserve">
+        <source>If this field is selected, the content will not be displayed in the customer mail.</source>
+      </trans-unit>
       <trans-unit id="properties.hasHoneypotField.ui.help.message" xml:space="preserve">
         <source>These fields are for protection against bots and extend the form by 2 additional fields. Which consist of an empty field and a field with a timestamp. If the bot fills or changes these the mail will not be sent.</source>
       </trans-unit>
@@ -20,8 +32,17 @@
       <trans-unit id="properties.subject" xml:space="preserve">
         <source>Subject</source>
       </trans-unit>
+      <trans-unit id="properties.customerSubject" xml:space="preserve">
+        <source>Customer Subject</source>
+      </trans-unit>
       <trans-unit id="properties.submitButtonLabel" xml:space="preserve">
         <source>Submit-Button-Label</source>
+      </trans-unit>
+      <trans-unit id="properties.isCustomerMail" xml:space="preserve">
+        <source>Is Customer Mail</source>
+      </trans-unit>
+      <trans-unit id="properties.isCustomerMail.ui.help.message" xml:space="preserve">
+        <source>Attention you have to set the Input-Type to e-mail</source>
       </trans-unit>
       <trans-unit id="ui.label" xml:space="preserve">
         <source>FormBuilder</source>
@@ -52,6 +73,9 @@
       </trans-unit>
       <trans-unit id="fields.textfield.text" xml:space="preserve">
         <source>Text</source>
+      </trans-unit>
+      <trans-unit id="fields.textfield.name" xml:space="preserve">
+        <source>Name</source>
       </trans-unit>
       <trans-unit id="fields.textfield.number" xml:space="preserve">
         <source>Number</source>

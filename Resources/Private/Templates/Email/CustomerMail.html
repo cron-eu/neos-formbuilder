@@ -1,0 +1,30 @@
+<f:layout name="Default.html"/>
+<f:section name="Subject">{subject}</f:section>
+<f:section name="Content">
+    <p>Sehr geehrte/r Herr / Frau {name}</p>
+    <p>folgende Angaben haben wir von Ihnen erhalten:</p>
+    <f:for each="{fields}" as="field">
+        <f:if condition="{field.values}">
+            <f:then>
+                <p>
+                    {field.node.properties.label}
+                    =============================
+                </p>
+                <f:for each="{field.values}" as="subField">
+                    <f:if condition="{subField.node.properties.label} != ''">
+                        <p>{subField.node.properties.label -> f:format.stripTags()}: {subField.value}</p>
+                    </f:if>
+                </f:for>
+            </f:then>
+            <f:else>
+                <f:if condition="{field.node.properties.label} != ''">
+                    <ul>
+                        <li>
+                            {field.node.properties.label -> f:format.stripTags()}: {field.value}
+                        </li>
+                    </ul>
+                </f:if>
+            </f:else>
+        </f:if>
+    </f:for>
+</f:section>

@@ -81,6 +81,7 @@ class EmailMessage
     {
 
         $this->mail->setBody($this->fluidView->render(), 'text/plain');
+        $this->mail->addPart($this->fluidView->render(),  'text/html');
 
         // set the subject only if not already set
         if (!$this->mail->getSubject()) {
