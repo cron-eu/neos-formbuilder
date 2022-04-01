@@ -247,9 +247,9 @@ class FormBuilderController extends ActionController
                 throw new \Exception('There must be an email field and must be marked as customer mail');
             }
 
-            $customerFields = array_filter($fields , function( $v ) {
+            $customerFields = array_filter($fields , function($field) {
                 if (!empty($field)) {
-                    return $v['node']->getProperty('filter') != true;
+                    return $field['node']->getProperty('filter') != true;
                 }
             });
 
