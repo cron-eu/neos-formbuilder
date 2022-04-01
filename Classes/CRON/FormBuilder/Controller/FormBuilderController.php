@@ -230,14 +230,16 @@ class FormBuilderController extends ActionController
             $customerFields = [];
 
             foreach ($fields as $field) {
-                if (!empty($field)) {
-                    if ($field['node']->getProperty('type') == "email" && $field['node']->getProperty('isCustomerMail')) {
-                        $customerMail = $field['value'];
-                    }
+                if (empty($field)) {
+                    continue;
+                }
 
-                    if ($field['node']->getProperty('type') == "name") {
-                        $customerName = $field['value'];
-                    }
+                if ($field['node']->getProperty('type') == "email" && $field['node']->getProperty('isCustomerMail')) {
+                    $customerMail = $field['value'];
+                }
+
+                if ($field['node']->getProperty('type') == "name") {
+                    $customerName = $field['value'];
                 }
             }
 
