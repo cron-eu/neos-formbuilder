@@ -230,6 +230,9 @@ class FormBuilderController extends ActionController
             $customerFields = [];
 
             foreach ($fields as $field) {
+                if (empty($field)) {
+                    continue;
+                }
 
                 if ($field['node']->getProperty('type') == "email" && $field['node']->getProperty('isCustomerMail')) {
                     $customerMail = $field['value'];
@@ -244,8 +247,10 @@ class FormBuilderController extends ActionController
                 throw new \Exception('There must be an email field and must be marked as customer mail');
             }
 
-            $customerFields = array_filter($fields , function( $v ) {
-                return $v['node']->getProperty('filter') != true;
+            $customerFields = array_filter($fields , function($field) {
+                if (!empty($field)) {
+                    return $field['node']->getProperty('filter') != true;
+                }
             });
 
             $emailMessageCustomer = new EmailMessage('CustomerMail');
